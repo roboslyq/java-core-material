@@ -5,7 +5,7 @@ import java.util.List;
 
 public class SimpleContainer {
 
-    private volatile List<Integer> container = new ArrayList<Integer>();
+    private List<Integer> container = new ArrayList<>();
 
     public void add(int value){
         container.add(value);

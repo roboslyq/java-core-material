@@ -1,9 +1,11 @@
 package com.roboslyq.jdk.thread;
 
 public class ThreadCommonTest {
+
+    static volatile SimpleContainer simpleContainer = new SimpleContainer();
+
     public static void main(String[] args) {
 
-        SimpleContainer simpleContainer = new SimpleContainer();
         Thread thread1 =  new Thread( ()->{
             for(int i=0;i<10;i++){
                 try {
