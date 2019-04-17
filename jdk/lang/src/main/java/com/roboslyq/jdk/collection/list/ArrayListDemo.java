@@ -26,6 +26,5 @@ public class ArrayListDemo {
                     System.out.println(Thread.currentThread().getId());
                 });
 
-
     }
 }

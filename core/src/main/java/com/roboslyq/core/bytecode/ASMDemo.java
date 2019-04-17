@@ -1,5 +1,6 @@
 package com.roboslyq.core.bytecode;
 
+import com.roboslyq.core.classloader.MyClassloader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
@@ -9,12 +10,12 @@ import java.io.*;
 import static org.objectweb.asm.Opcodes.INVOKEVIRTUAL;
 
 public class ASMDemo {
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException, NoSuchMethodException {
         ClassWriter cw = new ClassWriter(0);
         //通过visit方法确定类的头部信息
         cw.visit(
                 //参数一：版本信息
-                Opcodes.V1_5
+                Opcodes.V9
                 //参数二：类修改符，通过组合相关实现，与linux权限原理一致("Opcodes.ACC_PUBLIC + Opcodes.ACC_ABSTRACT + Opcodes.ACC_INTERFACE")
                 ,Opcodes.ACC_PUBLIC
                 //参数三：类型全路径
@@ -24,9 +25,10 @@ public class ASMDemo {
                 //超类名称，如果是接口或超类为Object则可能为null。Java仅单继承，故只有一个参数
                 , "com/roboslyq/core/bytecode/BytecodeParent"
                 //实现接口：可以实现多个接口，故参数为数组
-                ,new String[] {"com/roboslyq/core/bytecode/BytecodeInterface1"
+                ,null
+               /* ,new String[] {"com/roboslyq/core/bytecode/BytecodeInterface1"
                                 ,"com/roboslyq/core/bytecode/BytecodeInterface2"
-                            }
+                            }*/
                 );
 
         // 定义类的属性
@@ -36,7 +38,7 @@ public class ASMDemo {
                     //参数名称
                     "LESS",
                     //参数类型:详情见org.objectweb.asm.Type.getTypeInternal()
-                    "J",
+                    "I",
                     //字段签名，若字段类型不是泛型则可以为null
                     null,
                     //字段初始值
@@ -58,13 +60,21 @@ public class ASMDemo {
         ).visitEnd();
 
         // 定义类的方法
+        //构造函数
+        MethodVisitor mw = cw.visitMethod(Opcodes.ACC_PUBLIC, "<init>", "()V", null,null);
+        mw.visitVarInsn(Opcodes.ALOAD, 0);
+//        mw.visitMethodInsn(Opcodes.INVOKESPECIAL, "com/roboslyq/core/bytecode/AsmTest", "<init>", "()V");
+//        mw.visitInsn(Opcodes.RETURN);
+//        mw.visitMaxs(1, 1);
+        mw.visitEnd();
+
         MethodVisitor mv= cw.visitMethod(
                     //方法签名
                     Opcodes.ACC_PUBLIC
                     //方法名称
                     , "compareTo"
                     //方法参数：详情可以参考JVM字节码相关
-                    ,"(Ljava/lang/Object;)I"
+                    ,"()V"
                     , null
                     , null
                     );
@@ -82,10 +92,21 @@ public class ASMDemo {
         FileOutputStream fos = new FileOutputStream(file);
         fos.write(data);
         fos.close();
+        MyCLassLoader1 cLassLoader1 = new MyCLassLoader1();
+        Class c = cLassLoader1.defineClass(data);
 
-        ClassLoader classLoader =  new MyClassLoader();
-        Class clazz = ((MyClassLoader) classLoader).findClass("AsmTest");
-        System.out.println(clazz);
+
+
+        System.out.println("rpbps;uq--"+c);
+
+//        ClassLoader classLoader =  new MyClassloader();
+//        Class clazz = classLoader.loadClass("com.roboslyq.core.bytecode.AsmTest");
+//        System.out.println(clazz);
+    }
+    public static class MyCLassLoader1 extends ClassLoader{
+        public Class defineClass(byte[] data){
+            return super.defineClass(null,data,0,data.length,null);
+        }
     }
 }
 
