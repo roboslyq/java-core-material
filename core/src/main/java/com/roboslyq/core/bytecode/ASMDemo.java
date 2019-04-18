@@ -6,16 +6,18 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 import static org.objectweb.asm.Opcodes.INVOKEVIRTUAL;
 
 public class ASMDemo {
     public static void main(String[] args) throws IOException, ClassNotFoundException, NoSuchMethodException {
-        ClassWriter cw = new ClassWriter(0);
+        ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
         //通过visit方法确定类的头部信息
         cw.visit(
                 //参数一：版本信息
-                Opcodes.V9
+                Opcodes.V1_8
                 //参数二：类修改符，通过组合相关实现，与linux权限原理一致("Opcodes.ACC_PUBLIC + Opcodes.ACC_ABSTRACT + Opcodes.ACC_INTERFACE")
                 ,Opcodes.ACC_PUBLIC
                 //参数三：类型全路径
@@ -92,21 +94,34 @@ public class ASMDemo {
         FileOutputStream fos = new FileOutputStream(file);
         fos.write(data);
         fos.close();
-        MyCLassLoader1 cLassLoader1 = new MyCLassLoader1();
-        Class c = cLassLoader1.defineClass(data);
+//        MyCLassLoader1 cLassLoader1 = new MyCLassLoader1();
+//        Class c = cLassLoader1.defineClass(data);
+//
+//
+//
+//        System.out.println("rpbps;uq--"+c);
 
-
-
-        System.out.println("rpbps;uq--"+c);
-
-//        ClassLoader classLoader =  new MyClassloader();
-//        Class clazz = classLoader.loadClass("com.roboslyq.core.bytecode.AsmTest");
-//        System.out.println(clazz);
-    }
-    public static class MyCLassLoader1 extends ClassLoader{
-        public Class defineClass(byte[] data){
-            return super.defineClass(null,data,0,data.length,null);
+        ClassLoader classLoader =  new MyClassloader();
+        Class clazz = classLoader.loadClass("com.roboslyq.core.bytecode.AsmTest");
+        Method[] methodArray = clazz.getDeclaredMethods();
+        for (Method method : methodArray){
+            System.out.println(method.getName());
         }
+//        try {
+//            method.invoke(clazz.getConstructor().newInstance());
+//        } catch (IllegalAccessException e) {
+//            e.printStackTrace();
+//        } catch (InvocationTargetException e) {
+//            e.printStackTrace();
+//        } catch (InstantiationException e) {
+//            e.printStackTrace();
+//        }
+        System.out.println(clazz);
     }
+//    public static class MyCLassLoader1 extends ClassLoader{
+//        public Class defineClass(byte[] data){
+//            return super.defineClass(null,data,0,data.length,null);
+//        }
+//    }
 }
 
