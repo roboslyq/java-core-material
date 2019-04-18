@@ -32,8 +32,8 @@ public class MyClassloader extends ClassLoader {
     public static void main(String[] args) {
         MyClassloader myClassloader = new MyClassloader();
         try {
-          Class clazz =  myClassloader.loadClass("com.roboslyq.core.classloader.ClassloaderHello");
-            Class clazz1 = myClassloader.loadClass("com.roboslyq.core.bytecode.AsmTest");
+            Class clazz =  myClassloader.loadClass("com.roboslyq.core.classloader.ClassloaderHello");
+            Class clazz1 = myClassloader.loadClass("com.roboslyq.core.bytecode.asm.AsmTest");
             System.out.println(clazz1);
           System.out.println(clazz);
           Method method = clazz.getMethod("sayHello");

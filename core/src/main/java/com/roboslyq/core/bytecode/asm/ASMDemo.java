@@ -1,4 +1,4 @@
-package com.roboslyq.core.bytecode;
+package com.roboslyq.core.bytecode.asm;
 
 import com.roboslyq.core.classloader.MyClassloader;
 import org.objectweb.asm.ClassWriter;
@@ -28,8 +28,8 @@ public class ASMDemo {
                 , "com/roboslyq/core/bytecode/BytecodeParent"
                 //实现接口：可以实现多个接口，故参数为数组
                 ,null
-               /* ,new String[] {"com/roboslyq/core/bytecode/BytecodeInterface1"
-                                ,"com/roboslyq/core/bytecode/BytecodeInterface2"
+               /* ,new String[] {"com/roboslyq/core/bytecode/asm/BytecodeInterface1"
+                                ,"com/roboslyq/core/bytecode/asm/BytecodeInterface2"
                             }*/
                 );
 
@@ -65,7 +65,7 @@ public class ASMDemo {
         //构造函数
         MethodVisitor mw = cw.visitMethod(Opcodes.ACC_PUBLIC, "<init>", "()V", null,null);
         mw.visitVarInsn(Opcodes.ALOAD, 0);
-//        mw.visitMethodInsn(Opcodes.INVOKESPECIAL, "com/roboslyq/core/bytecode/AsmTest", "<init>", "()V");
+//        mw.visitMethodInsn(Opcodes.INVOKESPECIAL, "com/roboslyq/core/bytecode/asm/AsmTest", "<init>", "()V");
 //        mw.visitInsn(Opcodes.RETURN);
 //        mw.visitMaxs(1, 1);
         mw.visitEnd();
@@ -90,7 +90,7 @@ public class ASMDemo {
         cw.visitEnd();
         //将cw转换成字节数组写到文件里面去
         byte[] data = cw.toByteArray();
-        File file = new File("core/target/classes/com/roboslyq/core/bytecode/AsmTest.class");
+        File file = new File("core/target/classes/com/roboslyq/core/bytecode/asm/AsmTest.class");
         FileOutputStream fos = new FileOutputStream(file);
         fos.write(data);
         fos.close();
@@ -102,7 +102,7 @@ public class ASMDemo {
 //        System.out.println("rpbps;uq--"+c);
 
         ClassLoader classLoader =  new MyClassloader();
-        Class clazz = classLoader.loadClass("com.roboslyq.core.bytecode.AsmTest");
+        Class clazz = classLoader.loadClass("com.roboslyq.core.bytecode.asm.AsmTest");
         Method[] methodArray = clazz.getDeclaredMethods();
         for (Method method : methodArray){
             System.out.println(method.getName());

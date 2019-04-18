@@ -1,7 +1,8 @@
-package com.roboslyq.core.classloader;
+package com.roboslyq.core.bytecode;
 
-public class ClassloaderHello {
+public class HelloWorldBean {
     public void sayHello(){
         System.out.println("hello,world");
     }
+
 }

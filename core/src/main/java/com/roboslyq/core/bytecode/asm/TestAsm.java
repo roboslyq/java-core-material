@@ -1,4 +1,4 @@
-package com.roboslyq.core.bytecode;
+package com.roboslyq.core.bytecode.asm;
 
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
