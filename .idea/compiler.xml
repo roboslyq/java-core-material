@@ -6,12 +6,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="core" />
         <module name="lang" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
-      <module name="jdk" target="8" />
-      <module name="lang" target="8" />
+      <module name="core" target="9" />
+      <module name="jdk" target="1.5" />
+      <module name="lang" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
