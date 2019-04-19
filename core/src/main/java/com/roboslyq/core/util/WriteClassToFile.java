@@ -9,6 +9,7 @@ public class WriteClassToFile {
 
     public static void writeToFile(Object o) throws Exception {
         Class clazz = o.getClass();
+        System.out.println(clazz.toGenericString());
         String fileName = clazz.getName();
         File file = new File(FILE_PATH + fileName);
 //        FileOutputStream fileOutputStream = new FileOutputStream(file);

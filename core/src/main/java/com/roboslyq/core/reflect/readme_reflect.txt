@@ -10,3 +10,7 @@ private static final boolean saveGeneratedFiles = ((Boolean)AccessController.doP
 ）
 我们还可以使用java -classpath "%JAVA_HOME%/lib/sa-jdi.jar" sun.jvm.hotspot.HSDB中ClassBrower,查找类名并点击Create .class File.
 注:VM options:-verbose:class查看加载Class对象的过程
+
+3、编译Java源码
+
+4、
