@@ -1,4 +1,4 @@
-package com.roboslyq.core.reflect;
+package com.roboslyq.core.common;
 
 import java.io.Serializable;
 

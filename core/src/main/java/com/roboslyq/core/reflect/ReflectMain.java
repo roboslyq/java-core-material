@@ -1,5 +1,8 @@
 package com.roboslyq.core.reflect;
 
+import com.roboslyq.core.common.ParentInterface;
+import com.roboslyq.core.common.ParentInterfaceImpl;
+
 import java.lang.reflect.Proxy;
 
 public class ReflectMain {
@@ -18,7 +21,7 @@ public class ReflectMain {
 
 
 //        try {
-//            WriteJavaObjectToClassFile.writeToFile(parentInterface);
+//            ClassFileTransformerService.writeToFile(parentInterface);
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }

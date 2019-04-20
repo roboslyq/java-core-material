@@ -1,5 +1,7 @@
 package com.roboslyq.core.reflect;
 
+import com.roboslyq.core.common.ParentInterface;
+
 import java.io.Serializable;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

@@ -1,4 +1,4 @@
-package com.roboslyq.core.bytecode;
+package com.roboslyq.core.common;
 
 public class HelloWorldBean {
     public void sayHello(){

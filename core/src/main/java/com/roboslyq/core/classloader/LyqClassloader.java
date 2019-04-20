@@ -2,13 +2,11 @@ package com.roboslyq.core.classloader;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public class MyClassloader extends ClassLoader {
+public class LyqClassloader extends ClassLoader {
     private final static String CLASS_PATH_PREFIX = "core/target/classes/";
     @Override
     protected Class<?> findClass(String name)  {
@@ -30,7 +28,7 @@ public class MyClassloader extends ClassLoader {
         return fileInputStream.readAllBytes();
     }
     public static void main(String[] args) {
-        MyClassloader myClassloader = new MyClassloader();
+        LyqClassloader myClassloader = new LyqClassloader();
         try {
             Class clazz =  myClassloader.loadClass("com.roboslyq.core.classloader.ClassloaderHello");
             Class clazz1 = myClassloader.loadClass("com.roboslyq.core.bytecode.asm.AsmTest");

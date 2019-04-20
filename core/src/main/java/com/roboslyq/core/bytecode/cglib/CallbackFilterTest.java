@@ -1,6 +1,6 @@
 package com.roboslyq.core.bytecode.cglib;
 
-import com.roboslyq.core.bytecode.HelloWorldBean;
+import com.roboslyq.core.common.HelloWorldBean;
 import net.sf.cglib.proxy.Callback;
 import net.sf.cglib.proxy.CallbackFilter;
 import net.sf.cglib.proxy.Enhancer;

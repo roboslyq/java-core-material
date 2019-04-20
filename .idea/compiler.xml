@@ -10,10 +10,10 @@
         <module name="lang" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="8">
+    <bytecodeTargetLevel target="9">
       <module name="core" target="9" />
-      <module name="jdk" target="1.5" />
-      <module name="lang" target="1.5" />
+      <module name="jdk" target="9" />
+      <module name="lang" target="9" />
     </bytecodeTargetLevel>
   </component>
 </project>
