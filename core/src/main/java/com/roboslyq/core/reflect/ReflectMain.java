@@ -1,7 +1,5 @@
 package com.roboslyq.core.reflect;
 
-import com.roboslyq.core.util.WriteClassToFile;
-
 import java.lang.reflect.Proxy;
 
 public class ReflectMain {
@@ -19,11 +17,11 @@ public class ReflectMain {
 //        private static final boolean saveGeneratedFiles = ((Boolean)AccessController.doPrivileged(new GetBooleanAction("sun.misc.ProxyGenerator.saveGeneratedFiles"))).booleanValue();
 
 
-        try {
-            WriteClassToFile.writeToFile(parentInterface);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            WriteJavaObjectToClassFile.writeToFile(parentInterface);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
     }
 
