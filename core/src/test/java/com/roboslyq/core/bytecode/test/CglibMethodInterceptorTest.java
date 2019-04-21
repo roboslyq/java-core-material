@@ -3,10 +3,6 @@ package com.roboslyq.core.bytecode.test;
 import com.roboslyq.core.bytecode.cglib.MethodInterceptorService;
 import com.roboslyq.core.common.HelloWorldBean;
 import net.sf.cglib.proxy.Enhancer;
-import net.sf.cglib.proxy.MethodInterceptor;
-import net.sf.cglib.proxy.MethodProxy;
-
-import java.lang.reflect.Method;
 
 /**
  * @author roboslyq

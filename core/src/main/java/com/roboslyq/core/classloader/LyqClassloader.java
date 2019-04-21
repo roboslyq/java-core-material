@@ -3,8 +3,6 @@ package com.roboslyq.core.classloader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 public class LyqClassloader extends ClassLoader {
     private final static String CLASS_PATH_PREFIX = "core/target/classes/";
@@ -26,29 +24,6 @@ public class LyqClassloader extends ClassLoader {
         System.out.println(file.getAbsolutePath());
         FileInputStream fileInputStream = new FileInputStream(file);
         return fileInputStream.readAllBytes();
-    }
-    public static void main(String[] args) {
-        LyqClassloader myClassloader = new LyqClassloader();
-        try {
-            Class clazz =  myClassloader.loadClass("com.roboslyq.core.classloader.ClassloaderHello");
-            Class clazz1 = myClassloader.loadClass("com.roboslyq.core.bytecode.asm.AsmTest");
-            System.out.println(clazz1);
-          System.out.println(clazz);
-          Method method = clazz.getMethod("sayHello");
-            try {
-                method.invoke(clazz.getConstructor().newInstance());
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
     }
 
     public String getFilePath(String classPath){
