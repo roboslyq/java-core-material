@@ -8,7 +8,7 @@ import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public class AsmMain{
+public class AsmTest {
     public static void main(String[] args) throws IOException, ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         String asmClassName = "com/roboslyq/core/bytecode/AsmTest";
         String className = "com.roboslyq.core.bytecode.AsmTest";
