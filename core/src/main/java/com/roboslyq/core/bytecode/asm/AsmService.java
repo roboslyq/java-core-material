@@ -8,15 +8,27 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import static org.objectweb.asm.Opcodes.INVOKEVIRTUAL;
-
 /**
- * 基于Asm相关原理，这个方法不太能通用。需要根据自己的具体需求来实现相应的字节码生成。
+ * 一个抽象的visitor，用来访问一个Class对象。这个类的方法调用必须要有一定顺序,否则会报错，
+ * 因为class类的结构就是有序的。具体顺序如下：
+ * 1、visit() -->必选,访问类的开始
+ * 2、visitSource() --> 可选
+ * 3、visitModule() --> 可选
+ * 4、visitNestHost() --> 可选
+ * 5、visitOuterClass()
+ *  visitAnnotation()
+ *  visitTypeAnnotation()
+ *  isitAttribute()
+ *  visitNestMember()
+ *  visitInnerClass()
+ *  visitField()
+ *  visitMethod()
+ *  6、visitEnd() -->必选，最后一步调用
  */
 public class AsmService {
     public void doAsm(String className) throws IOException {
         {
-
+//            ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
             ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
             /**
              *  Step 1:
@@ -57,13 +69,13 @@ public class AsmService {
             //  Because we are inside a method, "this" is available to us as our first local variable (number 0).
             //  So we can load it onto the stack.
             constructor.visitVarInsn(Opcodes.ALOAD, 0);
-            constructor.visitMethodInsn(Opcodes.INVOKESPECIAL           // Invoke an instance method (non-virtual)
-                                        , "java/lang/Object"    // Class on which the method is defined
-                                        , "<init>"              // Name of the method
-                                        , "()V"             // Descriptor
-                                        ,false              // Is this class an interface?
+            constructor.visitMethodInsn(Opcodes.INVOKESPECIAL         // Invoke an instance method (non-virtual)
+                                        , "java/lang/Object"   // Class on which the method is defined
+                                        , "<init>"             // Name of the method
+                                        , "()V"            // Descriptor
+                                        ,false             // Is this class an interface?
                                         );
-            constructor.visitInsn(Opcodes.RETURN);                     // End the constructor method
+            constructor.visitInsn(Opcodes.RETURN);                    // End the constructor method
             /*
              * we have to explicitly return from the method; that's another thing the compiler does for us.
              * We then call visitMaxs() to provide a couple numbers to ASM so when this method is run,
@@ -72,7 +84,8 @@ public class AsmService {
              *  Even though we declared no local variables, and we have no parameters, our "this" counts as a local variable,
              * so we have to set it to 1.
              */
-            constructor.visitMaxs(1, 1);         // Specify max stack and local vars
+           // constructor.visitMaxs(1, 1);         // Specify max stack and local vars
+            constructor.visitMaxs(0, 0);         // Specify max stack and local vars
             constructor.visitEnd();
 
             // 定义类的属性
@@ -91,22 +104,24 @@ public class AsmService {
 
             //定义普通方法
             MethodVisitor mv = cw.visitMethod(
-                    Opcodes.ACC_PUBLIC,                         // public method
+                    Opcodes.ACC_PUBLIC,                        // public method
                     "add",                              // name
-                    "(II)I",                            // descriptor
-                    null,                               // signature (null means not generic)
-                    null);                              // exceptions (array of strings)
+                    "(II)I",                         // descriptor
+                    null,                             // signature (null means not generic)
+                    null);                           // exceptions (array of strings)
             mv.visitCode();
-            mv.visitVarInsn(Opcodes.ILOAD, 1);                  // Load int value onto stack
-            mv.visitVarInsn(Opcodes.ILOAD, 2);                  // Load int value onto stack
+            mv.visitVarInsn(Opcodes.ILOAD, 1);             // Load int value onto stack
+            mv.visitVarInsn(Opcodes.ILOAD, 2);             // Load int value onto stack
             mv.visitInsn(Opcodes.IADD);                         // Integer add from stack and push to stack
             mv.visitInsn(Opcodes.IRETURN);                      // Return integer from top of stack
-            mv.visitMaxs(2, 3);                         // Specify max stack and local vars
-            cw.visitEnd();                              // Finish the class definition
+            //实际上此处设置不生效，因为ClassWriter中构造函数参数为：ClassWriter.COMPUTE_FRAMES
+            mv.visitMaxs(2, 3);           // Specify max stack and local vars
             //方法定义结束
             mv.visitEnd();
-            //使cw类已经完成
-            cw.visitEnd();
+
+            cw.visitEnd();                                      // Finish the class definition
+
+            //Returns the content of the class file that was built by this ClassWriter.
             byte[] bs=cw.toByteArray();
             File file = new File("core/target/classes/" + className + ".class");
             FileOutputStream fos = new FileOutputStream(file);
