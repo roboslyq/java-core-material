@@ -11,6 +11,7 @@
 package com.roboslyq.core.bytecode;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 /**
  *
@@ -21,19 +22,23 @@ import java.io.*;
  */
 public class PrintClass {
     public static void main(String[] args) throws IOException {
+        //Class文件保存路径(根据实际情况自己选定)
         File file = new File("core\\target\\classes\\com\\roboslyq\\core\\common\\HelloWorldBean.class");
-        FileInputStream isr = new FileInputStream(file);
-        byte[] fileContext = isr.readAllBytes();
-        System.out.println(str2HexStr(fileContext));
-
-        byte[] stringByte = "sayHello2".getBytes();
-        System.out.println(str2HexStr(stringByte));
-        System.out.println(str2HexStr("sayHello2".getBytes()));
-        System.out.println(hexStringToString("4C696E654E756D6265725461626C65"));
-
-
+        try( FileInputStream isr = new FileInputStream(file);){
+            byte[] fileContext = isr.readAllBytes();
+            //此处输入为Class文件原内容(十六进制展示)
+            System.out.println(str2HexStr(fileContext));
+            //测试将十六进制转换为普通字符串（翻译），即可以根据需要将读出Class内容进行翻译
+            System.out.println(str2HexStr("sayHello2".getBytes()));
+        }
     }
-    public static String str2HexStr(byte[] bs) {
+
+    /**
+     * 将字符串转换为16进制
+     * @param bs
+     * @return
+     */
+    private static String str2HexStr(byte[] bs) {
         char[] chars = "0123456789ABCDEF".toCharArray();
         StringBuilder sb = new StringBuilder("");
         int bit;
@@ -46,25 +51,29 @@ public class PrintClass {
         return sb.toString();
     }
 
-    public static String hexStringToString(String s) {
-        if (s == null || s.equals("")) {
+    /**
+     * 将十六进制转换成字符串
+     * @param srcStr
+     * @return
+     */
+    public static String hexStringToString(String srcStr) {
+        if (srcStr == null || srcStr.equals("")) {
             return null;
         }
-        s = s.replace(" ", "");
-        byte[] baKeyword = new byte[s.length() / 2];
+        srcStr = srcStr.replace(" ", "");
+        byte[] baKeyword = new byte[srcStr.length() / 2];
         for (int i = 0; i < baKeyword.length; i++) {
             try {
-                baKeyword[i] = (byte) (0xff & Integer.parseInt(s.substring(i * 2, i * 2 + 2), 16));
+                baKeyword[i] = (byte) (0xff & Integer.parseInt(srcStr.substring(i * 2, i * 2 + 2), 16));
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         try {
-            s = new String(baKeyword, "UTF-8");
-            new String();
+            srcStr = new String(baKeyword, StandardCharsets.UTF_8);
         } catch (Exception e1) {
             e1.printStackTrace();
         }
-        return s;
+        return srcStr;
     }
 }
