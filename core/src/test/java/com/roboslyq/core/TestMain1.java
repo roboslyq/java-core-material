@@ -17,10 +17,12 @@ package com.roboslyq.core;
  * @create 2019/4/19
  * @since 1.0.0
  */
-public class TestMain {
+public class TestMain1 {
     public static void main(String[] args) {
-        Object o = new Object();
+      Object o = new Object();
         System.out.println(o.hashCode());
     }
+
+
 
 }
