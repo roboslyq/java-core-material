@@ -8,6 +8,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.exceptions.UndeliverableException;
 import io.reactivex.functions.Consumer;
 import io.reactivex.plugins.RxJavaPlugins;
+import io.reactivex.schedulers.Schedulers;
 
 import java.io.IOException;
 
@@ -35,17 +36,20 @@ public class FirstRxjava2Main {
                     break;
                 }
                 if(i % 5 == 0){
+                    printThread();
                     e.onError(new Throwable("异常测试-"+i));
                 }else{
                     //事件来源，可以扩展为其它来源，并且可以使用阻塞队列阻塞当前线程，触发onNext事件
                     System.out.println("开始发送第"+ i +"个事件");
+                    printThread();
                     e.onNext(i);
                 }
                 Thread.sleep(1000);
                 i++;
             }
             e.onComplete();
-        });
+        }).subscribeOn(Schedulers.newThread())
+                .observeOn(Schedulers.newThread());
 
         /**
          *2、创建观察者
@@ -58,16 +62,19 @@ public class FirstRxjava2Main {
 
             @Override
             public void onNext(Integer integer) {
+                printThread();
                 System.out.println( "no chain======================onNext " + integer);
             }
 
             @Override
             public void onError(Throwable e) {
+                printThread();
                 System.out.println( "no chain======================onError");
                e.printStackTrace();
             }
             @Override
             public void onComplete() {
+                printThread();
                 System.out.println( "no chain======================onComplete");
             }
         };
@@ -122,5 +129,9 @@ public class FirstRxjava2Main {
                 System.out.println("======================onComplete");
             }
         });
+    }
+
+    public static void printThread(){
+        System.out.println(Thread.currentThread().getId()+"--"+Thread.currentThread().getName());
     }
 }
