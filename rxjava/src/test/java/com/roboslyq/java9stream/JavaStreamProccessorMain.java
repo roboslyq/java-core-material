@@ -10,8 +10,6 @@
  */
 package com.roboslyq.java9stream;
 
-import roboslyq.java9stream.*;
-
 /**
  *
  * 〈java stream api测试〉
