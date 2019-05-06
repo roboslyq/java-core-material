@@ -12,9 +12,6 @@ package com.roboslyq.java9stream;
 
 import roboslyq.java9stream.*;
 
-import java.util.concurrent.Flow;
-import java.util.concurrent.SubmissionPublisher;
-
 /**
  *
  * 〈java stream api测试〉

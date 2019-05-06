@@ -10,9 +10,6 @@
  */
 package com.roboslyq.java9stream;
 
-import roboslyq.java9stream.SimpleDto;
-import roboslyq.java9stream.SimpleDtoHelper;
-
 import java.util.concurrent.Flow;
 import java.util.concurrent.SubmissionPublisher;
 

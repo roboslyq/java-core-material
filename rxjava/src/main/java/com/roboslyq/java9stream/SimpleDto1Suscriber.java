@@ -8,7 +8,7 @@
  * <author>                 <time>          <version>          <desc>
  * luo.yongqian         2019/5/6 17:42      1.0.0               创建
  */
-package roboslyq.java9stream;
+package com.roboslyq.java9stream;
 
 import java.util.concurrent.Flow;
 
