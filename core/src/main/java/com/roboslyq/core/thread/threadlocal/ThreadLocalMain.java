@@ -1,4 +1,4 @@
-package com.roboslyq.core.threadlocal;
+package com.roboslyq.core.thread.threadlocal;
 
 public class ThreadLocalMain {
 
