@@ -26,8 +26,30 @@ import java.util.Random;
  */
 public class FirstReactorMain {
     public static void main(String[] args) {
-        GenerateFluxDemo.simpleFluxByStaticMethod();
-        GenerateFluxDemo.fluxGenerate();
-        GenerateFluxDemo.fluxCreate();
+//        GenerateFluxDemo.simpleFluxByStaticMethod();
+//        GenerateFluxDemo.fluxGenerate();
+//        GenerateFluxDemo.fluxCreate();
+        Flux.just(1,2,3,4,5,6,7,8)
+                .filter(e -> e>5)
+                .map(e ->{
+                    User user = new User();
+                    user.setId(e);
+                    return user;
+                }
+                )
+                .filter(user -> user.getId() > 7)
+                .subscribe(System.out::println);
+    }
+
+}
+class  User {
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
