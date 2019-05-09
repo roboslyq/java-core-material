@@ -8,7 +8,7 @@
  * <author>                 <time>          <version>          <desc>
  * luo.yongqian         2019/4/19 14:58      1.0.0               创建
  */
-package com.roboslyq.core.bytecode.Instrument;
+package com.roboslyq.core.bytecode.instrument;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,12 +23,12 @@ import java.util.Arrays;
  * JDK5 提供的Instrument 功能实现字节码操作
  * 1、功能说明 ：
  *      启动时往 Java 虚拟机中挂上一个用户定义的 hook 程序，可以在装入特定类的时候改变特定类的字节码，从而改变该类的行为。但是其缺点也是明显的：
-        Instrument 包是在整个虚拟机上挂了一个钩子程序，每次装入一个新类的时候，都必须执行一遍这段程序，即使这个类不需要改变。
+        instrument 包是在整个虚拟机上挂了一个钩子程序，每次装入一个新类的时候，都必须执行一遍这段程序，即使这个类不需要改变。
  *      直接改变字节码事实上类似于直接改写 class 文件，无论是调用 ClassFileTransformer. transform(ClassLoader loader, String className,
  *      Class classBeingRedefined, ProtectionDomain protectionDomain, byte[] classfileBuffer)，
- *      还是 Instrument.redefineClasses(ClassDefinition[] definitions)，都必须提供新 Java 类的字节码。也就是说，
- *      同直接改写 class 文件一样，使用 Instrument 也必须了解想改造的方法相对类首部的偏移量，才能在适当的位置上插入新的代码。
- *      尽管 Instrument 可以改造类，但事实上，Instrument 更适用于监控和控制虚拟机的行为。
+ *      还是 instrument.redefineClasses(ClassDefinition[] definitions)，都必须提供新 Java 类的字节码。也就是说，
+ *      同直接改写 class 文件一样，使用 instrument 也必须了解想改造的方法相对类首部的偏移量，才能在适当的位置上插入新的代码。
+ *      尽管 instrument 可以改造类，但事实上，instrument 更适用于监控和控制虚拟机的行为。
  * 2、接口ClassFileTransformer
  *      通过实现接口{@link ClassFileTransformer}，将运行时的Object对象写入到对应的Class文件中，以方便查看Object对应的字节码。
  * 3、基本原理 ：
