@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ *  此类作为一个简单工具类，主要用来初始化简单对象集合。
  * 〈SimpleDto 容器〉
  * @author luo.yongqian
  * @create 2019/5/6
