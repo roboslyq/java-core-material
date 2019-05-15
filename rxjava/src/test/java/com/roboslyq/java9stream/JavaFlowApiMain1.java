@@ -1,6 +1,6 @@
 /*
  * Copyright (C), 2015-2019
- * FileName: JavaStreamApiMain1
+ * FileName: JavaFlowApiMain1
  * Author:   luo.yongqian
  * Date:     2019/5/6 15:36
  * Description: java stream api测试
@@ -20,7 +20,7 @@ import java.util.concurrent.SubmissionPublisher;
  * @create 2019/5/6
  * @since 1.0.0
  */
-public class JavaStreamApiMain1 {
+public class JavaFlowApiMain1 {
     public static void main(String[] args) throws InterruptedException {
         print();
         SubmissionPublisher<SimpleDto> publisher = new SubmissionPublisher<>();

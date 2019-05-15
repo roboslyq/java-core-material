@@ -1,6 +1,6 @@
 /**
  * Copyright (C), 2015-2019
- * FileName: JavaStreamApiMain1
+ * FileName: JavaFlowApiMain1
  * Author:   luo.yongqian
  * Date:     2019/5/6 15:36
  * Description: java stream api测试
@@ -17,7 +17,7 @@ package com.roboslyq.java9stream;
  * @create 2019/5/6
  * @since 1.0.0
  */
-public class JavaStreamProccessorMain {
+public class JavaFlowProccessorMain {
     public static void main(String[] args) throws InterruptedException {
         //创建 processor处理
         Java9StreamProcessor processor = new Java9StreamProcessor( simpleDto ->{

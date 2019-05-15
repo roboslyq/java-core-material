@@ -14,7 +14,7 @@ import java.util.concurrent.Flow;
 
 /**
  *
- * 〈SimlpeDto1的订阅者〉
+ * 〈SimlpeDto1的订阅者，实现Flow.Subscriber接口〉
  * @author luo.yongqian
  * @create 2019/5/6
  * @since 1.0.0

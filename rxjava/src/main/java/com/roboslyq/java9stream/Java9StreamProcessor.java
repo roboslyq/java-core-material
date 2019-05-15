@@ -27,7 +27,7 @@ import java.util.function.Function;
 public class Java9StreamProcessor extends SubmissionPublisher<SimpleDto1> implements Processor<SimpleDto,SimpleDto1> {
 
     /**
-     * 发布者和订阅者之间创建异步非阻塞链接。
+     * Subscription是发布者和订阅者之间创建异步非阻塞链接，发布者和订阅者之前沟通的桥梁。
      * 订阅者调用其request方法来向发布者请求项目。
      * 订阅者调用其cancel取消订阅的方法，即关闭发布者和订阅者之间的链接。
      */
