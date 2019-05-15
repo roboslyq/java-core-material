@@ -10,6 +10,8 @@
  */
 package com.roboslyq.java9stream;
 
+import com.roboslyq.java9stream.dto.SimpleDto;
+
 import java.util.concurrent.Flow;
 import java.util.concurrent.SubmissionPublisher;
 
@@ -63,7 +65,7 @@ public class JavaFlowApiMain1 {
             }
         });
 
-        SimpleDtoHelper
+        DtoHelper
                 .getSimpleDtos(10)          //初始化事件源
                 .forEach(                   //遍列事件源
                         publisher::submit   //每一次遍列发一条消息给订阅者

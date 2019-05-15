@@ -1,6 +1,6 @@
 /**
  * Copyright (C), 2015-2019
- * FileName: Java9StreamProcessor
+ * FileName: FlowProcessorDemo
  * Author:   luo.yongqian
  * Date:     2019/5/6 17:27
  * Description: Java stream中信息转换实现
@@ -9,6 +9,9 @@
  * luo.yongqian         2019/5/6 17:27      1.0.0               创建
  */
 package com.roboslyq.java9stream;
+
+import com.roboslyq.java9stream.dto.SimpleDto;
+import com.roboslyq.java9stream.dto.SimpleDto1;
 
 import java.util.concurrent.Flow;
 import java.util.concurrent.Flow.Processor;
@@ -24,7 +27,7 @@ import java.util.function.Function;
  * @create 2019/5/6
  * @since 1.0.0
  */
-public class Java9StreamProcessor extends SubmissionPublisher<SimpleDto1> implements Processor<SimpleDto,SimpleDto1> {
+public class FlowProcessorDemo extends SubmissionPublisher<SimpleDto1> implements Processor<SimpleDto,SimpleDto1> {
 
     /**
      * Subscription是发布者和订阅者之间创建异步非阻塞链接，发布者和订阅者之前沟通的桥梁。
@@ -42,7 +45,7 @@ public class Java9StreamProcessor extends SubmissionPublisher<SimpleDto1> implem
      * 构造函数，实现lambda转换
      * @param function
      */
-    public Java9StreamProcessor(Function<SimpleDto,SimpleDto1> function) {
+    public FlowProcessorDemo(Function<SimpleDto,SimpleDto1> function) {
         super();
         this.function = function;
     }

@@ -10,6 +10,8 @@
  */
 package com.roboslyq.java9stream;
 
+import com.roboslyq.java9stream.dto.SimpleDto1;
+
 import java.util.concurrent.Flow;
 
 /**

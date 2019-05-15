@@ -1,6 +1,6 @@
 /**
  * Copyright (C), 2015-2019
- * FileName: SimpleDtoHelper
+ * FileName: DtoHelper
  * Author:   luo.yongqian
  * Date:     2019/5/6 15:39
  * Description: SimpleDto 容器
@@ -9,6 +9,9 @@
  * luo.yongqian         2019/5/6 15:39      1.0.0               创建
  */
 package com.roboslyq.java9stream;
+
+import com.roboslyq.java9stream.dto.SimpleDto;
+import com.roboslyq.java9stream.dto.SimpleDto1;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +23,7 @@ import java.util.List;
  * @create 2019/5/6
  * @since 1.0.0
  */
-public class SimpleDtoHelper {
+public class DtoHelper {
     /**
      * @param len 返回list的长度
      * @return
