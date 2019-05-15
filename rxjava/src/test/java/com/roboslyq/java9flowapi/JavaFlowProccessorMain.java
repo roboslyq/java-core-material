@@ -8,9 +8,9 @@
  * <author>                 <time>          <version>          <desc>
  * luo.yongqian         2019/5/6 15:36      1.0.0               创建
  */
-package com.roboslyq.java9stream;
+package com.roboslyq.java9flowapi;
 
-import com.roboslyq.java9stream.dto.SimpleDto1;
+import com.roboslyq.java9flowapi.dto.SimpleDto1;
 
 /**
  *
@@ -29,7 +29,7 @@ public class JavaFlowProccessorMain {
             return new SimpleDto1();
         });
         //创建订阅者
-        SimpleDto1Suscriber  suscriber = new SimpleDto1Suscriber();
+        SuscriberDemo suscriber = new SuscriberDemo();
         //订阅信息
         processor.subscribe(suscriber);
         //构造数据源并且发布消息

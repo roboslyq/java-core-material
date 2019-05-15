@@ -1,6 +1,6 @@
 /**
  * Copyright (C), 2015-2019
- * FileName: SimpleDto1Suscriber
+ * FileName: SuscriberDemo
  * Author:   luo.yongqian
  * Date:     2019/5/6 17:42
  * Description: SimlpeDto1的订阅者
@@ -8,9 +8,9 @@
  * <author>                 <time>          <version>          <desc>
  * luo.yongqian         2019/5/6 17:42      1.0.0               创建
  */
-package com.roboslyq.java9stream;
+package com.roboslyq.java9flowapi;
 
-import com.roboslyq.java9stream.dto.SimpleDto1;
+import com.roboslyq.java9flowapi.dto.SimpleDto1;
 
 import java.util.concurrent.Flow;
 
@@ -21,18 +21,20 @@ import java.util.concurrent.Flow;
  * @create 2019/5/6
  * @since 1.0.0
  */
-public class SimpleDto1Suscriber implements Flow.Subscriber<SimpleDto1> {
+public class SuscriberDemo implements Flow.Subscriber<SimpleDto1> {
 
     /**
-     * 发布者和订阅者之间创建异步非阻塞链接。
-     * 订阅者调用其request方法来向发布者请求项目。
-     * 订阅者调用其cancel取消订阅的方法，即关闭发布者和订阅者之间的链接。
+     * 1、定义一个类属性，接收onSubscribe()事件传递的Subscription对象。用来与Publisher通讯。
+     * 2、Subscription发布者和订阅者之间创建异步非阻塞链接。
+     * 3、(1)订阅者调用其request方法来向发布者请求项目。
+     *    (2)订阅者调用其cancel取消订阅的方法，即关闭发布者和订阅者之间的链接。
+     *
      */
     private Flow.Subscription subscription;
 
     /**
-     * 订阅事件，这是订阅者订阅了发布者后接收消息时调用的第一个方法。
-     * 通常我们调用subscription.request开始从处理器（Processor）接收项目
+     * 1、订阅事件，这是订阅者订阅了发布者后接收消息时调用的第一个方法。
+     * 2、通常我们调用subscription.request开始从处理器（Processor）接收项目
      * @param subscription
      */
     @Override
@@ -43,7 +45,7 @@ public class SimpleDto1Suscriber implements Flow.Subscriber<SimpleDto1> {
     }
 
     /**
-     * 当从发布者收到消息时调用此方法
+     * 当从发布者收到消息时调用此方法并且需要重新发送request,告诉publisher可以继承推送消息。
      * @param item
      */
     @Override

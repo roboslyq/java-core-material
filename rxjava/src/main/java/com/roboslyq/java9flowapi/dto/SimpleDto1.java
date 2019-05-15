@@ -8,7 +8,7 @@
  * <author>                 <time>          <version>          <desc>
  * luo.yongqian         2019/5/6 15:34      1.0.0               创建
  */
-package com.roboslyq.java9stream.dto;
+package com.roboslyq.java9flowapi.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -22,7 +22,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class SimpleDto {
+public class SimpleDto1 {
     private Integer id;
     private String name;
 }

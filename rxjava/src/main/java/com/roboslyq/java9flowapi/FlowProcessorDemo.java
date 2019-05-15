@@ -8,10 +8,10 @@
  * <author>                 <time>          <version>          <desc>
  * luo.yongqian         2019/5/6 17:27      1.0.0               创建
  */
-package com.roboslyq.java9stream;
+package com.roboslyq.java9flowapi;
 
-import com.roboslyq.java9stream.dto.SimpleDto;
-import com.roboslyq.java9stream.dto.SimpleDto1;
+import com.roboslyq.java9flowapi.dto.SimpleDto;
+import com.roboslyq.java9flowapi.dto.SimpleDto1;
 
 import java.util.concurrent.Flow;
 import java.util.concurrent.Flow.Processor;
