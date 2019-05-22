@@ -17,6 +17,7 @@ import java.util.concurrent.Flow;
 /**
  *
  * 〈SimlpeDto1的订阅者，实现Flow.Subscriber接口〉
+ *  此实现方式为普通的Java接口实现操作，不是很简洁。可以直接使用
  * @author luo.yongqian
  * @create 2019/5/6
  * @since 1.0.0
