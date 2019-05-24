@@ -4,15 +4,15 @@ import sun.misc.Unsafe;
 
 import java.lang.reflect.Field;
 
-public class UnsafeTest {
+/**
+ * Unsafe测试
+ */
+public class UnsafeDemoMain {
 
     public static void main(String[] args) throws IllegalAccessException,InstantiationException {
         try {
             //获取Unsafe对象
-            Class<Unsafe> clazz = (Class<Unsafe>) Class.forName("sun.misc.Unsafe");
-            Field field =  clazz.getDeclaredField("theUnsafe");
-            field.setAccessible(true);
-            Unsafe unsafe = (Unsafe) field.get(null);
+            Unsafe unsafe = UnsafeUtils.getUnsafe();
 
             //实例化UnsafeUser
             UserUnsafe userUnsafe = (UserUnsafe) unsafe.allocateInstance(UserUnsafe.class);
@@ -40,7 +40,7 @@ public class UnsafeTest {
             unsafe.compareAndSwapInt(userUnsafe,fieldOffset,10,10);
             System.out.println("5------>"+userUnsafe.getId());
 
-        } catch (ClassNotFoundException | NoSuchFieldException e) {
+        } catch (NoSuchFieldException e) {
             e.printStackTrace();
         }
     }
@@ -48,6 +48,7 @@ public class UnsafeTest {
 
 class UserUnsafe{
     private int id;
+
     private String name;
 
     public int getId() {
