@@ -14,8 +14,8 @@
     </annotationProcessing>
     <bytecodeTargetLevel target="9">
       <module name="core" target="9" />
-      <module name="jdk" target="1.5" />
-      <module name="lang" target="1.5" />
+      <module name="jdk" target="9" />
+      <module name="lang" target="9" />
       <module name="rxjava" target="1.9" />
     </bytecodeTargetLevel>
   </component>
