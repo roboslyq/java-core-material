@@ -8,11 +8,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="core" />
-        <module name="lang" />
         <module name="rxjava" />
+        <module name="concurrent" />
+        <module name="lang" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="9">
+      <module name="concurrent" target="9" />
       <module name="core" target="9" />
       <module name="jdk" target="9" />
       <module name="lang" target="9" />
