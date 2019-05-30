@@ -44,6 +44,7 @@ public class ForkJoinPoolDemo extends RecursiveTask<Integer> {
         println("---------------------------- " + recursiveTimes + " ----------------------------");
         println("startIndex -->" + startIndex);
         println("endIndex -->" + endIndex);
+        //分支条件一：任务已经小于设定值，不需要拆分直接计算
         if(endIndex - startIndex <= TASK_SIZE){
             println("开始计算... ...");
             int tmp = 0 ;
@@ -51,8 +52,8 @@ public class ForkJoinPoolDemo extends RecursiveTask<Integer> {
                 tmp += i;
             }
             return tmp;
-        }else{
-            println("继承拆分");
+        }else{//分支条件二:任务不够小继续拆分
+            println("继续拆分");
             ForkJoinPoolDemo task1 = new ForkJoinPoolDemo(startIndex,(endIndex + startIndex)/2);
             task1.fork();
             ForkJoinPoolDemo task2 = new ForkJoinPoolDemo(1 + (endIndex + startIndex)/2,endIndex);
@@ -67,5 +68,6 @@ public class ForkJoinPoolDemo extends RecursiveTask<Integer> {
     private void println(Object obj){
         System.out.println("[ 当前线程: " + Thread.currentThread().getName() + " ] " + obj);
     }
+
 }
 
