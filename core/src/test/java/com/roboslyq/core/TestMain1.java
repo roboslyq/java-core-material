@@ -10,6 +10,10 @@
  */
 package com.roboslyq.core;
 
+import com.alibaba.fastjson.JSONArray;
+
+import java.util.Collections;
+
 /**
  *
  * 〈通用测试类使用〉
@@ -19,10 +23,19 @@ package com.roboslyq.core;
  */
 public class TestMain1 {
     public static void main(String[] args) {
-      Object o = new Object();
-        System.out.println(o.hashCode());
-    }
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.add(1);
+        jsonArray.add(2);
+        jsonArray.add(3);
+        jsonArray.add(4);
 
+        JSONArray jsonArray1 = new JSONArray(jsonArray);
+        Collections.reverse(jsonArray1);
+
+        System.out.println(jsonArray);
+
+        System.out.println(jsonArray1);
+    }
 
 
 }

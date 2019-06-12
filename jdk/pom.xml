@@ -11,6 +11,7 @@
     <modules>
         <module>lang</module>
         <module>concurrent</module>
+        <module>io</module>
     </modules>
     <build>
         <plugins>

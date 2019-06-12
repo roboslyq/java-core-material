@@ -56,6 +56,12 @@
             <artifactId>byte-buddy</artifactId>
             <version>1.9.10</version>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.56</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 </project>

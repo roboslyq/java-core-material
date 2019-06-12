@@ -6,17 +6,26 @@ import java.util.stream.Stream;
 public class CreateStream {
     public static void main(String[] args) {
         Stream.generate(()-> {
-                    System.out.println("开始生产");
+                    print("开始生产");
                     return new Random().nextInt(10);}
             )
                 .limit(10)
                 .filter(val -> {
-                    System.out.println("开始过滤");
-                    return val > 3;}
-                )
+                    boolean rel = val > 3;
+                    if(rel){
+                        print("开始过滤,元素符合条件，进行下一步操作");
+                    }else {
+                        print("开始过滤,元素"+ val +"不符合条件，返回重新生产 \n\n");
+                    }
+                    return rel;
+                })
                 .forEach(val ->{
-                    System.out.println("开始最终结果处理");
-                    System.out.println(val);
+                    print("开始最终结果处理 :" +val +"\n\n");
                 });
     }
+
+    private static void print(Object obj){
+        System.out.println("[ " + Thread.currentThread().getId() + " ]: " + obj );
+    }
+
 }

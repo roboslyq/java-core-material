@@ -7,15 +7,17 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="core" />
-        <module name="rxjava" />
         <module name="concurrent" />
+        <module name="core" />
+        <module name="io" />
         <module name="lang" />
+        <module name="rxjava" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="9">
       <module name="concurrent" target="9" />
       <module name="core" target="9" />
+      <module name="io" target="9" />
       <module name="jdk" target="9" />
       <module name="lang" target="9" />
       <module name="rxjava" target="1.9" />
