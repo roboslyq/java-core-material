@@ -4,9 +4,10 @@ import java.util.Random;
 import java.util.stream.Stream;
 
 public class CreateStream {
+    static  int i = 1;
     public static void main(String[] args) {
         Stream.generate(()-> {
-                    print("开始生产");
+                    print("开始生产第 " + i++ +" 个元素" );
                     return new Random().nextInt(10);}
             )
                 .limit(10)
@@ -19,6 +20,13 @@ public class CreateStream {
                     }
                     return rel;
                 })
+                .sorted()
+                .peek(val -> {
+                    print("peek :"+  val);
+                })
+                .map(val ->{
+                    print("开始Map转换");
+                    return "map：" + val;} )
                 .forEach(val ->{
                     print("开始最终结果处理 :" +val +"\n\n");
                 });
