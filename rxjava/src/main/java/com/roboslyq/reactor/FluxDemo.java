@@ -8,7 +8,7 @@
  * <author>                 <time>          <version>          <desc>
  * luo.yongqian         2019/5/22 12:32      1.0.0               创建
  */
-package com.roboslyq.java9flowapi;
+package com.roboslyq.reactor;
 
 import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Schedulers;
