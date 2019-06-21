@@ -11,7 +11,7 @@ public class GeneratedObserverWithChain {
      */
     public static void observerWithChain(){
         //1、使用链式方式创建观察者
-        Observable.create((ObservableOnSubscribe<Integer>) e -> {
+        Observable observable =  Observable.create((ObservableOnSubscribe<Integer>) e -> {
             int i = 1;
             while (true){
                 if(i > 10 ){
@@ -28,25 +28,47 @@ public class GeneratedObserverWithChain {
                 i++;
             }
             e.onComplete();
-        })  .subscribe(new Observer< Integer >() {
+        });
+        observable.subscribe(new Observer< Integer >() {
             @Override
             public void onSubscribe(Disposable d) {
-                System.out.println("chain ======================onSubscribe");
+                System.out.println("chain 1======================onSubscribe");
             }
 
             @Override
             public void onNext(Integer integer) {
-                System.out.println("chain ======================onNext " + integer);
+                System.out.println("chain 1======================onNext " + integer);
             }
 
             @Override
             public void onError(Throwable e) {
-                System.out.println("chain ======================onError");
+                System.out.println("chain 1======================onError");
             }
 
             @Override
             public void onComplete() {
-                System.out.println("======================onComplete");
+                System.out.println("====================== onComplete 1");
+            }
+        });
+        observable.subscribe(new Observer< Integer >() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                System.out.println("chain2 ======================onSubscribe");
+            }
+
+            @Override
+            public void onNext(Integer integer) {
+                System.out.println("chain2 ======================onNext " + integer);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                System.out.println("chain2 ======================onError");
+            }
+
+            @Override
+            public void onComplete() {
+                System.out.println("======================onComplete 2");
             }
         });
     }
