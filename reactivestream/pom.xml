@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.roboslyq</groupId>
-    <artifactId>rxjava</artifactId>
+    <artifactId>reactivestream</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>

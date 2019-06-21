@@ -11,7 +11,7 @@
         <module name="core" />
         <module name="io" />
         <module name="lang" />
-        <module name="rxjava" />
+        <module name="reactivestream" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="9">
@@ -20,7 +20,7 @@
       <module name="io" target="9" />
       <module name="jdk" target="9" />
       <module name="lang" target="9" />
-      <module name="rxjava" target="1.9" />
+      <module name="reactivestream" target="1.9" />
     </bytecodeTargetLevel>
   </component>
 </project>

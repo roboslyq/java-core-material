@@ -24,6 +24,7 @@ import java.util.Collections;
 public class TestMain1 {
     public static void main(String[] args) {
         System.out.println(1 << 30);
+        System.out.println(1 << 6 );
         JSONArray jsonArray = new JSONArray();
         jsonArray.add(1);
         jsonArray.add(2);
