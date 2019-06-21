@@ -7,11 +7,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="concurrent" />
         <module name="core" />
-        <module name="io" />
-        <module name="lang" />
         <module name="reactivestream" />
+        <module name="io" />
+        <module name="concurrent" />
+        <module name="lang" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="9">
@@ -20,7 +20,7 @@
       <module name="io" target="9" />
       <module name="jdk" target="9" />
       <module name="lang" target="9" />
-      <module name="reactivestream" target="9" />
+      <module name="reactivestream" target="1.9" />
     </bytecodeTargetLevel>
   </component>
 </project>
