@@ -9,10 +9,10 @@ public class FirstRxjava2Main {
         });
         //GenerateObserverWithoutChainDemo.observerWithoutChain();
         GeneratedObserverWithChain.observerWithChain();
-        try {
-            Thread.sleep(1000000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(1000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 }

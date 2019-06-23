@@ -13,7 +13,7 @@ public class GeneratedObserverWithChain {
     public static void observerWithChain(){
         //钩子函数扩展使用
         RxJavaPlugins.setOnObservableAssembly(originalObservable ->{
-            System.out.println("before Observable");
+            print("before Observable");
             return  originalObservable;
         });
         //1、使用链式方式创建观察者
@@ -28,7 +28,7 @@ public class GeneratedObserverWithChain {
 //                    e.onError(new Throwable("异常测试-"+i));
 //                }else{
 //                    //事件来源，可以扩展为其它来源，并且可以使用阻塞队列阻塞当前线程，触发onNext事件
-//                    System.out.println("开始发送第"+ i +"个chain事件");
+//                    print("开始发送第"+ i +"个chain事件");
 //                    e.onNext(i);
 //                }
 //                Thread.sleep(1000);
@@ -41,7 +41,7 @@ public class GeneratedObserverWithChain {
 //                    e.onError(new Throwable("异常测试-"+i));
 //                }else{
 //                    //事件来源，可以扩展为其它来源，并且可以使用阻塞队列阻塞当前线程，触发onNext事件
-//                    System.out.println("开始发送第"+ i +"个chain事件");
+//                    print("开始发送第"+ i +"个chain事件");
 //                    e.onNext(i);
 //                }
 //                Thread.sleep(1000);
@@ -56,53 +56,56 @@ public class GeneratedObserverWithChain {
             }
             e.onComplete();
         }).filter( val ->{
-            System.out.println(" 开始过滤值: " + val);
+            print(" 开始过滤值: " + val);
             return  val % 2 == 0;
         }).map(val ->{
-            System.out.println("开始转换:" + val);
+            print("开始转换:" + val);
             return  val + 1;
         });
         observable.subscribe(new Observer< Integer >() {
             @Override
             public void onSubscribe(Disposable d) {
-                System.out.println("chain 1======================onSubscribe");
+                print("chain 1======================onSubscribe");
             }
 
             @Override
             public void onNext(Integer integer) {
-                System.out.println("chain 1======================onNext " + integer);
+                print("chain 1======================onNext " + integer);
             }
 
             @Override
             public void onError(Throwable e) {
-                System.out.println("chain 1======================onError");
+                print("chain 1======================onError");
             }
 
             @Override
             public void onComplete() {
-                System.out.println("====================== onComplete 1");
+                print("====================== onComplete 1");
             }
         });
         observable.subscribe(new Observer< Integer >() {
             @Override
             public void onSubscribe(Disposable d) {
-                System.out.println("chain2 ======================onSubscribe");
+                print("chain2 ======================onSubscribe");
             }
 
             @Override
             public void onNext(Integer integer) {
-                System.out.println("chain2 ======================onNext " + integer);
+                print("chain2 ======================onNext " + integer);
             }
 
             @Override
             public void onError(Throwable e) {
-                System.out.println("chain2 ======================onError");
+                print("chain2 ======================onError");
             }
 
             @Override
             public void onComplete() {
-                System.out.println("======================onComplete 2");
+                print("======================onComplete 2");
             }
         });
+    }
+    public static void print(Object obj){
+        System.out.println("[ current Thread : "+ Thread.currentThread().getName() + " ]" + obj);
     }
 }
