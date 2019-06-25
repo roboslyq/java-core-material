@@ -18,5 +18,12 @@ package com.roboslyq.chains;
  * @since 1.0.0
  */
 public interface Subscriber<T> {
-    void subscribe(T t);
+
+    void onSubscribe(OnSubscribeProcessor var1);
+
+    void onNext( T var1);
+
+    void onError( Throwable var1);
+
+    void onComplete();
 }
