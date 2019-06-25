@@ -25,10 +25,8 @@ public class Nodes {
      * 源头Node需要手动创建
      * @return
      */
-    public static Node create(Supplier supplier){
-        Node node = new Node(null);
-        node.isHead = true;
-        node.supplier = supplier;
+    public static AbstractProvider create(OnSubscribeProcessor processor){
+        AbstractProvider node = new NodeCreate(processor);
         return node;
     }
 

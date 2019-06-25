@@ -25,20 +25,4 @@ public abstract class AbstractSubscriber<T,R> implements Subscriber {
         this.downSubscriber = downSubscriber;
     }
 
-    @Override
-    public void onSubscribe(OnSubscribeProcessor var1) {
-        System.out.println("onSubscribe...");
-    }
-
-    @Override
-    public void onError(Throwable var1) {
-        System.out.println("Throwable...");
-
-    }
-
-    @Override
-    public void onComplete() {
-        System.out.println("onComplete...");
-
-    }
 }

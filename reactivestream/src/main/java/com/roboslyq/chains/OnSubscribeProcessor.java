@@ -17,6 +17,6 @@ package com.roboslyq.chains;
  * @create 2019/6/25
  * @since 1.0.0
  */
-public class OnSubscribeProcessor {
-
+public interface OnSubscribeProcessor {
+    void doSubscribe(Subscriber subscriber);
 }

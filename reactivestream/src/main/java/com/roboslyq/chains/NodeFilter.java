@@ -10,6 +10,8 @@
  */
 package com.roboslyq.chains;
 
+import java.util.function.Predicate;
+
 /**
  *
  * 〈源节点〉:源节点稍与其他节点不一样，包含了数据源的创建
@@ -17,24 +19,23 @@ package com.roboslyq.chains;
  * @create 2019/6/25
  * @since 1.0.0
  */
-public class NodeCreate  extends AbstractProvider {
-
-    OnSubscribeProcessor processor;
+public class NodeFilter<T>  extends AbstractProvider  {
+    public Predicate filter;
     public Provider previous;
-    public NodeCreate(OnSubscribeProcessor processor) {
-        this.processor = processor;
+    public NodeFilter(Predicate filter,Provider previous) {
+        this.previous = previous;
+        this.filter = filter;
     }
     @Override
     public void doDeal(Subscriber subscriber) {
-        NodeCreateSubscriber subscriberCreate =    new NodeCreateSubscriber(subscriber);
-        processor.doSubscribe(subscriberCreate);
+        this.previous.deal(new NodeFilterSubscriber(subscriber,filter));
     }
 
-    class NodeCreateSubscriber implements Subscriber{
-        OnSubscribeProcessor processor;
-        private Subscriber downSubscriber;
-        public NodeCreateSubscriber(Subscriber downSubscriber) {
-            this.downSubscriber = downSubscriber;
+    class NodeFilterSubscriber extends  AbstractSubscriber{
+        public Predicate predicate;
+        public NodeFilterSubscriber(Subscriber downSubscriber,Predicate predicate) {
+            super(downSubscriber);
+            this.predicate = predicate;
         }
         @Override
         public void onSubscribe(OnSubscribeProcessor var1) {
@@ -43,7 +44,12 @@ public class NodeCreate  extends AbstractProvider {
 
         @Override
         public void onNext(Object var1) {
-            downSubscriber.onNext(var1);
+            if (predicate.test(var1)) {
+                System.out.println("符合filter条件，往下传播");
+                downSubscriber.onNext(var1);
+            }else{
+                System.out.println("不符合filter条件");
+            }
         }
 
         @Override

@@ -19,6 +19,38 @@ package com.roboslyq.chains;
  */
 public class ChainsMain {
     public static void main(String[] args) {
-        Nodes.create(()->( 10)).provide(()-> System.out.println());
+        Nodes.create(subscriber -> {
+            int i = 0;
+            while ( i< 10 ){
+                System.out.println("第 " + (++i) +"次生产");
+                subscriber.onNext(i);
+            }
+        }).filter(val ->{
+            System.out.println("filter--" + val);
+            return val != null;
+        }).map(val ->{
+            System.out.println("map--" + val);
+            return  val;
+        }).deal(new Subscriber() {
+            @Override
+            public void onSubscribe(OnSubscribeProcessor var1) {
+                System.out.println("subscribe "+ var1);
+            }
+
+            @Override
+            public void onNext(Object var1) {
+                System.out.println("subscribe "+ var1);
+            }
+
+            @Override
+            public void onError(Throwable var1) {
+                System.out.println("Throwable "+ var1);
+
+            }
+            @Override
+            public void onComplete() {
+                System.out.println("onComplete ");
+            }
+        });
     }
 }

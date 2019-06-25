@@ -10,6 +10,8 @@
  */
 package com.roboslyq.chains;
 
+import java.util.function.Function;
+
 /**
  *
  * 〈源节点〉:源节点稍与其他节点不一样，包含了数据源的创建
@@ -17,24 +19,23 @@ package com.roboslyq.chains;
  * @create 2019/6/25
  * @since 1.0.0
  */
-public class NodeCreate  extends AbstractProvider {
-
-    OnSubscribeProcessor processor;
+public class NodeMap extends AbstractProvider {
+    public Function map;
     public Provider previous;
-    public NodeCreate(OnSubscribeProcessor processor) {
-        this.processor = processor;
+    public NodeMap(Function map,Provider previous) {
+        this.previous = previous;
+        this.map = map;
     }
+
     @Override
     public void doDeal(Subscriber subscriber) {
-        NodeCreateSubscriber subscriberCreate =    new NodeCreateSubscriber(subscriber);
-        processor.doSubscribe(subscriberCreate);
+        this.previous.deal(new NodeMapSubscriber(subscriber,this.map));
     }
-
-    class NodeCreateSubscriber implements Subscriber{
-        OnSubscribeProcessor processor;
-        private Subscriber downSubscriber;
-        public NodeCreateSubscriber(Subscriber downSubscriber) {
-            this.downSubscriber = downSubscriber;
+    class NodeMapSubscriber extends  AbstractSubscriber{
+        public Function map;
+        public NodeMapSubscriber(Subscriber downSubscriber,Function map) {
+            super(downSubscriber);
+            this.map = map;
         }
         @Override
         public void onSubscribe(OnSubscribeProcessor var1) {
@@ -43,7 +44,8 @@ public class NodeCreate  extends AbstractProvider {
 
         @Override
         public void onNext(Object var1) {
-            downSubscriber.onNext(var1);
+            Object var2 = map.apply(var1);
+            downSubscriber.onNext(var2);
         }
 
         @Override
