@@ -20,5 +20,5 @@ import java.util.function.Consumer;
  * @since 1.0.0
  */
 public interface Publisher<T> {
-  void deal(Subscriber<T> subscriber);
+  void subscribe(Subscriber<T> subscriber);
 }

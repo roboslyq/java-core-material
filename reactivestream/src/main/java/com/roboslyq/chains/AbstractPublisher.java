@@ -31,9 +31,9 @@ public abstract class AbstractPublisher<T> implements Publisher {
      * @param subscriber
      */
     @Override
-    public void deal(Subscriber subscriber) {
-        doDeal(subscriber);
+    public void subscribe(Subscriber subscriber) {
+        doSubscribe(subscriber);
     }
 
-    public abstract void doDeal(Subscriber subscriber);
+    public abstract void doSubscribe(Subscriber subscriber);
 }

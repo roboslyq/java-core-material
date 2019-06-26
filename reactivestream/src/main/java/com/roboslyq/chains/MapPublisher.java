@@ -28,8 +28,8 @@ public class MapPublisher extends AbstractPublisher {
     }
 
     @Override
-    public void doDeal(Subscriber subscriber) {
-        this.previous.deal(new NodeMapSubscriber(subscriber,this.map));
+    public void doSubscribe(Subscriber subscriber) {
+        this.previous.subscribe(new NodeMapSubscriber(subscriber,this.map));
     }
     class NodeMapSubscriber extends  AbstractSubscriber{
         Function map;

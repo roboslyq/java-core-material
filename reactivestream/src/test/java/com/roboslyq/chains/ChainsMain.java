@@ -31,7 +31,7 @@ public class ChainsMain {
         }).map(val ->{
             System.out.println("map--" + val);
             return  val;
-        }).deal(new Subscriber() {
+        }).subscribe(new Subscriber() {
             @Override
             public void onSubscribe(OnSubscribeProcessor var1) {
                 System.out.println("subscribe "+ var1);

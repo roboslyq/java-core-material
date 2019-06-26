@@ -28,8 +28,8 @@ public class FilterPublisher<T>  extends AbstractPublisher {
         this.filter = filter;
     }
     @Override
-    public void doDeal(Subscriber subscriber) {
-        this.previous.deal(new NodeFilterSubscriber(subscriber,filter));
+    public void doSubscribe(Subscriber subscriber) {
+        this.previous.subscribe(new NodeFilterSubscriber(subscriber,filter));
     }
 
     class NodeFilterSubscriber extends  AbstractSubscriber{

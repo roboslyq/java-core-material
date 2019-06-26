@@ -30,7 +30,7 @@ public class CreatePublisher extends AbstractPublisher {
      * @param subscriber
      */
     @Override
-    public void doDeal(Subscriber subscriber) {
+    public void doSubscribe(Subscriber subscriber) {
         NodeCreateSubscriber subscriberCreate =    new NodeCreateSubscriber(subscriber);
         processor.doSubscribe(subscriberCreate);
     }
