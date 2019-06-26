@@ -17,11 +17,11 @@ package com.roboslyq.chains;
  * @create 2019/6/25
  * @since 1.0.0
  */
-public class CreatePublisher extends AbstractPublisher {
+public class CreatePublisher<T> extends AbstractPublisher<T> {
 
-    private OnSubscribeProcessor processor;
+    private OnSubscribeProcessor<T> processor;
 
-    CreatePublisher(OnSubscribeProcessor processor) {
+    CreatePublisher(OnSubscribeProcessor<T> processor) {
         this.processor = processor;
     }
 
@@ -30,32 +30,31 @@ public class CreatePublisher extends AbstractPublisher {
      * @param subscriber
      */
     @Override
-    public void doSubscribe(Subscriber subscriber) {
+    public void doSubscribe(Subscriber<? super T> subscriber) {
         NodeCreateSubscriber subscriberCreate =    new NodeCreateSubscriber(subscriber);
         processor.doSubscribe(subscriberCreate);
     }
 
-    class NodeCreateSubscriber implements Subscriber{
+    class NodeCreateSubscriber implements Subscriber<T>{
 
-        private Subscriber downSubscriber;
+        private Subscriber<? super T> downSubscriber;
 
-        NodeCreateSubscriber(Subscriber downSubscriber) {
+        NodeCreateSubscriber(Subscriber<? super T> downSubscriber) {
             this.downSubscriber = downSubscriber;
         }
         @Override
-        public void onSubscribe(OnSubscribeProcessor var1) {
+        public void onSubscribe(OnSubscribeProcessor<T> var1) {
             System.out.println("onSubscribe...");
         }
 
         @Override
-        public void onNext(Object var1) {
+        public void onNext(T var1) {
             downSubscriber.onNext(var1);
         }
 
         @Override
         public void onError(Throwable var1) {
             System.out.println("Throwable...");
-
         }
 
         @Override

@@ -14,27 +14,27 @@ import java.util.function.Predicate;
 
 /**
  *
- * 〈源节点〉:源节点稍与其他节点不一样，包含了数据源的创建
+ * 过滤器处理
  * @author luo.yongqian
  * @create 2019/6/25
  * @since 1.0.0
  */
-public class FilterPublisher<T>  extends AbstractPublisher {
-     private Predicate filter;
-     private Publisher previous;
+public class FilterPublisher<T>  extends AbstractHasUpstreamPublisher<T,T> {
+     private Predicate<T> filter;
 
-     FilterPublisher(Predicate filter, Publisher previous) {
-        this.previous = previous;
+     FilterPublisher(Predicate<T> filter, Publisher<T> previous) {
+         super(previous);
         this.filter = filter;
     }
+
     @Override
-    public void doSubscribe(Subscriber subscriber) {
+    public void doSubscribe(Subscriber<? super T> subscriber) {
         this.previous.subscribe(new NodeFilterSubscriber(subscriber,filter));
     }
 
-    class NodeFilterSubscriber extends  AbstractSubscriber{
-        Predicate predicate;
-        NodeFilterSubscriber(Subscriber downSubscriber, Predicate predicate) {
+    class NodeFilterSubscriber extends  AbstractSubscriber<T>{
+        Predicate<? super T> predicate;
+        NodeFilterSubscriber(Subscriber<? super T> downSubscriber, Predicate<T> predicate) {
             super(downSubscriber);
             this.predicate = predicate;
         }
@@ -44,7 +44,7 @@ public class FilterPublisher<T>  extends AbstractPublisher {
         }
 
         @Override
-        public void onNext(Object var1) {
+        public void onNext(T var1) {
             if (predicate.test(var1)) {
                 System.out.println("符合filter条件，往下传播");
                 downSubscriber.onNext(var1);

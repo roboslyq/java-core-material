@@ -19,7 +19,7 @@ package com.roboslyq.chains;
  */
 public interface Subscriber<T> {
 
-    void onSubscribe(OnSubscribeProcessor var1);
+    void onSubscribe(OnSubscribeProcessor<T> var1);
 
     void onNext( T var1);
 

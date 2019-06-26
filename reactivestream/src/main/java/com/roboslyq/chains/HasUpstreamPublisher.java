@@ -1,12 +1,12 @@
 /**
  * Copyright (C), 2015-2019
- * FileName: OnSubscribeProcessor
+ * FileName: HasUpstreamPublisher
  * Author:   luo.yongqian
- * Date:     2019/6/25 17:11
+ * Date:     2019/6/26 13:09
  * Description:
  * History:
  * <author>                 <time>          <version>          <desc>
- * luo.yongqian         2019/6/25 17:11      1.0.0               创建
+ * luo.yongqian         2019/6/26 13:09      1.0.0               创建
  */
 package com.roboslyq.chains;
 
@@ -14,9 +14,9 @@ package com.roboslyq.chains;
  *
  * 〈〉
  * @author luo.yongqian
- * @create 2019/6/25
+ * @create 2019/6/26
  * @since 1.0.0
  */
-public interface OnSubscribeProcessor<T> {
-    void doSubscribe(Subscriber<T> subscriber);
+public interface HasUpstreamPublisher<T> {
+    Publisher<T> previous();
 }

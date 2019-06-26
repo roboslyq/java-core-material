@@ -7,7 +7,7 @@ import java.util.function.Predicate;
  * Publisher抽象类，实现共众的通用逻辑
  * @param <T>
  */
-public abstract class AbstractPublisher<T> implements Publisher {
+public abstract class AbstractPublisher<T> implements Publisher<T> {
     /**
      * Map方法实现
      * @param function
@@ -31,9 +31,9 @@ public abstract class AbstractPublisher<T> implements Publisher {
      * @param subscriber
      */
     @Override
-    public void subscribe(Subscriber subscriber) {
+    public void subscribe(Subscriber<? super T> subscriber) {
         doSubscribe(subscriber);
     }
 
-    public abstract void doSubscribe(Subscriber subscriber);
+    public abstract void doSubscribe(Subscriber<? super T> subscriber);
 }
