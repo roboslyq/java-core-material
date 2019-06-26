@@ -1,6 +1,6 @@
 /**
  * Copyright (C), 2015-2019
- * FileName: NodeCreate
+ * FileName: CreatePublisher
  * Author:   luo.yongqian
  * Date:     2019/6/25 16:59
  * Description: 源节点
@@ -17,11 +17,11 @@ package com.roboslyq.chains;
  * @create 2019/6/25
  * @since 1.0.0
  */
-public class NodeCreate  extends AbstractProvider {
+public class CreatePublisher extends AbstractPublisher {
 
     OnSubscribeProcessor processor;
-    public Provider previous;
-    public NodeCreate(OnSubscribeProcessor processor) {
+    public Publisher previous;
+    public CreatePublisher(OnSubscribeProcessor processor) {
         this.processor = processor;
     }
     @Override

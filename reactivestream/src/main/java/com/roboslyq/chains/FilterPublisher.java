@@ -1,6 +1,6 @@
 /**
  * Copyright (C), 2015-2019
- * FileName: NodeCreate
+ * FileName: CreatePublisher
  * Author:   luo.yongqian
  * Date:     2019/6/25 16:59
  * Description: 源节点
@@ -19,10 +19,10 @@ import java.util.function.Predicate;
  * @create 2019/6/25
  * @since 1.0.0
  */
-public class NodeFilter<T>  extends AbstractProvider  {
+public class FilterPublisher<T>  extends AbstractPublisher {
     public Predicate filter;
-    public Provider previous;
-    public NodeFilter(Predicate filter,Provider previous) {
+    public Publisher previous;
+    public FilterPublisher(Predicate filter, Publisher previous) {
         this.previous = previous;
         this.filter = filter;
     }

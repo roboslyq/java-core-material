@@ -3,13 +3,13 @@ package com.roboslyq.chains;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-public abstract class AbstractProvider<T> implements Provider {
-    public Provider map(Function function){
-        return new NodeMap(function,this);
+public abstract class AbstractPublisher<T> implements Publisher {
+    public Publisher map(Function function){
+        return new MapPublisher(function,this);
     }
 
-    public AbstractProvider filter(Predicate filter){
-        return  new NodeFilter(filter,this);
+    public AbstractPublisher filter(Predicate filter){
+        return  new FilterPublisher(filter,this);
     }
 
     public void subscriber(Subscriber subscriber) {

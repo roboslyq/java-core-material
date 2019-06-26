@@ -1,6 +1,6 @@
 /**
  * Copyright (C), 2015-2019
- * FileName: Nodes
+ * FileName: Publishers
  * Author:   luo.yongqian
  * Date:     2019/6/25 14:08
  * Description:
@@ -10,24 +10,21 @@
  */
 package com.roboslyq.chains;
 
-import java.util.function.Supplier;
-
 /**
  *
- * 〈〉
+ * 〈Publisher的工具类〉
  * @author luo.yongqian
  * @create 2019/6/25
  * @since 1.0.0
  */
-public class Nodes {
+public class Publishers {
 
     /**
      * 源头Node需要手动创建
      * @return
      */
-    public static AbstractProvider create(OnSubscribeProcessor processor){
-        AbstractProvider node = new NodeCreate(processor);
-        return node;
+    public static AbstractPublisher create(OnSubscribeProcessor processor){
+        return new CreatePublisher(processor);
     }
 
 

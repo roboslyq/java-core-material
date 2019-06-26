@@ -1,6 +1,6 @@
 /**
  * Copyright (C), 2015-2019
- * FileName: NodeCreate
+ * FileName: CreatePublisher
  * Author:   luo.yongqian
  * Date:     2019/6/25 16:59
  * Description: 源节点
@@ -19,10 +19,10 @@ import java.util.function.Function;
  * @create 2019/6/25
  * @since 1.0.0
  */
-public class NodeMap extends AbstractProvider {
+public class MapPublisher extends AbstractPublisher {
     public Function map;
-    public Provider previous;
-    public NodeMap(Function map,Provider previous) {
+    public Publisher previous;
+    public MapPublisher(Function map, Publisher previous) {
         this.previous = previous;
         this.map = map;
     }

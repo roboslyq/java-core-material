@@ -19,6 +19,6 @@ import java.util.function.Consumer;
  * @create 2019/6/25
  * @since 1.0.0
  */
-public interface Provider<T> {
+public interface Publisher<T> {
   void deal(Subscriber<T> subscriber);
 }

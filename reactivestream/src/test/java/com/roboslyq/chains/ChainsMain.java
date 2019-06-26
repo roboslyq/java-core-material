@@ -19,7 +19,7 @@ package com.roboslyq.chains;
  */
 public class ChainsMain {
     public static void main(String[] args) {
-        Nodes.create(subscriber -> {
+        Publishers.create(subscriber -> {
             int i = 0;
             while ( i< 10 ){
                 System.out.println("第 " + (++i) +"次生产");
