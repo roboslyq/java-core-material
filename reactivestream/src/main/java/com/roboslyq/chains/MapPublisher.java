@@ -20,9 +20,9 @@ import java.util.function.Function;
  * @since 1.0.0
  */
 public class MapPublisher extends AbstractPublisher {
-    public Function map;
-    public Publisher previous;
-    public MapPublisher(Function map, Publisher previous) {
+    private Function map;
+    private Publisher previous;
+    MapPublisher(Function map, Publisher previous) {
         this.previous = previous;
         this.map = map;
     }
@@ -32,8 +32,8 @@ public class MapPublisher extends AbstractPublisher {
         this.previous.deal(new NodeMapSubscriber(subscriber,this.map));
     }
     class NodeMapSubscriber extends  AbstractSubscriber{
-        public Function map;
-        public NodeMapSubscriber(Subscriber downSubscriber,Function map) {
+        Function map;
+        NodeMapSubscriber(Subscriber downSubscriber, Function map) {
             super(downSubscriber);
             this.map = map;
         }

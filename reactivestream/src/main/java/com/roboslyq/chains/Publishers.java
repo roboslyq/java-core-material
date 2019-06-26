@@ -27,5 +27,4 @@ public class Publishers {
         return new CreatePublisher(processor);
     }
 
-
 }

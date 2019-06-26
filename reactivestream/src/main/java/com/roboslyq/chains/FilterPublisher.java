@@ -20,9 +20,10 @@ import java.util.function.Predicate;
  * @since 1.0.0
  */
 public class FilterPublisher<T>  extends AbstractPublisher {
-    public Predicate filter;
-    public Publisher previous;
-    public FilterPublisher(Predicate filter, Publisher previous) {
+     private Predicate filter;
+     private Publisher previous;
+
+     FilterPublisher(Predicate filter, Publisher previous) {
         this.previous = previous;
         this.filter = filter;
     }
@@ -32,8 +33,8 @@ public class FilterPublisher<T>  extends AbstractPublisher {
     }
 
     class NodeFilterSubscriber extends  AbstractSubscriber{
-        public Predicate predicate;
-        public NodeFilterSubscriber(Subscriber downSubscriber,Predicate predicate) {
+        Predicate predicate;
+        NodeFilterSubscriber(Subscriber downSubscriber, Predicate predicate) {
             super(downSubscriber);
             this.predicate = predicate;
         }

@@ -19,11 +19,16 @@ package com.roboslyq.chains;
  */
 public class CreatePublisher extends AbstractPublisher {
 
-    OnSubscribeProcessor processor;
-    public Publisher previous;
-    public CreatePublisher(OnSubscribeProcessor processor) {
+    private OnSubscribeProcessor processor;
+
+    CreatePublisher(OnSubscribeProcessor processor) {
         this.processor = processor;
     }
+
+    /**
+     * doDeal方法具体实现，因为是Create，所以没有前驱节点。直接发起后置节点调用
+     * @param subscriber
+     */
     @Override
     public void doDeal(Subscriber subscriber) {
         NodeCreateSubscriber subscriberCreate =    new NodeCreateSubscriber(subscriber);
@@ -31,9 +36,10 @@ public class CreatePublisher extends AbstractPublisher {
     }
 
     class NodeCreateSubscriber implements Subscriber{
-        OnSubscribeProcessor processor;
+
         private Subscriber downSubscriber;
-        public NodeCreateSubscriber(Subscriber downSubscriber) {
+
+        NodeCreateSubscriber(Subscriber downSubscriber) {
             this.downSubscriber = downSubscriber;
         }
         @Override
