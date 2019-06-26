@@ -17,11 +17,11 @@ package com.roboslyq.chains;
  * @create 2019/6/25
  * @since 1.0.0
  */
-public abstract class AbstractSubscriber<T> implements Subscriber<T> {
+public abstract class AbstractSubscriber<T,U> implements Subscriber<T>,SuscribeQueue<U> {
 
-    protected final Subscriber<? super T> downSubscriber;
+    protected final Subscriber<? super U> downSubscriber;
 
-    public AbstractSubscriber(Subscriber<? super T> downSubscriber) {
+    public AbstractSubscriber(Subscriber<? super U> downSubscriber) {
         this.downSubscriber = downSubscriber;
     }
 

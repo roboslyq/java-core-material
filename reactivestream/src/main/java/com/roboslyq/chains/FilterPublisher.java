@@ -32,7 +32,7 @@ public class FilterPublisher<T>  extends AbstractHasUpstreamPublisher<T,T> {
         this.previous.subscribe(new NodeFilterSubscriber(subscriber,filter));
     }
 
-    class NodeFilterSubscriber extends  AbstractSubscriber<T>{
+    class NodeFilterSubscriber extends  AbstractSubscriber<T,T>{
         Predicate<? super T> predicate;
         NodeFilterSubscriber(Subscriber<? super T> downSubscriber, Predicate<T> predicate) {
             super(downSubscriber);

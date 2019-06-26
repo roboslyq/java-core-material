@@ -13,7 +13,7 @@ public abstract class AbstractPublisher<T> implements Publisher<T> {
      * @param function
      * @return
      */
-    public Publisher map(Function function){
+    public <R> Publisher map(Function<? super T, ? extends R> function){
         return new MapPublisher(function,this);
     }
 
@@ -22,8 +22,8 @@ public abstract class AbstractPublisher<T> implements Publisher<T> {
      * @param filter
      * @return
      */
-    public AbstractPublisher filter(Predicate filter){
-        return  new FilterPublisher(filter,this);
+    public AbstractPublisher filter(Predicate<T> filter){
+        return  new FilterPublisher<T>(filter,this);
     }
 
     /**

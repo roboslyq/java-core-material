@@ -19,7 +19,7 @@ package com.roboslyq.chains;
  */
 public class ChainsMain {
     public static void main(String[] args) {
-        Publishers.create(subscriber -> {
+        Publishers.create((OnSubscribeProcessor<Integer>)subscriber -> {
             int i = 0;
             while ( i< 10 ){
                 System.out.println("第 " + (++i) +"次生产");
@@ -30,8 +30,8 @@ public class ChainsMain {
             return val != null;
         }).map(val ->{
             System.out.println("map--" + val);
-            return  val;
-        }).subscribe(new Subscriber() {
+            return  val + "";
+        }).subscribe(( Subscriber<String>)new Subscriber() {
             @Override
             public void onSubscribe(OnSubscribeProcessor var1) {
                 System.out.println("subscribe "+ var1);

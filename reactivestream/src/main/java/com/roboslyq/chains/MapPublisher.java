@@ -33,7 +33,7 @@ public class MapPublisher<T,U> extends AbstractHasUpstreamPublisher<T,U> {
     }
     class NodeMapSubscriber<T,U> extends  AbstractSubscriber<T,U> {
         Function<T,U> map;
-        NodeMapSubscriber(Subscriber<? super T> downSubscriber, Function map) {
+        NodeMapSubscriber(Subscriber<? super U> downSubscriber, Function<T,U> map) {
             super(downSubscriber);
             this.map = map;
         }
@@ -44,7 +44,7 @@ public class MapPublisher<T,U> extends AbstractHasUpstreamPublisher<T,U> {
 
         @Override
         public void onNext(T var1) {
-            T var2 =  map.apply(var1);
+            U var2 =  map.apply(var1);
             downSubscriber.onNext(var2);
         }
 

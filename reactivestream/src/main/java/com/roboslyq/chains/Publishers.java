@@ -17,14 +17,14 @@ package com.roboslyq.chains;
  * @create 2019/6/25
  * @since 1.0.0
  */
-public class Publishers {
+public class Publishers<T> {
 
     /**
      * 源头Node需要手动创建
      * @return
      */
-    public static AbstractPublisher create(OnSubscribeProcessor processor){
-        return new CreatePublisher(processor);
+    public static <T> AbstractPublisher<T> create(OnSubscribeProcessor<T> processor){
+        return new CreatePublisher<T>(processor);
     }
 
 }
