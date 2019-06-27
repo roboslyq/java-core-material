@@ -10,10 +10,10 @@ import java.util.function.Predicate;
 public abstract class AbstractPublisher<T> implements Publisher<T> {
     /**
      * Map方法实现
-     * @param function
-     * @return
+     * @param function 函数式接口转换实现
+     * @return MapPublisher
      */
-    public <R> Publisher map(Function<? super T, ? extends R> function){
+    <R> Publisher map(Function<? super T, ? extends R> function){
         return new MapPublisher(function,this);
     }
 
@@ -22,7 +22,7 @@ public abstract class AbstractPublisher<T> implements Publisher<T> {
      * @param filter
      * @return
      */
-    public AbstractPublisher filter(Predicate<T> filter){
+    AbstractPublisher filter(Predicate<T> filter){
         return  new FilterPublisher<T>(filter,this);
     }
 

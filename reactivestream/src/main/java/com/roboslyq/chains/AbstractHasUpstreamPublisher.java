@@ -21,7 +21,7 @@ public abstract class AbstractHasUpstreamPublisher<T,U> extends AbstractPublishe
 
     final Publisher<T> previous;
 
-    public AbstractHasUpstreamPublisher(Publisher<T> previous) {
+    AbstractHasUpstreamPublisher(Publisher<T> previous) {
         this.previous = previous;
     }
 
