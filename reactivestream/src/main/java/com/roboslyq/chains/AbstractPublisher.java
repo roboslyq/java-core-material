@@ -13,7 +13,7 @@ public abstract class AbstractPublisher<T> implements Publisher<T> {
      * @param function 函数式接口转换实现
      * @return MapPublisher
      */
-    <R> Publisher map(Function<? super T, ? extends R> function){
+    final <R> Publisher map(Function<? super T, ? extends R> function){
         return new MapPublisher(function,this);
     }
 

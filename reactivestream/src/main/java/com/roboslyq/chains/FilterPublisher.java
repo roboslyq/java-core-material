@@ -19,7 +19,7 @@ import java.util.function.Predicate;
  * @create 2019/6/25
  * @since 1.0.0
  */
-public class FilterPublisher<T>  extends AbstractHasUpstreamPublisher<T,T> {
+public class FilterPublisher<T>  extends AbstractPublisherWithUpstream<T,T> {
      private Predicate<T> filter;
 
      FilterPublisher(Predicate<T> filter, Publisher<T> previous) {

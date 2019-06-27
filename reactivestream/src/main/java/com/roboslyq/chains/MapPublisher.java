@@ -19,22 +19,23 @@ import java.util.function.Function;
  * @create 2019/6/25
  * @since 1.0.0
  */
-public class MapPublisher<T,U> extends AbstractHasUpstreamPublisher<T,U> {
+public class MapPublisher<T,U> extends AbstractPublisherWithUpstream<T,U> {
 
-    private Function<T,U> map;
+    private Function<? super T, ? extends U> map;
 
-    MapPublisher(Function<T,U> map, Publisher<T> previous) {
+    MapPublisher(Function<? super T, ? extends U> map, Publisher<T> previous) {
         super(previous);
         this.map = map;
     }
 
     @Override
     public void doSubscribe(Subscriber<? super U> subscriber) {
-        this.previous.subscribe(new NodeMapSubscriber(subscriber,this.map));
+       previous.subscribe(new MapSubscriber(subscriber,this.map));
     }
-    class NodeMapSubscriber extends  AbstractSubscriber<T,U> {
+
+   static final class MapSubscriber<T,U> extends  AbstractSubscriber<T,U> {
         final Function<? super T, ? extends U> map;
-        NodeMapSubscriber(Subscriber<? super U> downSubscriber, Function<T,U> map) {
+        MapSubscriber(Subscriber<? super U> downSubscriber, Function<T,U> map) {
             super(downSubscriber);
             this.map = map;
         }

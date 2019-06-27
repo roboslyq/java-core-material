@@ -1,6 +1,6 @@
 /**
  * Copyright (C), 2015-2019
- * FileName: AbstractHasUpstreamPublisher
+ * FileName: AbstractPublisherWithUpstream
  * Author:   luo.yongqian
  * Date:     2019/6/26 13:11
  * Description:
@@ -17,11 +17,11 @@ package com.roboslyq.chains;
  * @create 2019/6/26
  * @since 1.0.0
  */
-public abstract class AbstractHasUpstreamPublisher<T,U> extends AbstractPublisher<U> implements HasUpstreamPublisher<T> {
+public abstract class AbstractPublisherWithUpstream<T,U> extends AbstractPublisher<U> implements HasUpstreamPublisher<T> {
 
     final Publisher<T> previous;
 
-    AbstractHasUpstreamPublisher(Publisher<T> previous) {
+    AbstractPublisherWithUpstream(Publisher<T> previous) {
         this.previous = previous;
     }
 
