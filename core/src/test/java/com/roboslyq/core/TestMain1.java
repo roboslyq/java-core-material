@@ -23,20 +23,22 @@ import java.util.Collections;
  */
 public class TestMain1 {
     public static void main(String[] args) {
-        System.out.println(1 << 30);
-        System.out.println(1 << 6 );
-        JSONArray jsonArray = new JSONArray();
-        jsonArray.add(1);
-        jsonArray.add(2);
-        jsonArray.add(3);
-        jsonArray.add(4);
+        long estimate = 10;
+        System.out.println(estimate >>>= 1);
+//        System.out.println(1 << 30);
+//        System.out.println(1 << 6 );
+//        JSONArray jsonArray = new JSONArray();
+//        jsonArray.add(1);
+//        jsonArray.add(2);
+//        jsonArray.add(3);
+//        jsonArray.add(4);
+//
+//        JSONArray jsonArray1 = new JSONArray(jsonArray);
+//        Collections.reverse(jsonArray1);
+//
+//        System.out.println(jsonArray);
 
-        JSONArray jsonArray1 = new JSONArray(jsonArray);
-        Collections.reverse(jsonArray1);
-
-        System.out.println(jsonArray);
-
-        System.out.println(jsonArray1);
+//        System.out.println(jsonArray1);
     }
 
 
