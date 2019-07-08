@@ -28,8 +28,10 @@ import java.util.stream.Collectors;
 public class ListToMapDemo {
     public static void main(String[] args) {
         User[] userArray = User.userHelper(5);
-        Map<Integer,String> res =  Arrays.stream(userArray)
-                .collect(Collectors.toMap(User::getId, User::getName));
+        // key 目前为Object，可以指定具体类型，根据不同需要来定
+        Map<Object,String> res =  Arrays.stream(userArray)
+//                .collect(Collectors.toMap(User::getId, User::getName));
+         .collect(Collectors.toMap(user -> user.getId() + "-" + user.getName(), User::getName));
         res.forEach((key,value) ->{
            System.out.println("map key is : " + key + " value is :" + value);
        });
