@@ -5,12 +5,15 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.RecursiveTask;
 
-public class SumFormJoin extends RecursiveTask<Integer> {
-    private final static Integer TOTAL_NUM = 1000000000;
-    private final static Integer TASK_SIZE  = 50000000;
+/**
+ * ForkJoin框架简单使用示例
+ */
+public class SumForkJoin extends RecursiveTask<Integer> {
+    private final static Integer TOTAL_NUM = 100;
+    private final static Integer TASK_SIZE  = 20;
 
     public static void main(String[] args) {
-        SumFormJoin sumFormJoin = new SumFormJoin(SumFormJoin.initArray(TOTAL_NUM),0,TOTAL_NUM);
+        SumForkJoin sumFormJoin = new SumForkJoin(SumForkJoin.initArray(TOTAL_NUM),0,TOTAL_NUM);
         sumFormJoin.forEach();
         sumFormJoin.doSum();
 
@@ -18,7 +21,7 @@ public class SumFormJoin extends RecursiveTask<Integer> {
     Integer[] array;
     Integer left;
     Integer right;
-    public SumFormJoin(Integer[] array, Integer left, Integer right) {
+    public SumForkJoin(Integer[] array, Integer left, Integer right) {
         this.array = array;
         this.left = left;
         this.right = right;
@@ -27,7 +30,7 @@ public class SumFormJoin extends RecursiveTask<Integer> {
 
     @Override
     protected Integer compute() {
-//        System.out.println("[current thread : ]" + Thread.currentThread().getId());
+        System.out.println("[current thread : ]" + Thread.currentThread().getId());
         Integer currentSize = this.right - this.left;
         if(currentSize <= TASK_SIZE){
             int tmp = 0;
@@ -37,8 +40,8 @@ public class SumFormJoin extends RecursiveTask<Integer> {
             return  tmp;
         }else{
             Integer middle =  (this.right + this.left )/ 2;
-            SumFormJoin task1 = new SumFormJoin(this.array,this.left,middle);
-            SumFormJoin task2 = new SumFormJoin(this.array,middle,right);
+            SumForkJoin task1 = new SumForkJoin(this.array,this.left,middle);
+            SumForkJoin task2 = new SumForkJoin(this.array,middle,right);
             task1.fork();
             task2.fork();
             Integer res1 = task1.join();
