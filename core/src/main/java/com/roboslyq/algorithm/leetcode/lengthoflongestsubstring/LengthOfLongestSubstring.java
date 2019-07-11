@@ -1,10 +1,10 @@
-package com.roboslyq;
+package com.roboslyq.algorithm.leetcode.lengthoflongestsubstring;
 
-import java.util.*;
+import java.util.ArrayList;
 
-public class TestMain {
+public class LengthOfLongestSubstring {
     public static void main(String[] args) {
-        TestMain testMain = new TestMain();
+        LengthOfLongestSubstring testMain = new LengthOfLongestSubstring();
 //        System.out.println(testMain.lengthOfLongestSubstring("adaabcdefghaijkdabc"));
 //        System.out.println(testMain.lengthOfLongestSubstring("abcabcbb"));
 //        System.out.println(testMain.lengthOfLongestSubstring(" "));
