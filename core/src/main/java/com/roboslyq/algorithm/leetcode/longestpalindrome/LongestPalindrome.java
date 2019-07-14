@@ -30,72 +30,55 @@ public class LongestPalindrome {
         String pre =   "aaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllllmmmmmmmmmmnnnnnnnnnnooooooooooppppppppppqqqqqqqqqqrrrrrrrrrrssssssssssttttttttttuuuuuuuuuuvvvvvvvvvvwwwwwwwwwwxxxxxxxxxxyyyyyyyyyyzzzzzzzzzzyyyyyyyyyyxxxxxxxxxxwwwwwwwwwwvvvvvvvvvvuuuuuuuuuuttttttttttssssssssssrrrrrrrrrrqqqqqqqqqqppppppppppoooooooooonnnnnnnnnnmmmmmmmmmmllllllllllkkkkkkkkkkjjjjjjjjjjiiiiiiiiiihhhhhhhhhhggggggggggffffffffffeeeeeeeeeeddddddddddccccccccccbbbbbbbbbbaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllllmmmmmmmmmmnnnnnnnnnnooooooooooppppppppppqqqqqqqqqqrrrrrrrrrrssssssssssttttttttttuuuuuuuuuuvvvvvvvvvvwwwwwwwwwwxxxxxxxxxxyyyyyyyyyyzzzzzzzzzzyyyyyyyyyyxxxxxxxxxxwwwwwwwwwwvvvvvvvvvvuuuuuuuuuuttttttttttssssssssssrrrrrrrrrrqqqqqqqqqqppppppppppoooooooooonnnnnnnnnnmmmmmmmmmmllllllllllkkkkkkkkkkjjjjjjjjjjiiiiiiiiiihhhhhhhhhhggggggggggffffffffffeeeeeeeeeeddddddddddccccccccccbbbbbbbbbbaaaa";
         String test2 = "aaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllllmmmmmmmmmmnnnnnnnnnnooooooooooppppppppppqqqqqqqqqqrrrrrrrrrrssssssssssttttttttttuuuuuuuuuuvvvvvvvvvvwwwwwwwwwwxxxxxxxxxxyyyyyyyyyyzzzzzzzzzzyyyyyyyyyyxxxxxxxxxxwwwwwwwwwwvvvvvvvvvvuuuuuuuuuuttttttttttssssssssssrrrrrrrrrrqqqqqqqqqqppppppppppoooooooooonnnnnnnnnnmmmmmmmmmmllllllllllkkkkkkkkkkjjjjjjjjjjiiiiiiiiiihhhhhhhhhhggggggggggffffffffffeeeeeeeeeeddddddddddccccccccccbbbbbbbbbbaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllllmmmmmmmmmmnnnnnnnnnnooooooooooppppppppppqqqqqqqqqqrrrrrrrrrrssssssssssttttttttttuuuuuuuuuuvvvvvvvvvvwwwwwwwwwwxxxxxxxxxxyyyyyyyyyyzzzzzzzzzzyyyyyyyyyyxxxxxxxxxxwwwwwwwwwwvvvvvvvvvvuuuuuuuuuuttttttttttssssssssssrrrrrrrrrrqqqqqqqqqqppppppppppoooooooooonnnnnnnnnnmmmmmmmmmmllllllllllkkkkkkkkkkjjjjjjjjjjiiiiiiiiiihhhhhhhhhhggggggggggffffffffffeeeeeeeeeeddddddddddccccccccccbbbbbbbbbbaaaa";
 //        String test2 = "bbbb";
-//       String test3 ="bb";
+       String test3 ="bbb";
 //        System.out.println("abcd".substring(1,2));
         System.out.println(palindrome.longestPalindrome(test2));
+        System.out.println(palindrome.longestPalindrome(test3));
 //        System.out.println(palindrome.longestPalindrome(test3));
     }
     public String longestPalindrome(String s) {
+        //特殊情况特殊处理
         if(s == null || s.equals("") || s.length() == 1){
             return s;
-        }else if(s.length() == 2 ){
-            if(s.charAt(0) == s.charAt(1)){
-                return s;
-            }else{
-                return s.charAt(1) + "";
-            }
-        }else{
+        }
+        else{
             int resultStart = 0;
             int resultEnd = 0;
             int before = 0;
             int after = 0;
-            for (int i = 0; i < s.length(); i++) {
-                if(i==496){
-                    System.out.println(i);
-                }
+            for (int i = 0; i < s.length() - 1; i++) {
+                //判断前N位连续的情况，例如 "AAAAAbxbb"的结果是"AAAAA"。因为后续的算法是往两边和往右比较，处理不了这个情况
                 if(i == 0){
                     int tmp  = i;
                     while (s.charAt(i) == s.charAt(++tmp)) {
                         after ++;
-                        if( tmp == s.length()-1){
-                            break;
-                        }
-
+                        if( tmp == s.length()-1) break;
                     }
                     resultStart = before;
                     resultEnd = after;
                     continue;
                 }
-                if(i + 1 == s.length()){
-                    break;
-                }
                 int forTimes = 0;
-                if(s.charAt( i - 1) == s.charAt(i + 1)) ++forTimes;
+                //两边相等(exp: "aba")，符合条件，需要循环
+                final boolean b = s.charAt(i - 1) == s.charAt(i + 1);
+                if(b) ++forTimes;
+                //右边相等（exp: "aa"）
                 if(s.charAt( i ) == s.charAt(i + 1)) ++forTimes;
                 for(int j = 0; j< forTimes;j ++  ){
-                    int tmpBefore;
-                    int tmpAfter ;
-                    if(s.charAt( i - 1) == s.charAt(i + 1) && j == 0){
-                        tmpBefore = before = i ;
-                        tmpAfter = after = i ;
-
+                    int tmpBefore , tmpAfter;
+                    if(b && j == 0){
+                        tmpBefore = before = tmpAfter = after = i ;
                     }else{
                         after = tmpAfter = i+ 1;
                         before = tmpBefore = i;
                     }
-                    if(tmpAfter < s.length()-1 && tmpBefore > 0){
-
+                    if(tmpAfter < s.length()-1 ){
                         while (s.charAt(--tmpBefore) == s.charAt(++tmpAfter)) {
-                            before--;
-                            after++;
-                            if (before == 0 ) {
-                                break;
-                            }
-                            if (after == s.length()-1) {
-                                break;
-                            }
+                            before--; after++;
+                            if (before == 0 || after == s.length()-1 ) break;//结束条件
                         }
                     }
+                    //有更大的符合条件的回文串产生
                     if( after  - before > resultEnd - resultStart ){
                         resultStart = before;
                         resultEnd = after;
