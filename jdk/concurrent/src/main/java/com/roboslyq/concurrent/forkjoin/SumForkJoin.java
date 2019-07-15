@@ -14,7 +14,7 @@ public class SumForkJoin extends RecursiveTask<Integer> {
 
     public static void main(String[] args) {
         SumForkJoin sumFormJoin = new SumForkJoin(SumForkJoin.initArray(TOTAL_NUM),0,TOTAL_NUM);
-        sumFormJoin.forEach();
+//        sumFormJoin.forEach();
         sumFormJoin.doSum();
 
     }
