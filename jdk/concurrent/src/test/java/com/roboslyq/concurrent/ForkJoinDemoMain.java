@@ -14,8 +14,12 @@ public class ForkJoinDemoMain
 {
     @Test
     public void forkJoinPoolDemoTest() throws ExecutionException, InterruptedException {
-            ForkJoinPool forkJoinPool = new ForkJoinPool();
-            ForkJoinPoolDemo forkJoinPoolDemo = new ForkJoinPoolDemo(1,100);
+        /*
+         *此方式doug lea不推荐：   ForkJoinPool forkJoinPool = new ForkJoinPool();
+         */
+         ForkJoinPool forkJoinPool =  ForkJoinPool.commonPool();
+
+        ForkJoinPoolDemo forkJoinPoolDemo = new ForkJoinPoolDemo(1,100);
             ForkJoinTask result =  forkJoinPool.submit(forkJoinPoolDemo);
          System.out.println(result.get());
         System.out.println(forkJoinPoolDemo.getRecursiveTimes());
