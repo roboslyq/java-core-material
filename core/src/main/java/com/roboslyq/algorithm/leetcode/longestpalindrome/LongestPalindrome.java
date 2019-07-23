@@ -1,6 +1,6 @@
 /**
  * Copyright (C), 2015-2019
- * FileName: LongestPalindrome
+ * FileName: LongestPalindrome1
  * Author:   luo.yongqian
  * Date:     2019/7/11 16:48
  * Description:
@@ -16,6 +16,7 @@ package com.roboslyq.algorithm.leetcode.longestpalindrome;
  * @author luo.yongqian
  * @create 2019/7/11
  * @since 1.0.0
+ * 中心法：循环遍列，从中心往两边扩散
  * https://leetcode-cn.com/problems/longest-palindromic-substring/solution/zhong-xin-kuo-san-dong-tai-gui-hua-by-liweiwei1419/
  */
 public class LongestPalindrome {
