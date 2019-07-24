@@ -8,7 +8,7 @@
  * <author>                 <time>          <version>          <desc>
  * luo.yongqian         2019/5/27 12:56      1.0.0               创建
  */
-package com.roboslyq.concurrent;
+package com.roboslyq.concurrent.forkjoin;
 
 import java.util.concurrent.RecursiveTask;
 

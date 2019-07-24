@@ -1,6 +1,6 @@
 package com.roboslyq.concurrent;
 
-import com.roboslyq.concurrent.ForkJoinPoolDemo;
+import com.roboslyq.concurrent.forkjoin.ForkJoinPoolDemo;
 import org.junit.Test;
 
 import java.util.concurrent.ExecutionException;
