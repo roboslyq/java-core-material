@@ -8,7 +8,7 @@
  * <author>                 <time>          <version>          <desc>
  * luo.yongqian         2019/7/11 16:48      1.0.0               创建
  */
-package com.roboslyq.algorithm.leetcode.longestpalindrome;
+package com.roboslyq.algorithm.leetcode.longestpalindrome_0005;
 
 /**
  *

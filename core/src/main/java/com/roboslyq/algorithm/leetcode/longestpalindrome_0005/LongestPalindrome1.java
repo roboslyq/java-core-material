@@ -1,4 +1,4 @@
-package com.roboslyq.algorithm.leetcode.longestpalindrome;
+package com.roboslyq.algorithm.leetcode.longestpalindrome_0005;
 
 import java.util.Vector;
 

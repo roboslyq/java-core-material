@@ -1,4 +1,4 @@
-package com.roboslyq.algorithm.leetcode.longestpalindrome;
+package com.roboslyq.algorithm.leetcode.longestpalindrome_0005;
 
 /**
  * 马拉车算法实现回文串

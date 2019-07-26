@@ -1,4 +1,4 @@
-package com.roboslyq.algorithm.leetcode.lengthoflongestsubstring;
+package com.roboslyq.algorithm.leetcode.lengthoflongestsubstring_0003;
 
 public class LengthOfLongestSubstring2 {
     public static void main(String[] args) {
