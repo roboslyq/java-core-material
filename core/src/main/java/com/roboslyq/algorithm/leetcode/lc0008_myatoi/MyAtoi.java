@@ -1,4 +1,4 @@
-package com.roboslyq.algorithm.leetcode.myatoi_0008;
+package com.roboslyq.algorithm.leetcode.lc0008_myatoi;
 
 /**
  * 此题关键是判断整数溢出。

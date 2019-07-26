@@ -1,4 +1,4 @@
-package com.roboslyq.algorithm.leetcode.lengthoflongestsubstring_0003;
+package com.roboslyq.algorithm.leetcode.lc0003_lengthoflongestsubstring;
 
 import java.util.ArrayList;
 

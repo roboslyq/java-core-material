@@ -1,4 +1,4 @@
-package com.roboslyq.algorithm.leetcode.addtwonumbers_0002;
+package com.roboslyq.algorithm.leetcode.lc0002_addtwonumbers;
 
 public class ListNode {
     int val;

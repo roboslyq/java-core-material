@@ -1,4 +1,4 @@
-package com.roboslyq.algorithm.leetcode.addtwonumbers_0002;
+package com.roboslyq.algorithm.leetcode.lc0002_addtwonumbers;
 
 /**
  * 求单向列表相加：

@@ -1,4 +1,4 @@
-package com.roboslyq.algorithm.leetcode.maxarea_0011;
+package com.roboslyq.algorithm.leetcode.lc0011_maxarea;
 
 /**
  * 此方法我也不知道叫什么名字，暂叫“水位下移法”吧。

@@ -1,4 +1,4 @@
-package com.roboslyq.algorithm.leetcode.reverse_0007;
+package com.roboslyq.algorithm.leetcode.lc0007_reverse;
 
 public class ReverseInteger {
     public static void main(String[] args) {

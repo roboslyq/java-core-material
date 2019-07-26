@@ -1,4 +1,4 @@
-package com.roboslyq.algorithm.leetcode.echostrwithz_0006;
+package com.roboslyq.algorithm.leetcode.lc0006_echostrwithz;
 
 /**
  * 可用，但算法效率不高

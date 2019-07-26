@@ -1,7 +1,4 @@
-package com.roboslyq.algorithm.leetcode.twosum_0001;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+package com.roboslyq.algorithm.leetcode.lc0001_twosum;
 
 public class TwoSum {
     public static void main(String[] args) {

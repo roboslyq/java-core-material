@@ -8,7 +8,7 @@
  * <author>                 <time>          <version>          <desc>
  * luo.yongqian         2019/7/26 13:10      1.0.0               创建
  */
-package com.roboslyq.algorithm.leetcode.inttoroman_0012;
+package com.roboslyq.algorithm.leetcode.lc0012_inttoroman;
 
 import java.util.HashMap;
 import java.util.Map;

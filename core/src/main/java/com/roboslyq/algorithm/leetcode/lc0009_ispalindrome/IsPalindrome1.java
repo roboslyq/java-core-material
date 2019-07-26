@@ -8,7 +8,7 @@
  * <author>                 <time>          <version>          <desc>
  * luo.yongqian         2019/7/23 12:20      1.0.0               创建
  */
-package com.roboslyq.algorithm.leetcode.ispalindrome_0009;
+package com.roboslyq.algorithm.leetcode.lc0009_ispalindrome;
 
 /**
  *
