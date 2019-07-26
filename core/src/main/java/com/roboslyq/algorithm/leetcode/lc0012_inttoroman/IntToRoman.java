@@ -29,6 +29,7 @@ public class IntToRoman {
 //        System.out.println(intToRoman.intToRoman(9));
 //        System.out.println(intToRoman.intToRoman(58));
         System.out.println(intToRoman.intToRoman(1994));
+        System.out.println(intToRoman.intToRoman(2994));
     }
 
     public String intToRoman(int num) {
@@ -70,11 +71,12 @@ public class IntToRoman {
         int mutiple = 1;
         while(num * 10/bit > 0){
             int mode = num % 10;
-            res = String.format("%s%s", romanMap.get(mode * mutiple), res);
+            res = romanMap.get(mode * mutiple) + res;
             num = num /10;
             mutiple *= 10;
         }
         return  res;
     }
+
 
 }
