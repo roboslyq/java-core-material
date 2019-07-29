@@ -3,7 +3,7 @@ package com.roboslyq.algorithm.leetcode.lc0016_3sumclosest;
 import java.util.Arrays;
 
 /**
- * 暴力法
+ * 暴力法，可以借助lc0015双指针法，逐渐靠近目标函数
  */
 public class ThreeSumClosest {
     public static void main(String[] args) {
