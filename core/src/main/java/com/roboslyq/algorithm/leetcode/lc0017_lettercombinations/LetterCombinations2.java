@@ -47,22 +47,19 @@ public class LetterCombinations2 {
     private ArrayList<String> res;
 
     public List<String> letterCombinations(String digits) {
-
+        //空字符串输入直接返回
+        if(digits.equals(""))  return res;
         res = new ArrayList<String>();
-        if(digits.equals(""))
-            return res;
-
+        //index为0开始递归，初始串为“”
         findCombination(digits, 0, "");
         return res;
     }
 
     private void findCombination(String digits, int index, String s){
-
         if(index == digits.length()){
             res.add(s);
             return;
         }
-
         Character c = digits.charAt(index);
         String letters = letterMap[c - '0'];
         for(int i = 0 ; i < letters.length() ; i ++){
