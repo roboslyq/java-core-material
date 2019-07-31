@@ -34,7 +34,46 @@ public class MergeTwoLists {
         }
 
     }
+
+    /**
+     * 通过变量，消除重复代码
+     * @param l1
+     * @param l2
+     * @return
+     */
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        if(l1 == null) return l2;
+        if(l2 == null) return l1;
+        ListNode result = new ListNode(0);//结果保存，返回时取result.next()
+        ListNode calResult = result;
+        ListNode currentNode = l1;
+        ListNode backNode =l2;
+        while (currentNode != null && backNode != null){
+            if(currentNode.val > backNode.val){
+                ListNode tmp = currentNode;
+                currentNode = backNode;
+                backNode = tmp;
+            }
+            calResult.next = new ListNode(currentNode.val);
+            currentNode = currentNode.next;
+            if(currentNode == null){
+                calResult.next.next = backNode;
+                break;
+            }
+            calResult = calResult.next;
+
+        }
+        return result.next;
+
+    }
+
+    /**
+     * 另一种写法，通过if判断，有部分重复代码
+     * @param l1
+     * @param l2
+     * @return
+     */
+    public ListNode mergeTwoLists1(ListNode l1, ListNode l2) {
         if(l1 == null) return l2;
         if(l2 == null) return l1;
         ListNode result = new ListNode(0);//结果保存，返回时取result.next()
@@ -59,7 +98,6 @@ public class MergeTwoLists {
 
         }
         return result.next;
-
     }
 
 }
