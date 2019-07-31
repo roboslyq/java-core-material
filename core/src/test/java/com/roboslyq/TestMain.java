@@ -19,13 +19,16 @@ public class TestMain {
         t.start();
         print(5);
         try {
-            t.join();
-            print(6);
+           // t.join();
+          //  print(6);
         } catch (Exception e) {
             throw new AssertionError(e);
         }
     }
     public static void main(String[] args) {
+        int k = 5;
+        int i=(k++)+(k++)+(k++);
+        System.out.println(i);
 //        System.out.println(MICROS_PER_DAY / MILLIS_PER_DAY);
 //        int t1 = 24 * 60 * 60;
 //        int t2 =  24 * 60 * 60 * 1000;
