@@ -40,6 +40,8 @@ import java.util.Map;
  */
 public class RemoveNthFromEnd {
     public static void main(String[] args) {
+        RemoveNthFromEnd removeNthFromEnd = new RemoveNthFromEnd();
+        removeNthFromEnd.removeNthFromEnd(new ListNode(1),1);
 
     }
     public ListNode removeNthFromEnd(ListNode head, int n) {
@@ -51,10 +53,14 @@ public class RemoveNthFromEnd {
             tmp = tmp.next;
             i++;
         }
-        if(n >)
+        int index = i - n - 1;
+        ListNode preDel = iListNode.get(index);
+        if(preDel.next != null){
+            preDel.next = preDel.next.next;
+        }
+
        return head;
     }
-
 }
 
 class ListNode {
