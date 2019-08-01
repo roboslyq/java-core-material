@@ -45,20 +45,26 @@ public class RemoveNthFromEnd {
 
     }
     public ListNode removeNthFromEnd(ListNode head, int n) {
+        //使用Map保存每个ListNode元素，map的key为ListNode所在链表的位置（ListNode没有重新new，只是新建了引用，因此存储空间不变）
         Map<Integer,ListNode> iListNode = new HashMap<>();
         ListNode tmp = head;
+        //将ListNode转为Map
         int i = 0;
         while(tmp != null){
             iListNode.put(i,tmp);
             tmp = tmp.next;
             i++;
         }
+        //计算删除位置前一位置
         int index = i - n - 1;
-        ListNode preDel = iListNode.get(index);
-        if(preDel.next != null){
-            preDel.next = preDel.next.next;
+        if(index == -1){//如果是删除首元素，直接将head指向head.next即可。
+            head = head.next;
+        }else{//否则，先获取删除位置的Pre元素，然后将pre元素的next指向pre.next.next即可
+            ListNode preDel = iListNode.get(index);
+            if(preDel.next != null){
+                preDel.next = preDel.next.next;
+            }
         }
-
        return head;
     }
 }
