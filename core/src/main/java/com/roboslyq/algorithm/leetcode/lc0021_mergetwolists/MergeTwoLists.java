@@ -8,7 +8,7 @@
  * <author>                 <time>          <version>          <desc>
  * luo.yongqian         2019/7/31 17:54      1.0.0               创建
  */
-package com.roboslyq.algorithm.leetcode.lc021_mergetwolists;
+package com.roboslyq.algorithm.leetcode.lc0021_mergetwolists;
 
 /**
  *
