@@ -12,7 +12,7 @@ package com.roboslyq.algorithm.leetcode.lc0026_removeduplicates;
 
 /**
  *
- * 〈〉
+ * 〈双指针法〉
  * @author luo.yongqian
  * @create 2019/8/8
  * @since 1.0.0
@@ -24,23 +24,18 @@ public class Removeduplicates {
         System.out.println(removeduplicates.removeDuplicates(nums));
     }
     public int removeDuplicates(int[] nums) {
-        //默认第一个元素不相同，所以res初始值为1
-        int res = 1;
+        //当前索引
+        int currentIndex = 0;
         if(nums != null && nums.length>0){
-            //当前索引
-            int currentIndex = 0;
             //当前索引值
-            int currentValue = nums[currentIndex];
             for(int i=1;i<nums.length;i++){
-                if(currentValue != nums[i]){//不相等时，更新当前索引及下一索引的值
-                    res++;
-                    currentValue=nums[i];
+                if(nums[currentIndex] != nums[i]){//不相等时，更新当前索引及下一索引的值
                     nums[++currentIndex] = nums[i];
                 }
             }
         }
-
-        return res;
+        //返回结果为索引值+1
+        return currentIndex +1 ;
     }
 
 }
