@@ -21,9 +21,10 @@ import java.util.List;
  * @since 1.0.0
  */
 public class GenerateParenthesis {
+    public static Integer index = 0;
     public static void main(String[] args) {
         GenerateParenthesis generateParenthesis = new GenerateParenthesis();
-        List<String> res = generateParenthesis.generateParenthesis(3);
+        List<String> res = generateParenthesis.generateParenthesis(2);
         for(String str : res){
             System.out.println(str);
         }
@@ -36,6 +37,8 @@ public class GenerateParenthesis {
     }
 
     public void generateAll(char[] current, int pos, List<String> result) {
+        System.out.println((++index) +":"+new String(current));
+        System.out.println();
         if (pos == current.length) {
             if (valid(current))
                 result.add(new String(current));
