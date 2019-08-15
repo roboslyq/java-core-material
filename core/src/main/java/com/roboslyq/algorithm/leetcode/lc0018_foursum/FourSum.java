@@ -10,6 +10,8 @@
  */
 package com.roboslyq.algorithm.leetcode.lc0018_foursum;
 
+import java.util.List;
+
 /**
  *
  * 〈〉
@@ -26,5 +28,10 @@ package com.roboslyq.algorithm.leetcode.lc0018_foursum;
  *
  */
 public class FourSum {
+    public static void main(String[] args) {
 
+    }
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        return null;
+    }
 }

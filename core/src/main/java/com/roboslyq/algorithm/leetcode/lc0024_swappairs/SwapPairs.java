@@ -1,4 +1,4 @@
-package com.roboslyq.algorithm.leetcode.lc0023_swappairs;
+package com.roboslyq.algorithm.leetcode.lc0024_swappairs;
 
 import com.roboslyq.algorithm.leetcode.ListNode;
 
