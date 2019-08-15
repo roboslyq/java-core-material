@@ -57,7 +57,7 @@ public class ReverseKGroup {
                 resTail.next = reverseKGroup(curr,k);
             }else{
                 //元素不够，重新反转回来
-                resTail = reverseKGroup(curr,j);
+                resTail.next = reverseKGroup(resHead,j);
             }
         }
 
