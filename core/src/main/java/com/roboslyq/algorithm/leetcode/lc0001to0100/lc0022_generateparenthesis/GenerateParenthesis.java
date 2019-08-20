@@ -37,11 +37,11 @@ public class GenerateParenthesis {
     }
 
     public void generateAll(char[] current, int pos, List<String> result) {
-        System.out.println((++index) +":"+new String(current));
-        System.out.println();
+        //到达规定的长度，则截止递归
         if (pos == current.length) {
-            if (valid(current))
+            if (valid(current)){
                 result.add(new String(current));
+            }
         } else {
             current[pos] = '(';
             generateAll(current, pos+1, result);
@@ -50,14 +50,26 @@ public class GenerateParenthesis {
         }
     }
 
-    public boolean valid(char[] current) {
-        int balance = 0;
-        for (char c: current) {
-            if (c == '(') balance++;
-            else balance--;
-            if (balance < 0) return false;
+    /**
+     * 比较简单的判断方式：使用一个标识leftNum 记录左括号数量，遇到右括号时leftNum减一，在过程中始终保证leftNum>=0
+     * 并且最终leftNum = 0即可。
+     * @param parenthesis
+     * @return
+     */
+    public boolean valid(char[] parenthesis) {
+        int leftNum = 0;
+        for (char c: parenthesis) {
+            if (c == '('){
+                leftNum++;
+            }
+            else{
+                leftNum--;
+            }
+            //小于0表示非法字符串，提前结果
+            if (leftNum < 0) return false;
         }
-        return (balance == 0);
+        //最终结果leftNum必须等于0
+        return (leftNum == 0);
     }
 
 }
