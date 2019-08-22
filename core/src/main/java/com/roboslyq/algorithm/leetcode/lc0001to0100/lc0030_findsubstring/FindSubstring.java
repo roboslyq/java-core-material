@@ -1,7 +1,10 @@
 package com.roboslyq.algorithm.leetcode.lc0001to0100.lc0030_findsubstring;
 
 import java.util.*;
-
+/*
+ * 1、将数组中的所有字符组合放入Map中，作为key
+ * 2、遍列源串s,窗口滑动右移，判断是否在Map中是否存在当前Key。
+ */
 public class FindSubstring {
 
 
