@@ -34,29 +34,32 @@ public class SearchRange {
         int left = 0;
         int right = nums.length - 1;
         while (left <= right) {
+            //取中值
             int middleIndex = (right + left ) % 2 == 0 ? (right + left ) / 2 : (right + left ) / 2 + 1;
+            //分支1 ： 中值 = 目标值
             if (nums[middleIndex] == target) {
-                res[0] = res[1] = middleIndex; //默认只有一个值
-                for (int i = middleIndex; i >= left; i--) {//遍列左值
+                res[0] = res[1] = middleIndex; //默认只有一个值(没有重复)
+                for (int i = middleIndex; i >= left; i--) {//遍列左值(检测左边是否还有重复值)
                     if (nums[i] != target) {
                         break;
                     } else {
                         res[0] = i;
                     }
                 }
-                for (int i = middleIndex; i <= right; i++) {//遍列左值
+                for (int i = middleIndex; i <= right; i++) {//遍列左值(检测左边是否有重复值)
                     if (nums[i] != target) {
                         break;
                     } else {
                         res[1] = i;
                     }
                 }
-                break;
+                break;//找到值后，中断循环
             }
+            //分支2 ： 中值 < 目标值，表示目标值可能落在右侧，修改left为中值即可。
             if (nums[middleIndex] < target) {
                 left = middleIndex + 1;
             }
-
+            //分支3 ： 中值 > 目标值，表示目标值可能落在右侧，修改right为中值即可。
             if (nums[middleIndex] > target) {
                 right = middleIndex - 1;
             }
