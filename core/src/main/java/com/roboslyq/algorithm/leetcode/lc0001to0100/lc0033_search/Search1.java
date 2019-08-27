@@ -5,13 +5,14 @@ package com.roboslyq.algorithm.leetcode.lc0001to0100.lc0033_search;
  *
  * 简要来说：
  *
- * nums[0] <= nums[mid]（0 - mid不包含旋转）且nums[0] <= target <= nums[mid] 时 high 向前规约；
+ * nums[0] <= nums[mid]（0 - mid不包含旋转）且nums[0] <= target <= nums[mid] 时 high 向前规约(向右规约)；
  *
- * nums[mid] < nums[0]（0 - mid包含旋转），target <= nums[mid] < nums[0] 时向前规约（target 在旋转位置到 mid 之间）
+ * nums[mid] < nums[0]（0 - mid包含旋转），target <= nums[mid] < nums[0] 时向前规约（即旋转偏右，旋转后，左少右多，此时nums[mid] < nums[0].
+ * 如果 此时target <= nums[mid] 那么葛粉，target 在旋转位置到 mid 之间）
  *
  * nums[mid] < nums[0]，nums[mid] < nums[0] <= target 时向前规约（target 在 0 到旋转位置之间）
  *
- * 其他情况向后规约
+ * 其他情况向后规约（向左规约）
  *
  * 也就是说nums[mid] < nums[0]，nums[0] > target，target > nums[mid] 三项均为真或者只有一项为真时向后规约。
  *
