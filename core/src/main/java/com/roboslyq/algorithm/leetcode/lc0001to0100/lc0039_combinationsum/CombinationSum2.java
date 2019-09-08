@@ -1,6 +1,6 @@
 /**
  * Copyright (C), 2015-2019
- * FileName: CombinationSum1
+ * FileName: CombinationSum
  * Author:   luo.yongqian
  * Date:     2019/8/29 13:06
  * Description:
@@ -11,7 +11,6 @@
 package com.roboslyq.algorithm.leetcode.lc0001to0100.lc0039_combinationsum;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -46,14 +45,15 @@ import java.util.List;
  */
 
 /**
- * 题解：使用减法实现(回溯+剪枝)
+ * 题解：在CombinationSum 和 CombinationSum1上性能极致优化
+ * 主要是循环过程中不创建新的List，则是在结果中创建。但循环中必须删除刚添加的元素
  */
-public class CombinationSum1 {
+public class CombinationSum2 {
     public static void main(String[] args) {
-        CombinationSum1 CombinationSum1 = new CombinationSum1();
+        CombinationSum2 combinationSum = new CombinationSum2();
         int [] input = {2,3,5};
         int target = 8;
-        List<List<Integer>>  res =  CombinationSum1.combinationSum(input,target);
+        List<List<Integer>>  res =  combinationSum.combinationSum(input,target);
         for(List<Integer> list : res){
             for(Integer tmp : list){
                 System.out.print(tmp +",");
@@ -69,9 +69,14 @@ public class CombinationSum1 {
     //进行排序(类变量，不需要传参)
     public Integer target = 0;
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        //入口排序
+        //Arrays.sort(candidates);
+//        if(candidates[0] > target){
+//            return res;
+//        }
         this.target = target;
         List<Integer> list = new ArrayList<>();
-        recursive(candidates,list,target,0);
+        recursive(candidates,list,0,0);
         return res;
     }
 
@@ -83,19 +88,19 @@ public class CombinationSum1 {
      * @param index 当前索引位轩，默认从0开始
      */
     public void recursive(int[] candidates, List<Integer> currentList,int currentValue,int index){
-        if(currentValue < 0){
+        if(currentValue > target){
             return;
         }
-        if(currentValue == 0){
-            res.add(currentList);
+        if(currentValue == target){
+            res.add(new ArrayList<>(currentList));
             return;
         }
         for(int i=index;i<candidates.length;i++){
-            List<Integer> tmpList = new ArrayList<>(currentList);
-            int currentNew = currentValue - candidates[i];
-            tmpList.add(candidates[i]);
+            int currentNew = currentValue + candidates[i];
+            currentList.add(candidates[i]);
             //递归回溯(注意：i不变，保证下次再包含当前位置元素）
-            recursive(candidates, tmpList, currentNew,i);
+            recursive(candidates, currentList, currentNew,i);
+            currentList.remove(currentList.size() - 1);
         }
     }
 }
