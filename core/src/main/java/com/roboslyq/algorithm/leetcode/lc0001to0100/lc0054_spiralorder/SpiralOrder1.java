@@ -43,19 +43,19 @@ import java.util.List;
  * @create 2019/9/12
  * @since 1.0.0
  */
-public class SpiralOrder {
+public class SpiralOrder1 {
     public static void main(String[] args) {
 //        int[][] test = {
 //            {1,2,3,4},
-//            {4,5,6,8},
-//            {7,8,9,10}
+//            {10,11,12,5},
+//            {9,8,7,6}
 //        };
         int[][] test = {
             {1 },
             {4 },
             {7}
         };
-        SpiralOrder spiralOrder = new SpiralOrder();
+        SpiralOrder1 spiralOrder = new SpiralOrder1();
         List<Integer> integers = spiralOrder.spiralOrder(test);
         integers.stream().forEach(System.out::println);
     }
@@ -64,60 +64,61 @@ public class SpiralOrder {
         if(matrix == null || matrix.length == 0){
             return  new ArrayList<>();
         }
-        int y = matrix.length;
-        int x = matrix[0].length;
+        int x = matrix.length;
+        int y = matrix[0].length;
         List<Integer> res = new ArrayList<>(x*y);
-        //处理x=1的特殊情况
-        if(x==1){
-            for(int j=0;j<y;j++){
-                res.add(matrix[j][0]);
-            }
-            return res;
-        }
-        int count = x*y;
-        int c_h = 0; //high,上方高度的初始值，即第0行开始
-        int c_d = y-1;//down,下方的高度值，从数据
-        int c_r = x -1;
-        int c_l = 0;
-        int cur_x = 0;//x轴值（行数）
-        int cur_y = 0;//y轴值（列数）
-        int for_type = 0; // 0 : 行右，1：上下 2 行左 3 下上
-
+        int count = x * y;
+        // i表示行数，j表示列数（位置标识）
+        int cur_min_i = 0; //行双指针，当前上行位置
+        int cur_max_i = x-1;//行双指针，当前下行位置
+        int cur_max_j = y -1;//双指针，当前最右列位置
+        int cur_min_j = 0; //列又指针，当前最左行位置
+        //当前元素所在点位
+        int cur_i = 0;//x轴值（行数）
+        int cur_j = 0;//y轴值（列数）
+        //当前移动类型（一共可分解为4种移动类型）
+        int for_type = 0; // 0 : 行从左向右，1：列从上往下 2 :行从右向左 3 :列从下往上
         while (count-- > 0){
-            res.add(matrix[cur_x][cur_y]);
+            res.add(matrix[cur_i][cur_j]);//添加当前元素到结果表中
             switch (for_type){
                 case 0:
-                    cur_y++;
-                    if(cur_y == c_r){
-                        c_h++;
+                    if(cur_j == cur_max_j){
+                        cur_min_i++;
+                        cur_i++;
                         for_type=1;
-                    };
+                    }else{
+                        cur_j++;
+                    }
                     break;
                 case 1:
-                    cur_x++;
-                    if(cur_x == c_d){
-                        c_r--;
+                    if(cur_i == cur_max_i){
+                        cur_max_j--;
+                        cur_j--;
                         for_type=2;
+                    }else{
+                        cur_i++;
                     }
                     break;
                 case 2:
-                    cur_y--;
-                    if(cur_y == c_l){
-                        c_d--;
+                    if(cur_j == cur_min_j){
+                        cur_max_i--;
+                        cur_i--;
                         for_type=3;
+                    }else{
+                        cur_j--;
                     }
                     break;
                 case 3:
-                    cur_x--;
-                    if(cur_x == c_h){
-                        c_l++;
+                    if(cur_i == cur_min_i){
+                        cur_min_j++;
+                        cur_j++;
                         for_type = 0;
+                    }else {
+                        cur_i--;
                     }
                     break;
             }
         }
         return res;
-
     }
-
 }
