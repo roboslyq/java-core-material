@@ -22,10 +22,15 @@ import java.util.List;
  */
 public class SpiralOrder {
     public static void main(String[] args) {
+//        int[][] test = {
+//            {1,2,3,4},
+//            {4,5,6,8},
+//            {7,8,9,10}
+//        };
         int[][] test = {
-            {1,2,3,4},
-            {4,5,6,8},
-            {7,8,9,10}
+            {1 },
+            {4 },
+            {7}
         };
         SpiralOrder spiralOrder = new SpiralOrder();
         List<Integer> integers = spiralOrder.spiralOrder(test);
@@ -39,6 +44,12 @@ public class SpiralOrder {
         int y = matrix.length;
         int x = matrix[0].length;
         List<Integer> res = new ArrayList<>(x*y);
+        if(x==1){
+            for(int j=0;j<y;j++){
+                res.add(matrix[j][0]);
+            }
+            return res;
+        }
         int count = x*y;
         int c_h = 0;
         int c_d = y-1;
