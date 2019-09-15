@@ -1,5 +1,7 @@
 package com.roboslyq.algorithm.leetcode.lc0001to0100.lc0002_addtwonumbers;
 
+import com.roboslyq.algorithm.leetcode.ListNode;
+
 /**
  * 求单向列表相加：
  * 从左向右循环，注意进位标识
