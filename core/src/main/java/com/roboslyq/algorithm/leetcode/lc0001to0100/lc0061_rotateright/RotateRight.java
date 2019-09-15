@@ -2,11 +2,14 @@ package com.roboslyq.algorithm.leetcode.lc0001to0100.lc0061_rotateright;
 
 
 import com.roboslyq.algorithm.leetcode.ListNode;
-import lombok.val;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 1、循环listnode.length次时 ，链表不变。所以循环次数可以为  k % istnode.length 。即k与ListNode长度取余
+ * 2、旋转方法即将tail指向head,然后倒数第二个next指向null即可。
+ */
 public class RotateRight {
     public static void main(String[] args) {
 
