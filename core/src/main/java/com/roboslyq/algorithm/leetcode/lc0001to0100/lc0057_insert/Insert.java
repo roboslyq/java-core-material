@@ -30,12 +30,14 @@ public class Insert {
             } else {
                 //情况1：newLeft在左表示需要合并
                 if (newLeft <= right) {
+                    //情况1.1 在最左边新增元素，即可完成
                     if(newLeft < left && newRight < left){
                         list.add(new int[]{newLeft,newRight});
                         list.add(new int[]{left, right});
                         completed = true;
                         continue;
                     }else{
+                        //情况1.2 合并处理
                         if (newLeft >= left) {
                             newLeft = left;
                         }
@@ -63,9 +65,9 @@ public class Insert {
                         completed = true;
                     }
 
-                } else {//newLeft > right
+                } else {// 情况2： newleft当前right的右边，表示不需要合并，直接将当前元素添加到结果元素即可
                     list.add(new int[]{left, right});
-                    if (i == intervals.length - 1) {
+                    if (i == intervals.length - 1) {//如果是最末尾，将new元素添加到结果集中即可
                         list.add(new int[]{newLeft, newRight});
                     }
                 }
