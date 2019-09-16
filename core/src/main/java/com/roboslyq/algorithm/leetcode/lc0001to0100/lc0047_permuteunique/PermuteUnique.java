@@ -1,25 +1,25 @@
-package com.roboslyq.algorithm.leetcode.lc0001to0100.lc0046_permute;
+package com.roboslyq.algorithm.leetcode.lc0001to0100.lc0047_permuteunique;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
- * 回溯法1：没有使用数组标识位，而是使用List.remove(i))
+ * 回溯法1：
+ * 1、没有使用数组标识位，而是使用List.remove(i))
+ * 2、没有剪枝支重，而是使用结果Set去重，因此对性能有一定的影响
  */
-public class Permute {
+public class PermuteUnique {
     public static void main(String[] args) {
-        Permute permute = new Permute();
-        permute.permute(new int[]{1,2,3});
-        for(List<Integer> list : permute.res){
+        PermuteUnique permuteUnique = new PermuteUnique();
+        List<List<Integer>> res = permuteUnique.permuteUnique(new int[]{1,1,3});
+        for(List<Integer> list : res){
             list.stream().forEach(System.out::print);
             System.out.println();
         }
     }
-    List<List<Integer>> res = new ArrayList<>();
-    public List<List<Integer>> permute(int[] nums) {
+    Set<List<Integer>> resTmp = new HashSet<>();
+    public List<List<Integer>> permuteUnique(int[] nums) {
         if (nums == null || nums.length == 0) {
-            return res;
+            return  new ArrayList<>();
         }
 
         ArrayList numsList = new ArrayList<>(nums.length);
@@ -27,11 +27,11 @@ public class Permute {
             numsList.add(nums[i]);
         }
         permute(numsList,new ArrayList<>() );
-        return res;
+        return new ArrayList<>(resTmp);
     }
     public void permute(List<Integer> nums,ArrayList<Integer> prefix){
         if(nums.size() == 0){
-            res.add(new ArrayList<>(prefix));
+            resTmp.add(new ArrayList<>(prefix));
             return;
         }
         for(int i=0;i<nums.size();i++){
