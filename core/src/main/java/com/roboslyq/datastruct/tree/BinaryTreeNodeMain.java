@@ -1,7 +1,25 @@
-package com.roboslyq.datastruct;
+package com.roboslyq.datastruct.tree;
+
+import com.roboslyq.datastruct.Source;
+import com.roboslyq.datastruct.SourceImpl1;
 
 public class BinaryTreeNodeMain {
+
     public static void main(String[] args) {
+
+        BinaryTreeUtil binaryTreeUtil = new BinaryTreeUtil();
+        BinaryTreeNode headNode = generate();
+        binaryTreeUtil.preOrder(headNode);
+    }
+
+    /**
+     *           1
+     *        2    4
+     *    3           5
+     *
+     * @return
+     */
+    public static BinaryTreeNode generate(){
         int i=0;
         BinaryTreeNode<Source> headNode = new BinaryTreeNode<>();
         Source source1 = new SourceImpl1();
@@ -32,8 +50,6 @@ public class BinaryTreeNodeMain {
         right1.setT(source3);
 
         headNode.setRightNode(right1);
-
-        BinaryTreeUtil binaryTreeUtil = new BinaryTreeUtil();
-        binaryTreeUtil.preOrder(headNode);
+        return  headNode;
     }
 }

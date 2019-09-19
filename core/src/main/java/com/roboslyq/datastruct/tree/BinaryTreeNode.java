@@ -1,4 +1,4 @@
-package com.roboslyq.datastruct;
+package com.roboslyq.datastruct.tree;
 
 public class BinaryTreeNode<T> {
 
