@@ -3,53 +3,22 @@ package com.roboslyq.datastruct.tree;
 import com.roboslyq.datastruct.Source;
 import com.roboslyq.datastruct.SourceImpl1;
 
+/**
+ * 一曰迭代（iterate）；二曰递归（recursion）。
+ * 从“编程之美”的角度看，可以借用一句非常经典的话：“迭代是人，递归是神！”来从宏观上对二者进行把握。
+ */
 public class BinaryTreeNodeMain {
 
     public static void main(String[] args) {
 
         BinaryTreeUtil binaryTreeUtil = new BinaryTreeUtil();
-        BinaryTreeNode headNode = generate();
+        BinaryTreeNode headNode =BinaryTreeUtil.generate1(4);
+        System.out.println("start--递归法--前序遍列 : ");
         binaryTreeUtil.preOrder(headNode);
+        System.out.println("end--递归法--前序遍列 ");
+        System.out.println("start--迭代法--前序遍列 : ");
+        binaryTreeUtil.preOrder1(headNode);
+        System.out.println("end--迭代法--前序遍列 ");
     }
 
-    /**
-     *           1
-     *        2    4
-     *    3           5
-     *
-     * @return
-     */
-    public static BinaryTreeNode generate(){
-        int i=0;
-        BinaryTreeNode<Source> headNode = new BinaryTreeNode<>();
-        Source source1 = new SourceImpl1();
-        source1.setId(++i);
-        headNode.setT(source1);
-
-        BinaryTreeNode<Source> left1 = new BinaryTreeNode<>();
-        Source source2 = new SourceImpl1();
-        source2.setId(++i);
-        left1.setT(source2);
-        headNode.setLeftNode(left1);
-
-        BinaryTreeNode<Source> left11 = new BinaryTreeNode<>();
-        Source source21 = new SourceImpl1();
-        source21.setId(++i);
-        left11.setT(source21);
-        left1.setLeftNode(left11);
-
-        BinaryTreeNode<Source> rigth11 = new BinaryTreeNode<>();
-        Source source22 = new SourceImpl1();
-        source22.setId(++i);
-        rigth11.setT(source22);
-        left1.setRightNode(rigth11);
-
-        BinaryTreeNode<Source> right1 = new BinaryTreeNode<>();
-        Source source3 = new SourceImpl1();
-        source3.setId(++i);
-        right1.setT(source3);
-
-        headNode.setRightNode(right1);
-        return  headNode;
-    }
 }
