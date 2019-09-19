@@ -16,9 +16,12 @@ public class BinaryTreeNodeMain {
         System.out.println("start--递归法--前序遍列 : ");
         binaryTreeUtil.preOrder(headNode);
         System.out.println("end--递归法--前序遍列 ");
-        System.out.println("start--迭代法--前序遍列 : ");
+        System.out.println("start--迭代法1--前序遍列 : ");
         binaryTreeUtil.preOrder1(headNode);
-        System.out.println("end--迭代法--前序遍列 ");
+        System.out.println("end--迭代法1--前序遍列 ");
+        System.out.println("start--迭代法2--前序遍列 : ");
+        binaryTreeUtil.preOrder2(headNode);
+        System.out.println("end--迭代法2--前序遍列 ");
     }
 
 }

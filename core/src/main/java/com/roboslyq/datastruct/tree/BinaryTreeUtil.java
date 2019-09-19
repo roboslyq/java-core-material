@@ -64,7 +64,7 @@ public class BinaryTreeUtil {
     }
 
     /**
-     * 迭代法，前序遍列
+     * 迭代法1，前序遍列
      * @param binaryTreeNode
      */
     public static void preOrder1(BinaryTreeNode<Object> binaryTreeNode){
@@ -78,6 +78,25 @@ public class BinaryTreeUtil {
                 if(stack.isEmpty()) break;
                 binaryTreeNode = stack.pop();
                 binaryTreeNode = binaryTreeNode.getRightNode();
+            }
+    }
+    /**
+     * 迭代法2，前序遍列
+     * @param binaryTreeNode
+     */
+    public static void preOrder2(BinaryTreeNode<Object> binaryTreeNode){
+            Stack<BinaryTreeNode> stack = new Stack<>();
+            //当前迭代节点初始化
+            BinaryTreeNode curr = binaryTreeNode;
+            while (curr != null || !stack.isEmpty()) {
+                while (curr != null) {//当前节点不为空,如果当前节点为空，处理栈中下一个节点。
+                    System.out.println(curr.getT());
+                    stack.push(curr);//栈保存当前节点，并且遍列左节点入栈
+                    curr = curr.getLeftNode();
+                }
+                //处理当前节点的右节点(左节点入栈时就已经处理过了)
+                curr = stack.pop();
+                curr = curr.getRightNode();
             }
     }
 }
