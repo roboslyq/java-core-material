@@ -22,6 +22,9 @@ public class BinaryTreeNodeMain {
         System.out.println("start--迭代法2--前序遍列 : ");
         binaryTreeUtil.preOrder2(headNode);
         System.out.println("end--迭代法2--前序遍列 ");
+        System.out.println("start--分层遍列--前序遍列 : ");
+        binaryTreeUtil.levelOrder(headNode);
+        System.out.println("end--分层遍列--前序遍列 ");
     }
 
 }

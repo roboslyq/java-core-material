@@ -81,11 +81,12 @@ public class BinaryTreeUtil {
             }
     }
     /**
-     * 迭代法2，前序遍列
+     * 迭代法2，分导
      * @param binaryTreeNode
      */
     public static void preOrder2(BinaryTreeNode<Object> binaryTreeNode){
-            Stack<BinaryTreeNode> stack = new Stack<>();
+            //双端队列
+            LinkedList<BinaryTreeNode> stack = new LinkedList<>();
             //当前迭代节点初始化
             BinaryTreeNode curr = binaryTreeNode;
             while (curr != null || !stack.isEmpty()) {
@@ -98,5 +99,34 @@ public class BinaryTreeUtil {
                 curr = stack.pop();
                 curr = curr.getRightNode();
             }
+    }
+
+    /**
+     * 分层遍列
+     * @param binaryTreeNode
+     */
+
+    public static void levelOrder(BinaryTreeNode binaryTreeNode) {
+        //双端队列
+        LinkedList<BinaryTreeNode> queueCurr = new LinkedList<>();
+        LinkedList<BinaryTreeNode> queueNext = new LinkedList<>();
+        //当前迭代节点初始化
+        queueCurr.addLast(binaryTreeNode);
+        while (!queueCurr.isEmpty()) {
+            while (!queueCurr.isEmpty()) {//当前节点不为空,如果当前节点为空，处理栈中下一个节点。
+                BinaryTreeNode currNode = queueCurr.poll();
+                System.out.println(currNode.getT());
+                if(currNode.getLeftNode() != null){
+                    queueNext.addLast(currNode.getLeftNode());
+                }
+                if(currNode.getRightNode() != null){
+                    queueNext.addLast(currNode.getRightNode());
+                }
+            }
+            //处理当前节点的右节点(左节点入栈时就已经处理过了)
+            LinkedList<BinaryTreeNode> queuetemp = queueCurr;
+            queueCurr = queueNext;
+            queueNext = queuetemp;
+        }
     }
 }
