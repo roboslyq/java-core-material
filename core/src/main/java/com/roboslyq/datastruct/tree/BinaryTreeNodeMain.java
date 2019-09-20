@@ -11,19 +11,22 @@ public class BinaryTreeNodeMain {
 
     public static void main(String[] args) {
 
-        BinaryTreeUtil binaryTreeUtil = new BinaryTreeUtil();
+//        BinaryTreeUtil binaryTreeUtil = new BinaryTreeUtil();
         BinaryTreeNode headNode =BinaryTreeUtil.generate1(4);
-        System.out.println("start--递归法--前序遍列 : ");
-        binaryTreeUtil.preOrder(headNode);
-        System.out.println("end--递归法--前序遍列 ");
-        System.out.println("start--迭代法1--前序遍列 : ");
-        binaryTreeUtil.preOrder1(headNode);
-        System.out.println("end--迭代法1--前序遍列 ");
-        System.out.println("start--迭代法2--前序遍列 : ");
-        binaryTreeUtil.preOrder2(headNode);
-        System.out.println("end--迭代法2--前序遍列 ");
+//        System.out.println("start--递归法--前序遍列 : ");
+//        binaryTreeUtil.preOrder(headNode);
+//        System.out.println("end--递归法--前序遍列 ");
+//        System.out.println("start--迭代法1--前序遍列 : ");
+//        binaryTreeUtil.preOrder1(headNode);
+//        System.out.println("end--迭代法1--前序遍列 ");
+//        System.out.println("start--迭代法2--前序遍列 : ");
+//        binaryTreeUtil.preOrder2(headNode);
+//        System.out.println("end--迭代法2--前序遍列 ");
+//        System.out.println("start--分层遍列--前序遍列 : ");
+//        binaryTreeUtil.levelOrder(headNode);
+//        System.out.println("end--分层遍列--前序遍列 ");
         System.out.println("start--分层遍列--前序遍列 : ");
-        binaryTreeUtil.levelOrder(headNode);
+        BinaryTreeUtil.levelOrder2(headNode);
         System.out.println("end--分层遍列--前序遍列 ");
     }
 

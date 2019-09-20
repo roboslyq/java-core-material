@@ -129,4 +129,26 @@ public class BinaryTreeUtil {
             queueNext = queuetemp;
         }
     }
+
+    /**
+     * 分层遍列:不需要当前层和下一层，因为顺序固定，只需要往Queue 末尾追加就行
+     * @param binaryTreeNode
+     */
+
+    public static void levelOrder2(BinaryTreeNode binaryTreeNode) {
+        //双端队列()
+        LinkedList<BinaryTreeNode> queue = new LinkedList<>();
+        //当前迭代节点初始化
+        queue.addLast(binaryTreeNode);
+        while (!queue.isEmpty()) {
+            BinaryTreeNode currNode = queue.poll();
+            System.out.println(currNode.getT());
+            if(currNode.getLeftNode() != null){
+                queue.addLast(currNode.getLeftNode());
+            }
+            if(currNode.getRightNode() != null){
+                queue.addLast(currNode.getRightNode());
+            }
+        }
+    }
 }
