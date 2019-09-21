@@ -16,7 +16,7 @@ import java.util.LinkedList;
 
 /**
  *
- * 〈〉
+ * 〈迭代遍列法，注意有坑，普通的遍列方法不能保证整体是一个BST〉
  * @author luo.yongqian
  * @create 2019/9/20
  * @since 1.0.0
