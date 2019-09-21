@@ -24,12 +24,15 @@ import java.util.Stack;
 public class IsValidBST2 {
     public static void main(String[] args) {
         IsValidBST2 isValidBST = new IsValidBST2();
-        TreeNode root = new TreeNode(2);
+        TreeNode root = new TreeNode(3);
         TreeNode left = new TreeNode(1);
-        TreeNode right = new TreeNode(3);
+        TreeNode right = new TreeNode(5);
+        TreeNode r = new TreeNode(2);
         root.left = left;
         root.right = right;
+        right.left = r;
         System.out.println(isValidBST.isValidBST(root));
+
 
     }
     public boolean isValidBST(TreeNode root) {
@@ -37,6 +40,14 @@ public class IsValidBST2 {
         return helper(root, null, null);
     }
 
+    /**
+     * 节点值：右边遍列，lower保存爷节点值为最低，更新upper为父节点值
+     *         左遍列，upper为爷节点值，更新lower为父节点值
+     * @param node
+     * @param lower
+     * @param upper
+     * @return
+     */
     public boolean helper(TreeNode node, Integer lower, Integer upper) {
         if (node == null) return true;
         int val = node.val;
@@ -48,7 +59,7 @@ public class IsValidBST2 {
         if (upper != null && val >= upper) return false;
         //右节点遍列，当前val为lower边界，因为右边的子节点大于当前节点，所以不用考虑上限
         if (!helper(node.right, val, upper)) return false;
-        //左节点遍列，当前val为upper边界，lower边界不需要更新
+        //左节点遍列，当前val为upper边界，lower边界不需要(为爷节点的值)更新
         if (!helper(node.left, lower, val)) return false;
         return true;
     }
