@@ -1,5 +1,6 @@
 package com.roboslyq.algorithm.leetcode.lc0001to0100.lc0089_graycode;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -60,6 +61,27 @@ public class GrayCode {
                 res.add(res.get(j) + add);
             }
         }
+        return res;
+    }
+
+    /**
+     * graycode公式法
+     *
+     * @param n
+     * @return
+     */
+    public List<Integer> grayCode1(int n) {
+        List<Integer> res = new ArrayList();
+        if (n == 0) {
+            res.add(0);
+            return res;
+        }
+
+        int b = (int)Math.pow(2, n);
+        for(int i = 0; i < b; i++) {
+            res.add(i ^ (i >> 1));
+        }
+
         return res;
     }
 }
