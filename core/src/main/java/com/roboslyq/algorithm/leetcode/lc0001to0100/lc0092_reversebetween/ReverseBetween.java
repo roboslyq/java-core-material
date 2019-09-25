@@ -14,41 +14,51 @@ public class ReverseBetween {
         l3.next = l4;
         l4.next = l5;
         ReverseBetween reverseBetween = new ReverseBetween();
-        reverseBetween.reverseBetween(l1,2,4);
-        while (l1.next != null){
-            System.out.println(l1.val);
-            l1 = l1.next;
+        ListNode res = reverseBetween.reverseBetween(l1,2,4);
+        while (res != null){
+            System.out.println(res.val);
+            res = res.next;
         }
     }
+
+    /**
+     * 分三段逻辑处理
+     * @param head
+     * @param m
+     * @param n
+     * @return
+     */
     public ListNode reverseBetween(ListNode head, int m, int n) {
-        ListNode before_start_reverse = null;
-        ListNode after_start_reverse = null;
-        ListNode start_reverse = null;
-        ListNode pre = null;//反转链条的前置节点
-//        ListNode after_end_erverse=null;
-//        ListNode after_end_rerverse=null;
-        ListNode end_reverse = null;
-        ListNode cur = head; //初始化cur,即相当于下面for循环的i=1
-        ListNode tmp = null;
-        for (int i = 1; i < Integer.MAX_VALUE ; i++) {
-            if(i == m-1){//反转前处理(超始位置要取前，因为需要保存前一节点)
-                before_start_reverse = cur;
-                start_reverse = cur.next;
-                pre = start_reverse;
-            }
-            if(i>= m && i <= n){//反转中处理
-                tmp = cur.next;
-                cur.next = pre;
-                pre = cur;
-                cur = tmp;
 
-            }
-            if(i == n+1) {//反转结尾处理
-                before_start_reverse.next = cur;
-
-                break;
-            }
+        ListNode before_reverse = null;//反转链条的前置节点
+        ListNode start_reverse = null;//反转的起始节点
+        ListNode cur = head;         //当前节点
+        ListNode pre_tmp = null;     //临时节点
+        //第一段逻辑，交易前的节点
+        while(m > 1){
+            before_reverse = cur;
+            cur = cur.next;
+            m--;
+            n--;//n计数器
         }
+        //设置开始转换节点
+        start_reverse = cur;
+        ListNode tmp = null;
+        //交易中的节点处理（节点置换）
+        while(n > 0){//此时n的值为原始n与m的差值
+            tmp = cur.next;
+            cur.next = pre_tmp;
+            pre_tmp = cur;
+            cur = tmp;
+            n--;
+        }
+        //最后串联节点
+        if(before_reverse != null){
+            before_reverse.next = pre_tmp;
+        }else{
+            head = pre_tmp;
+        }
+        start_reverse.next = cur;
         return head;
     }
 }
