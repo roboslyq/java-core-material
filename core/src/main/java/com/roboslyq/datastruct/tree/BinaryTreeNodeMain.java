@@ -23,7 +23,7 @@ public class BinaryTreeNodeMain {
 //        binaryTreeUtil.postOrder1(headNode);
 //        System.out.println("end--迭代法2--前序遍列 ");
 //        System.out.println("start--分层遍列--前序遍列 : ");
-//        binaryTreeUtil.levelOrder(headNode);
+//        binaryTreeUtil.findInTree(headNode);
 //        System.out.println("end--分层遍列--前序遍列 ");
         System.out.println("start--分层遍列--前序遍列 : ");
         BinaryTreeUtil.levelOrder2(headNode);
