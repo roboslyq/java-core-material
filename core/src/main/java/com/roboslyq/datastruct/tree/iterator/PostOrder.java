@@ -31,7 +31,7 @@ public class PostOrder {
     public static void main(String[] args) {
 //        BinaryTreeNode headNode = BinaryTreeUtil.generate1(4);
 //        BinaryTreeNode headNode1 = BinaryTreeUtil.generate1(4);
-        BinaryTreeNode headNode1 = BinaryTreeUtil.generate1(3);
+        BinaryTreeNode headNode1 = BinaryTreeUtil.generate1(2);
         PostOrder postOrder = new PostOrder();
         postOrder.postOrder1(headNode1);
 //        4
@@ -100,5 +100,4 @@ public class PostOrder {
             }
         }
     }
-
 }
