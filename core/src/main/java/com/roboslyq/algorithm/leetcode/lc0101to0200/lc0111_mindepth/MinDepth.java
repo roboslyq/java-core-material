@@ -35,8 +35,7 @@ public class MinDepth {
      * @return
      */
     public int minDepth(TreeNode root, int curDepth) {
-        //节点为空，返回curDepth
-        if (root == null) return curDepth;
+        //因为下方有条件判断，root不为空才递归，所以此处不需要判断root是否为空
         //节点的左右节点为空，表示叶子节点，返回结果
         if (root.left == null && root.right == null) {
             return curDepth;
