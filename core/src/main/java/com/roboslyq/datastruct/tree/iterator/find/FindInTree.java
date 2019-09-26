@@ -1,4 +1,4 @@
-package com.roboslyq.datastruct.tree.find;
+package com.roboslyq.datastruct.tree.iterator.find;
 
 import com.roboslyq.datastruct.tree.BinaryTreeNode;
 import com.roboslyq.datastruct.tree.BinaryTreeUtil;
