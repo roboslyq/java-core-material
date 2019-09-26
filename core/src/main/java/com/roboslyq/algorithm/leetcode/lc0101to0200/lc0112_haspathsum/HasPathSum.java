@@ -54,26 +54,19 @@ public class HasPathSum {
         HasPathSum hasPathSum = new HasPathSum();
         System.out.println(hasPathSum.hasPathSum(root,4));
     }
+
+    /**
+     * 递归法
+     * @param root
+     * @param sum
+     * @return
+     */
     public boolean hasPathSum(TreeNode root, int sum) {
-        Stack<TreeNode> stack = new Stack<>();
-        Stack<Integer> sumStack = new Stack<>();
-        boolean hasPathNum = false;
-        sumStack.push(0);
-        while(true){
-            while(root != null){//当前节点不为空，直接继续处理，添加到栈
-                sumStack.push(sumStack.peek() +  root.val);
-                stack.push(root);
-                root = root.left;
-            }
-            if(stack.isEmpty()) break;
-            int res = sumStack.pop();
-            if(res == sum){
-                hasPathNum   =  true;
-                break;
-            }
-            root = stack.pop();
-            root = root.right;
+        if(root == null) return false;
+        sum -= root.val;
+        if(root.left == null && root.right == null){
+            if(sum == 0) return true;
         }
-        return hasPathNum;
+        return hasPathSum(root.left,sum) || hasPathSum(root.right,sum);
     }
 }
