@@ -10,13 +10,70 @@
  */
 package com.roboslyq.algorithm.leetcode.lc0101to0200.lc0112_haspathsum;
 
+import com.roboslyq.algorithm.leetcode.TreeNode;
+import com.roboslyq.algorithm.leetcode.lc0101to0200.lc0101_issymmetric.IsSymmetric;
+
+import java.util.Stack;
+
 /**
  *
- * 〈〉
+ * 给定一个二叉树和一个目标和，判断该树中是否存在根节点到叶子节点的路径，这条路径上所有节点值相加等于目标和。
+ *
+ * 说明: 叶子节点是指没有子节点的节点。
+ *
+ * 示例: 
+ * 给定如下二叉树，以及目标和 sum = 22，
+ *
+ *               5
+ *              / \
+ *             4   8
+ *            /   / \
+ *           11  13  4
+ *          /  \      \
+ *         7    2      1
+ * 返回 true, 因为存在目标和为 22 的根节点到叶子节点的路径 5->4->11->2。
+ *
+ * 来源：力扣（LeetCode）
+ * 链接：https://leetcode-cn.com/problems/path-sum
+ * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  * @author luo.yongqian
  * @create 2019/9/26
  * @since 1.0.0
  */
 public class HasPathSum {
-
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode(1);
+        TreeNode left = new TreeNode(2);
+        TreeNode right = new TreeNode(2);
+        TreeNode tmp1 = new TreeNode(3);
+        TreeNode tmp2 = new TreeNode(3);
+        root.left = left;
+        root.right = right;
+        left.right = tmp1;
+        right.right = tmp2;
+        HasPathSum hasPathSum = new HasPathSum();
+        System.out.println(hasPathSum.hasPathSum(root,4));
+    }
+    public boolean hasPathSum(TreeNode root, int sum) {
+        Stack<TreeNode> stack = new Stack<>();
+        Stack<Integer> sumStack = new Stack<>();
+        boolean hasPathNum = false;
+        sumStack.push(0);
+        while(true){
+            while(root != null){//当前节点不为空，直接继续处理，添加到栈
+                sumStack.push(sumStack.peek() +  root.val);
+                stack.push(root);
+                root = root.left;
+            }
+            if(stack.isEmpty()) break;
+            int res = sumStack.pop();
+            if(res == sum){
+                hasPathNum   =  true;
+                break;
+            }
+            root = stack.pop();
+            root = root.right;
+        }
+        return hasPathNum;
+    }
 }
