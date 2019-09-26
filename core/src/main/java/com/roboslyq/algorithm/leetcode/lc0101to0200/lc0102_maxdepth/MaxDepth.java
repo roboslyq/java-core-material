@@ -1,4 +1,4 @@
-package com.roboslyq.algorithm.leetcode.lc0101to200.lc0102_maxdepth;
+package com.roboslyq.algorithm.leetcode.lc0101to0200.lc0102_maxdepth;
 
 import com.roboslyq.algorithm.leetcode.TreeNode;
 

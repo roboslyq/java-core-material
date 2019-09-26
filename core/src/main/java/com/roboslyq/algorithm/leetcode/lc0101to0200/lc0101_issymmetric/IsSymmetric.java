@@ -1,9 +1,6 @@
-package com.roboslyq.algorithm.leetcode.lc0101to200.lc0101_issymmetric;
+package com.roboslyq.algorithm.leetcode.lc0101to0200.lc0101_issymmetric;
 
 import com.roboslyq.algorithm.leetcode.TreeNode;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
 
 /**
  * 给定一个二叉树，检查它是否是镜像对称的。
