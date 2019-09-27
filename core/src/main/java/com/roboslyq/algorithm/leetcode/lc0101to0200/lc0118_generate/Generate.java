@@ -10,11 +10,8 @@
  */
 package com.roboslyq.algorithm.leetcode.lc0101to0200.lc0118_generate;
 
-import com.roboslyq.algorithm.leetcode.ListNode;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -35,6 +32,12 @@ public class Generate {
             System.out.println();
         }
     }
+
+    /**
+     * 动态规划
+     * @param numRows
+     * @return
+     */
     public List<List<Integer>> generate(int numRows) {
         List<List<Integer>> res = new ArrayList<>();
         if(numRows   ==   0) return res;
