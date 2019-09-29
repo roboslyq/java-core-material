@@ -55,19 +55,30 @@ import java.util.Stack;
 public class EvalRPN {
     public static void main(String[] args) {
         EvalRPN evalRPN = new EvalRPN();
-        System.out.println(evalRPN.cal(3,5,"+"));
+//        System.out.println(evalRPN.cal(3,5,"+"));
+        String[] test = new String[]{"10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"};
+        System.out.println(evalRPN.evalRPN(test));
     }
-    public int evalRPN(String[] tokens) {
-       Stack<Integer> stack = new Stack();
-        for (int i = 0; i < tokens.length ; i++) {
-            String strI = tokens[i];
-            if(strI.equals("+") || strI.equals("-") || strI.equals("*") || strI.equals("/")){
-                int val2 = Integer.valueOf(stack.pop());
-                int val1 = Integer.valueOf(stack.pop());
-                stack.push(cal(val1,val2,strI));
 
+    /**
+     * 使用栈，当遇到运算符时*+-/,出栈两个数，计算然后得到结果并入栈即可。
+     * @param tokens
+     * @return
+     */
+    public int evalRPN(String[] tokens) {
+        if(tokens.length == 0) return 0;
+        if(tokens.length == 1) return Integer.valueOf(tokens[0]);
+       Stack<Integer> stack = new Stack<>();
+        for (String strI : tokens) {
+            if (strI.equals("+") || strI.equals("-") || strI.equals("*") || strI.equals("/")) {
+                int val2 = stack.pop();
+                int val1 = stack.pop();
+                stack.push(cal(val1, val2, strI));
+            } else {
+                stack.push(Integer.valueOf(strI));
             }
         }
+        return stack.pop();
 
     }
     public int cal(int val1,int val2,String cal) {
