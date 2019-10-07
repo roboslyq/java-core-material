@@ -72,10 +72,44 @@ public class SortList {
             ListNode node = array.get(i);
             tmpHead.next = node;
             tmpHead = node;
+            //删除末尾节点的Next,否则可能形成致循环链表
             if(i == array.size()-1){
                 tmpHead.next = null;
             }
         }
         return resHead.next;
+    }
+
+    /**
+     * 归并排序（注意cut和merge链操作即可）
+     * @param head
+     * @return
+     */
+    public ListNode sortList1(ListNode head) {
+        if (head == null || head.next == null)
+            return head;
+        ListNode fast = head.next, slow = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        ListNode tmp = slow.next;
+        slow.next = null;
+        ListNode left = sortList(head);
+        ListNode right = sortList(tmp);
+        ListNode h = new ListNode(0);
+        ListNode res = h;
+        while (left != null && right != null) {
+            if (left.val < right.val) {
+                h.next = left;
+                left = left.next;
+            } else {
+                h.next = right;
+                right = right.next;
+            }
+            h = h.next;
+        }
+        h.next = left != null ? left : right;
+        return res.next;
     }
 }
