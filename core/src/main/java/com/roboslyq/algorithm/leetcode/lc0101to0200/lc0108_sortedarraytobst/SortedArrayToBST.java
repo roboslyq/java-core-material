@@ -51,12 +51,21 @@ public class SortedArrayToBST {
         return generateBST(nums,0,nums.length-1);
     }
 
+    /**
+     * 思想：
+     * 1、平衡：保证左右节点相等即可，即二分法
+     * 2、搜索树：left < right永远成立。所以二分之后，左边节点为左子树，右边的节点为右子树。递归即可
+     * @param nums
+     * @param leftNodeIndex
+     * @param rightNodeIndex
+     * @return
+     */
     public TreeNode generateBST(int[] nums,int leftNodeIndex,int rightNodeIndex){
         if(leftNodeIndex > rightNodeIndex) return null;
         int middleIndex = (rightNodeIndex + leftNodeIndex)/2;
         //每次生成middleIndex位置的节点
         TreeNode curRoot = new TreeNode(nums[middleIndex]);
-        //左右分别排除middleIndex即可
+        //左右分别排除middleIndex即可，递归生成左子树和右子树
         curRoot.left = generateBST(nums,leftNodeIndex,middleIndex-1);
         curRoot.right = generateBST(nums,middleIndex+1,rightNodeIndex);
         return curRoot;
