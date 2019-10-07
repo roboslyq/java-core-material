@@ -41,21 +41,23 @@ import com.roboslyq.algorithm.leetcode.TreeNodeUtil;
  */
 public class SortedArrayToBST {
     public static void main(String[] args) {
-        Integer[] nums = new Integer[]{0, -3, 9, -10, null, 5};
+        int[] nums = {-10,-3,0,5,9,11};
         SortedArrayToBST sortedArrayToBST = new SortedArrayToBST();
         TreeNode res = sortedArrayToBST.sortedArrayToBST(nums);
         TreeNodeUtil.inOrder(res);
 
     }
-    public TreeNode sortedArrayToBST(Integer[] nums) {
+    public TreeNode sortedArrayToBST(int[] nums) {
         return generateBST(nums,0,nums.length-1);
     }
 
-    public TreeNode generateBST(Integer[] nums,int leftNodeIndex,int rightNodeIndex){
+    public TreeNode generateBST(int[] nums,int leftNodeIndex,int rightNodeIndex){
+        if(leftNodeIndex > rightNodeIndex) return null;
         int middleIndex = (rightNodeIndex + leftNodeIndex)/2;
-        if(leftNodeIndex >= rightNodeIndex) return null;
+        //每次生成middleIndex位置的节点
         TreeNode curRoot = new TreeNode(nums[middleIndex]);
-        curRoot.left = generateBST(nums,leftNodeIndex,middleIndex);
+        //左右分别排除middleIndex即可
+        curRoot.left = generateBST(nums,leftNodeIndex,middleIndex-1);
         curRoot.right = generateBST(nums,middleIndex+1,rightNodeIndex);
         return curRoot;
     }
