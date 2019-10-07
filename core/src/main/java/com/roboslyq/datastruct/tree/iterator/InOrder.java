@@ -28,26 +28,26 @@ public class InOrder {
         BinaryTreeNode headNode = BinaryTreeUtil.generate1(4);
         BinaryTreeNode headNode1 = BinaryTreeUtil.generate1(4);
         InOrder preOrder = new InOrder();
-        preOrder.preOrder1(headNode);
+        preOrder.inOrder1(headNode);
         System.out.println("-------------------");
-        preOrder.preOrder2(headNode1);
+        preOrder.inOrder2(headNode1);
     }
 
     /**
      * 递归中序遍列
      * @param treeNode
      */
-    public void preOrder1(BinaryTreeNode treeNode){
+    public void inOrder1(BinaryTreeNode treeNode){
         if(treeNode == null) return;
-        preOrder1(treeNode.getLeftNode());
+        inOrder1(treeNode.getLeftNode());
         System.out.println(treeNode.getT());
-        preOrder1(treeNode.getRightNode());
+        inOrder1(treeNode.getRightNode());
     }
     /**
      * 迭代中序遍列（DSF深度优先遍列)
      * @param treeNode
      */
-    public void preOrder2(BinaryTreeNode treeNode){
+    public void inOrder2(BinaryTreeNode treeNode){
         Stack<BinaryTreeNode> binaryTreeNodes = new Stack<>();
         while(true){
             while(treeNode != null){//当前节点不为空，直接继续处理，添加到栈
