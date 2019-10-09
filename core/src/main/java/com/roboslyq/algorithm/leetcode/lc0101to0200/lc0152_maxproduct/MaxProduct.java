@@ -38,52 +38,46 @@ public class MaxProduct {
         System.out.println(maxProduct.maxProduct(new int[]{-4,-3}));
         System.out.println(maxProduct.maxProduct(new int[]{-2,0,-1}));
     }
-    /**
-     * 最优解动态规则，先找出动态方程：
-     * Max(i) = Max(Max(i-1),Max(i-1)*i)
+     /**
+     * 解题思路：
+     * 最暴力的方式当然是遍历到i，都和i之前的再循环一遍，找到最大值，双重遍历
+     * 上面的解题时间会超，所以得考虑利用之前的遍历结果，==>动态规划
+     * <p>
+     * 求积的最大值，最麻烦的就是
+     * 当遇到0的时候，整个乘积会变成0；当遇到负数的时候，当前的最大乘积会变成最小乘积，最小乘积会变成最大乘积
+     * <p>
+     * 所以用两个数组进行保存最大值和最小值
+     * <p>
+     * 当前的最大值等于已知的最大值、最小值和当前值的乘积，当前值，这三个数的最大值。
+     * 当前的最小值等于已知的最大值、最小值和当前值的乘积，当前值，这三个数的最小值。
+     * 结果是最大值数组中的最大值。
+     * <p>
+     * 数组可以进一步优化成int，空间复杂度从O(n)->O(1)
+     *
      * @param nums
      * @return
      */
     public int maxProduct(int[] nums) {
-        int curMax = Integer.MIN_VALUE;
-        int curIndex = 0;
-        while (nums[curIndex] == 0){
-            curIndex++;
-            if(curIndex >= nums.length) return 0;
+        if(nums.length == 0) return 0;
+        if(nums.length == 1) return nums[0];
+        int preMax = nums[0];
+        int preMin = nums[0];
+        int res = nums[0];
+        int curMax = 0;
+        int curMin = 0;
+        for (int i = 1; i < nums.length ; i++) {
+            /**
+             * 获取当前的最大值：Math.max(nums[i] * preMax,nums[i] * preMin)
+             * 获取当前的最小值：Math.min(nums[i] * preMax,nums[i] * preMin)
+             *
+             */
+            curMax = Math.max(nums[i],Math.max(nums[i] * preMax,nums[i] * preMin));
+            curMin = Math.min(nums[i],Math.min(nums[i] * preMax,nums[i] * preMin));
+            preMax = Math.max(curMax,curMin);
+            preMin = Math.min(curMax,curMin);
+            res = Math.max(res, curMax);
         }
-        int curMutilVal = nums[curIndex];
-        for (int i = curIndex+1; i < nums.length ; i++) {
-            if(nums[i] == 0){//遇到0截断处理，重新开始计算值
-                curMax = Math.max(curMutilVal,curMax);
-                curMutilVal = 0;
-            }else if(nums[i] < 0){//遇到负数
-                if(needMutilNegative(nums,i+1)){
-                    if(curMutilVal == 0){
-                        curMutilVal =  nums[i];
-                    }else{
-                        curMutilVal = curMutilVal * nums[i];
-                    }
-                }else {
-                    curMax = Math.max(curMutilVal,curMax);
-                    curMutilVal = 0;
-                }
-            }else {
-                if(curMutilVal == 0){
-                    curMutilVal =  nums[i];
-                }else{
-                    curMutilVal = curMutilVal * nums[i];
-                }
-            }
-        }
-        return Math.max(curMax,curMutilVal);
-    }
-
-    public boolean needMutilNegative(int[] nums,int nextIndex){
-        for (int i = nextIndex; i < nums.length; i++) {
-            if(nums[i] < 0) return true;
-            if(nums[i] == 0) return false;
-        }
-        return false;
+        return res;
     }
 
 }
