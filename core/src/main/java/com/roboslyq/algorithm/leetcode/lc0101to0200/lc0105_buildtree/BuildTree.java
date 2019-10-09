@@ -10,6 +10,8 @@
  */
 package com.roboslyq.algorithm.leetcode.lc0101to0200.lc0105_buildtree;
 
+import com.roboslyq.algorithm.leetcode.TreeNode;
+
 /**
  *
  * 〈根据一棵树的前序遍历与中序遍历构造二叉树。
@@ -38,5 +40,15 @@ package com.roboslyq.algorithm.leetcode.lc0101to0200.lc0105_buildtree;
  * @since 1.0.0
  */
 public class BuildTree {
-
+    /**
+     * 算法：
+     *  1、前序遍列，数组第0个元素为root节点
+     *  2、中序遍列，数组左边的值均为左子树
+     * @param preorder
+     * @param inorder
+     * @return
+     */
+//    public TreeNode buildTree(int[] preorder, int[] inorder) {
+//
+//    }
 }
