@@ -8,7 +8,7 @@
  * <author>                 <time>          <version>          <desc>
  * luo.yongqian         2019/9/6 12:29      1.0.0               创建
  */
-package com.roboslyq.builder;
+package com.roboslyq.other.builder;
 
 /**
  *
@@ -29,10 +29,6 @@ public class Sub1 extends Parent<Sub1> {
         return  this;
     }
 
-    public static void main(String[] args) {
-        Sub1 sub1 = new Sub1();
-        Sub1 sub12 = sub1.setId1("1")
-                .setId2("2");
-    }
+
 
 }

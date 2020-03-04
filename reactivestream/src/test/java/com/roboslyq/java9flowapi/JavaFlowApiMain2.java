@@ -37,13 +37,13 @@ public class JavaFlowApiMain2 {
         publisher.subscribe(subscriber2);
 
         //初始化事件源,此值如果大于256(即BufferdSubscription中的缓存值，Publisher则会被阻塞。)
-        DtoHelper.getSimpleDtos(2000)
-                .forEach(                   //遍列事件源
-                        simpleDto -> {
-                            Log.print("生产元素：" + simpleDto.getName());
-                            publisher.submit(simpleDto);   //每一次遍列发一条消息给订阅者
-                        }
-                );
+//        DtoHelper.getSimpleDtos(2000)
+//                .forEach(                   //遍列事件源
+//                        simpleDto -> {
+//                            Log.print("生产元素：" + simpleDto.getName());
+//                            publisher.submit(simpleDto);   //每一次遍列发一条消息给订阅者
+//                        }
+//                );
         //因上面的流程是异步的，所以如果此处不sleep等待一下，控制台可能不会打印信息
         Thread.sleep(1000);
         //关闭流
