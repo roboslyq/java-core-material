@@ -11,11 +11,10 @@
 package com.roboslyq.reactor;
 
 import reactor.core.publisher.Flux;
-import reactor.core.scheduler.Schedulers;
 
 /**
  *
- * 〈〉
+ * 〈背压测试〉
  * @author luo.yongqian
  * @date 2020/3/5
  * @since 1.0.0

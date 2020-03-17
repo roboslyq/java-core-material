@@ -10,8 +10,6 @@
  */
 package com.roboslyq.reactor;
 
-import com.roboslyq.reactor.FluxDemo;
-
 /**
  *
  * 〈Flux Demo main〉
@@ -21,11 +19,11 @@ import com.roboslyq.reactor.FluxDemo;
  */
 public class FluxDemoMain {
     public static void main(String[] args) {
-//        FluxDemo.synchronizedDemo();
-        FluxDemo.asynchronizedDemo();
-//        FluxDemo.subscribeLambda();
-//        FluxDemo.subscribeLambd1();
-//        FluxDemo.subscribeLambd2();
-//        FluxDemo.subscribeLambd3();
+//        FluxCreateDemo.synchronizedDemo();
+//        FluxCreateDemo.asynchronizedDemo();
+//        FluxCreateDemo.subscribeLambda();
+//        FluxCreateDemo.subscribeLambd1();
+//        FluxCreateDemo.subscribeLambd2();
+//        FluxCreateDemo.subscribeLambd3();
     }
 }
