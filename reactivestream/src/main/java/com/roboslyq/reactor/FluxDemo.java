@@ -10,6 +10,7 @@
  */
 package com.roboslyq.reactor;
 
+import org.junit.Test;
 import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Schedulers;
 
@@ -35,6 +36,7 @@ import java.util.concurrent.Flow;
  * @since 1.0.0
  */
 public class FluxDemo {
+
     /**
      * 同步线程（均为main线程），打印结果如下：
      * [ main ] : A
@@ -45,6 +47,7 @@ public class FluxDemo {
         Flux.just("A","B","C")
                 .subscribe(FluxDemo::print);
     }
+
     /**
      * 1、publicOn方法为指定线程池，
      * 2、Flow线程池为Scheduler体系，与Java中的Executors基本一一对应
@@ -54,9 +57,11 @@ public class FluxDemo {
      * [ elastic-2 ] : B
      * [ elastic-2 ] : C
      */
+    @Test
     public static void asynchronizedDemo(){
         Flux.just("A","B","C")
-                .publishOn(Schedulers.elastic())
+                .parallel(2)
+                .runOn(Schedulers.elastic())
                 .subscribe(FluxDemo::print);
         try {
             //因为异步特性，此处模拟等待异常线程完成执行，否则控制台可以看不到打印信息
@@ -76,30 +81,39 @@ public class FluxDemo {
     public static void subscribeLambd1(){
         Flux.just("A","B","C")
                 .subscribe(
-                        System.out::println //consumer
-                    , System.out::println  // error consumer
+                        //consumer
+                        System.out::println
+                        // error consumer
+                        , System.out::println
                         );
     }
     public static void subscribeLambd2(){
         Flux.just("A","B","C")
                 .subscribe(
-                        System.out::println //consumer-->
-                        ,System.out::println  // error consumer -->
+                        //consumer-->
+                        System.out::println
+                        // error consumer -->
+                        ,System.out::println
                         ,()->{
-                            System.out.println("完成consumer"); //completeConsumer
+                            //completeConsumer
+                            System.out.println("完成consumer");
                         }
                         );
     }
     public static void subscribeLambd3(){
         Flux.just("A","B","C")
                 .subscribe(
-                        System.out::println //consumer
-                        ,System.out::println  // error consumer
+                        //consumer
+                        System.out::println
+                        // error consumer
+                        ,System.out::println
+                        //completeConsumer
                         ,()->{
-                            System.out.println("完成consumer"); //completeConsumer
+                            System.out.println("完成consumer");
                         }
+                        //onNext
                         , subscription -> {
-                            subscription.request(2); //
+                            subscription.request(2);
                         }
                         );
     }

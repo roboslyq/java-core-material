@@ -18,9 +18,9 @@
       <module name="concurrent" target="9" />
       <module name="core" target="9" />
       <module name="io" target="9" />
-      <module name="jdk" target="8" />
+      <module name="jdk" target="9" />
       <module name="lang" target="9" />
-      <module name="reactivestream" target="9" />
+      <module name="reactivestream" target="1.9" />
     </bytecodeTargetLevel>
   </component>
 </project>

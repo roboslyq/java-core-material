@@ -33,14 +33,11 @@ public class FluxDemo2 {
             }
         }).subscribe(System.out::println);
     }
-
 }
 
 
 class Count{
     public int count;
-
-
     public void  increase(){
       count++;
     }
