@@ -17,10 +17,10 @@ package com.roboslyq.util.spi;
  * @create 2019/6/17
  * @since 1.0.0
  */
-public class UserServiceImpl implements UserInterface {
+public class UserServiceImpl2 implements UserInterface {
 
     @Override
     public String getUserName() {
-        return "roboslyq1";
+        return "roboslyq2";
     }
 }

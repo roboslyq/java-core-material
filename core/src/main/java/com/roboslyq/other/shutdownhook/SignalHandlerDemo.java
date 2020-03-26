@@ -53,4 +53,3 @@ class SignalHandlerImpl implements SignalHandler {
         }
     }
 }
-}

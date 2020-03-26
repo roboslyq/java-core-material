@@ -12,7 +12,7 @@ package com.roboslyq.chains;
 
 /**
  *
- * 〈〉
+ * 〈订阅者〉
  * @author luo.yongqian
  * @create 2019/6/25
  * @since 1.0.0

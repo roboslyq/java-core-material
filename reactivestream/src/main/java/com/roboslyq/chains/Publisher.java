@@ -14,7 +14,7 @@ import java.util.function.Consumer;
 
 /**
  *
- * 〈具体操作接口〉
+ * 〈生产者〉
  * @author luo.yongqian
  * @create 2019/6/25
  * @since 1.0.0

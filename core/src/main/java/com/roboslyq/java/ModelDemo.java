@@ -18,7 +18,7 @@ package com.roboslyq.java;
  * @since 1.0.0
  */
 public class ModelDemo {
-    private int id;
+    public int id;
     private String name;
 
     public int getId() {

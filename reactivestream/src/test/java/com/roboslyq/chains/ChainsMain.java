@@ -27,7 +27,7 @@ public class ChainsMain {
             }
         }).filter(val ->{
             System.out.println("filter--" + val);
-            return val != null;
+            return val != 5;
         }).map(val ->{
             System.out.println("map--" + val);
             return  val + "";

@@ -1,4 +1,4 @@
-package com.roboslyq.core.concurrent.unsage;
+package com.roboslyq.core.concurrent.unsafe;
 
 import sun.misc.Unsafe;
 

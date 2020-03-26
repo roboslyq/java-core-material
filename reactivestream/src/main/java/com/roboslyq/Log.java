@@ -25,7 +25,7 @@ public class Log {
         print("");
     }
     public static void print(String message) {
-        System.out.printf("当前线程：%s,%s,%s \n", Thread.currentThread().getId(), Thread.currentThread().getName(),message);
+        System.out.printf("当前线程(%s) :%s \n",  Thread.currentThread().getName(),message);
     }
 
 }
