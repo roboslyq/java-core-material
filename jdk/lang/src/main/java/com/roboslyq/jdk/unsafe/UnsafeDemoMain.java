@@ -47,6 +47,10 @@ public class UnsafeDemoMain {
 }
 
 class UserUnsafe{
+
+    public UserUnsafe(){
+        System.out.println("constructor was called!!!");
+    }
     private int id;
 
     private String name;
