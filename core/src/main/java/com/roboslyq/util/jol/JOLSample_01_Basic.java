@@ -36,8 +36,6 @@ public class JOLSample_01_Basic {
 
     public static class A {
         boolean f;
-        int a =99;
-        String b = "hello world";
     }
 
 }

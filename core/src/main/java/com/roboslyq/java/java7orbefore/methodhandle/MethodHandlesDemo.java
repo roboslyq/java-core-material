@@ -1,4 +1,4 @@
-package com.roboslyq.java.java9.methodhandle;
+package com.roboslyq.java.java7orbefore.methodhandle;
 
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.VarHandle;
@@ -45,6 +45,7 @@ public class MethodHandlesDemo {
         System.out.println(demo.name);
 
         boolean result2_1 = ID_HANDLE.compareAndSet(demo, 0, 11);
+
         boolean result2_2 = NAME_HANDLE.compareAndSet(demo, "luoyq", "luoyq1");
         //false
         System.out.println(result2_1);
