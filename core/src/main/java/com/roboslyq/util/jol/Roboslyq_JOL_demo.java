@@ -12,8 +12,8 @@ package com.roboslyq.util.jol;
 
 import org.openjdk.jol.info.ClassLayout;
 import org.openjdk.jol.vm.VM;
+
 import static java.lang.System.out;
-import static java.lang.System.setOut;
 
 /**
  *
