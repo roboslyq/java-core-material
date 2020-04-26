@@ -21,8 +21,8 @@ public class JdbcDemo {
             //1.初始化对象,加载驱动
             Class.forName("oracle.jdbc.driver.OracleDriver");
             //2.得到连接(1433表示sql server的默认端口)
-            ct = DriverManager.getConnection("jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=10.252.241.24)(PORT=1521))(LOAD_BALANCE=YES)(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=odsuat01)))", "rptuser", "Rpassw0rd2021");
-//            ct = DriverManager.getConnection("jdbc:oracle:thin:@//10.252.241.24:1521/odsuat01", "rptuser", "Rpassw0rd2021");
+//            ct = DriverManager.getConnection("jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=10.252.241.24)(PORT=1521))(LOAD_BALANCE=YES)(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=odsuat01)))", "rptuser", "Rpassw0rd2021");
+            ct = DriverManager.getConnection("jdbc:oracle:thin:@//10.252.241.24:1521/odsuat01", "rptuser", "Rpassw0rd2021");
             //3.创建Preparestatement,创建数据
             ps = ct.prepareStatement("SELECT 1 FROM DUAL");
             //可以传参数进去SQL语句里，但是注意 ? 只能在where条件里面
