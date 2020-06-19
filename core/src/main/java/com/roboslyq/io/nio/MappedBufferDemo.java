@@ -10,15 +10,9 @@
  */
 package com.roboslyq.io.nio;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.RandomAccessFile;
-import java.nio.ByteBuffer;
-import java.nio.CharBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
-import java.nio.charset.Charset;
-import java.nio.charset.CharsetDecoder;
 
 /**
  *
@@ -36,7 +30,13 @@ public class MappedBufferDemo {
         mappedByteBuffer.get(buffer1);
         System.out.println(new String(buffer1));
         mappedByteBuffer.flip();
-        mappedByteBuffer.put("abcde".getBytes());
+        //默认写第一个字节
+        mappedByteBuffer.put("k".getBytes());
+        mappedByteBuffer.put("he".getBytes(),0,2);
+        mappedByteBuffer.putChar(5,'z');
+        mappedByteBuffer.putChar(7,'x');
+        mappedByteBuffer.clear();
+        mappedByteBuffer.force();
     }
 
 }
