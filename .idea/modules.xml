@@ -5,10 +5,12 @@
       <module fileurl="file://$PROJECT_DIR$/cache/cache.iml" filepath="$PROJECT_DIR$/cache/cache.iml" />
       <module fileurl="file://$PROJECT_DIR$/jdk/concurrent/concurrent.iml" filepath="$PROJECT_DIR$/jdk/concurrent/concurrent.iml" />
       <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/framework/framework.iml" filepath="$PROJECT_DIR$/framework/framework.iml" />
       <module fileurl="file://$PROJECT_DIR$/jdk/io/io.iml" filepath="$PROJECT_DIR$/jdk/io/io.iml" />
       <module fileurl="file://$PROJECT_DIR$/java-core-material.iml" filepath="$PROJECT_DIR$/java-core-material.iml" />
       <module fileurl="file://$PROJECT_DIR$/jdk/jdk.iml" filepath="$PROJECT_DIR$/jdk/jdk.iml" />
       <module fileurl="file://$PROJECT_DIR$/jdk/lang/lang.iml" filepath="$PROJECT_DIR$/jdk/lang/lang.iml" />
+      <module fileurl="file://$PROJECT_DIR$/framework/mybatis/mybatis.iml" filepath="$PROJECT_DIR$/framework/mybatis/mybatis.iml" />
       <module fileurl="file://$PROJECT_DIR$/reactivestream/reactivestream.iml" filepath="$PROJECT_DIR$/reactivestream/reactivestream.iml" />
     </modules>
   </component>

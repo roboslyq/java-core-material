@@ -14,6 +14,10 @@ public class TuFileParse {
     //    private static ExecutorService executor = Executors.newFixedThreadPool(4);
     // 结果文件保存路径，可以从参数中传递
     private static String RES_FILE_PATH = "D:\\logs\\tu\\";
+    // 当前位置
+    private static int currIndex = 85;
+    // 头部长度
+    private static int HEAD_SIZE = 85;
     //
     private static String RES_FILE_SUFFIX = ".dat";
     // 分割符
@@ -78,12 +82,17 @@ public class TuFileParse {
         fileName = args[0];
         date = args[1];
         TuFileParse fileDemo = new TuFileParse();
-        fileDemo.parseFile("D:\\IdeaProjects_community\\java-core-material\\core\\src\\main\\java\\com\\roboslyq\\io\\io\\cif089rn.dat");
+//        fileDemo.parseFile("D:\\IdeaProjects_community\\java-core-material\\core\\src\\main\\java\\com\\roboslyq\\io\\io\\cif089rn.dat");
+        fileDemo.parseFile("D:\\IdeaProjects_community\\java-core-material\\core\\src\\main\\java\\com\\roboslyq\\io\\io\\cif088d.dat");
     }
 
     public void parseFile(String filePath) throws IOException {
         BufferedReader fileReader = new BufferedReader(new FileReader(new File(filePath)));
-        String srcdata = fileReader.readLine().substring(85);
+        String  completeStr = fileReader.readLine();
+        if(Objects.isNull(completeStr) || completeStr.length() <= HEAD_SIZE + 2){
+            System.out.println("文件长度小于85,请检查文件大小");
+        }
+        String srcdata = completeStr.substring(HEAD_SIZE);
         // 按每一笔Loan拆分，得到每一笔Loan的详情，包含7个segments
         String[] resArray = srcdata.split("ES02\\*\\*");
         Arrays.stream(resArray).forEach(loan -> parseLoan(loan, 0, ""));
