@@ -16,11 +16,11 @@
 package com.roboslyq.framework.mybatis.mapper;
 
 import com.roboslyq.framework.mybatis.domain.Blog;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
-public interface BlogMapper {
+public interface BlogMapperNoXML {
 
+  @Select("SELECT * FROM blog WHERE id = #{id}")
   Blog selectBlog(int id);
 
 }
