@@ -1,0 +1,1 @@
+原理说明见：https://github.com/roboslyq/openmessaging-storage-dledger/docs/应用集成DLedger框架.md
