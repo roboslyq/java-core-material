@@ -33,7 +33,7 @@ public class FirstByteBuddyMain {
         Class<?> clazz = ByteBuddyService.getClazz();
         ParentInterfaceImpl impl = (ParentInterfaceImpl)clazz.getConstructor().newInstance();
         System.out.println(impl);
-        System.out.println(impl.sayHello1());
+//        System.out.println(impl.sayHello1());
         Method method = clazz.getMethod("sayHello2");
         method.invoke(clazz,null);
 

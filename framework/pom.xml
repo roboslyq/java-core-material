@@ -12,6 +12,7 @@
         <module>mybatis</module>
         <module>dledger</module>
         <module>netty-recycler</module>
+        <module>calcite</module>
     </modules>
 
 
