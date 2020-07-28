@@ -56,15 +56,20 @@ public class Stack<T> {
      * 具体见：WeakOrderQueue.allocate
      */
     final AtomicInteger availableSharedCapacity;
-    //DELAYED_RECYCLED中最多可存储的{Stack，WeakOrderQueue}键值对个数
+
+    /** DELAYED_RECYCLED中最多可存储的{Stack，WeakOrderQueue}键值对个数 */
     final int maxDelayedQueues;
-    //elements最大的容量：默认最大为4k，4096
+
+    /** elements最大的容量：默认最大为4k，4096*/
     private final int maxCapacity;
-    //默认为8-1=7，即2^3-1，控制每8个元素只有一个可以被recycle，其余7个被扔掉
+
+    /** 默认为8-1=7，即2^3-1，控制每8个元素只有一个可以被recycle，其余7个被扔掉*/
     private final int ratioMask;
-    //Stack底层数据结构，真正的用来存储数据
+
+    /**  Stack底层数据结构，真正的用来存储数据*/
     public DefaultHandle<?>[] elements;
-    //elements中的元素个数，同时也可作为操作数组的下标
+
+    /** elements中的元素个数，同时也可作为操作数组的下标*/
     public int size;
     /**
      * 每有一个元素将要被回收, 则该值+1，例如第一个被回收的元素的handleRecycleCount=handleRecycleCount+1=0

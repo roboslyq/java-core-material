@@ -11,16 +11,14 @@
 package com.roboslyq.netty.recycler;
 
 import java.lang.ref.WeakReference;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import static java.lang.Math.min;
 
 /**
  *
- * 〈  **
- *      * 多线程共享的队列:
- *      * 存储其它线程收回到分配线程的对象，当某个线程从Stack中获取不到对象时会从WeakOrderQueue中获取对象。
- *      〉
+ * 线程共享的队列:
+ * 存储其它线程收回到分配线程的对象，当某个线程从Stack中获取不到对象时会从WeakOrderQueue中获取对象。
+ *
  * @author roboslyq
  * @date 2020/7/22
  * @since 1.0.0
@@ -33,73 +31,13 @@ public class WeakOrderQueue {
      */
     static final WeakOrderQueue DUMMY = new WeakOrderQueue();
 
-    // Let Link extend AtomicInteger for intrinsics. The Link itself will be used as writerIndex.
-    // 收回对象存储在链表某个Link节点里，当Link节点存储的收回对象满了时会新建1个Link放在Link链表尾。
-    @SuppressWarnings("serial")
-    static final class Link extends AtomicInteger {
-        private final DefaultHandle<?>[] elements = new DefaultHandle[Recycler.LINK_CAPACITY];
-
-        private int readIndex;
-        Link next;
-    }
-
-    // This act as a place holder for the head Link but also will reclaim space once finalized.
-    // Its important this does not hold any reference to either Stack or WeakOrderQueue.
-    static final class Head {
-        private final AtomicInteger availableSharedCapacity;
-
-        Link link;
-
-        Head(AtomicInteger availableSharedCapacity) {
-            this.availableSharedCapacity = availableSharedCapacity;
-        }
-
-        /// TODO: In the future when we move to Java9+ we should use java.lang.ref.Cleaner.
-        @Override
-        protected void finalize() throws Throwable {
-            try {
-                super.finalize();
-            } finally {
-                Link head = link;
-                link = null;
-                while (head != null) {
-                    reclaimSpace(Recycler.LINK_CAPACITY);
-                    Link next = head.next;
-                    // Unlink to help GC and guard against GC nepotism.
-                    head.next = null;
-                    head = next;
-                }
-            }
-        }
-
-        void reclaimSpace(int space) {
-            assert space >= 0;
-            availableSharedCapacity.addAndGet(space);
-        }
-
-        boolean reserveSpace(int space) {
-            return reserveSpace(availableSharedCapacity, space);
-        }
-
-        static boolean reserveSpace(AtomicInteger availableSharedCapacity, int space) {
-            assert space >= 0;
-            for (;;) {
-                int available = availableSharedCapacity.get();
-                if (available < space) {
-                    return false;
-                }
-                if (availableSharedCapacity.compareAndSet(available, available - space)) {
-                    return true;
-                }
-            }
-        }
-    }
-    //Link数组
     // chain of data items
     private final Head head;
+
     private Link tail;
+
     // pointer to another queue of delayed items for the same stack
-    //向同一堆栈的另一个延迟项队列的指针
+    // 向同一堆栈的另一个延迟项队列的指针
     public WeakOrderQueue next;
     /**
      * 当前WeakReference对应的拥有者(Thread)
@@ -107,6 +45,7 @@ public class WeakOrderQueue {
      * 2、作用是在poll的时候，如果owner不存在了，则需要将该线程所包含的WeakOrderQueue的元素释放，然后从链表中删除该Queue。
      */
     public final WeakReference<Thread> owner;
+
     //WeakOrderQueue的唯一标记
     private final int id = Recycler.ID_GENERATOR.getAndIncrement();
 
@@ -194,6 +133,12 @@ public class WeakOrderQueue {
     }
 
     // transfer as many items as we can from this queue to the stack, returning true if any were transferred
+
+    /**
+     * 数据转移：将当前queue中的items中转移到stack中。如果有任何的数据转移成功，则返回true，否则返回false.
+     * @param dst
+     * @return
+     */
     @SuppressWarnings("rawtypes")
     boolean transfer(Stack<?> dst) {
         Link head = this.head.link;

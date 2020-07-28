@@ -2,39 +2,41 @@ package com.roboslyq.io.io;
 
 import java.io.*;
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * TU定长文件解析
+ * TODO: 目前是单线程，可以优化
+ * @author roboslyq
+ * @date 2020/7/24
+ * @since 1.0.0
  */
 public class TuFileParse {
 
-    //    private static ExecutorService executor = Executors.newFixedThreadPool(4);
-    // 结果文件保存路径，可以从参数中传递
-    private static String RES_FILE_PATH = "D:\\logs\\tu\\";
-    // 当前位置
+    /** 源文件路径: 不需要日期，程序中会自己追加跑批日期*/
+    private static String SRC_FILE_PATH;
+    /** 结果文件保存路径，可以从参数中传递: 不需要日期，程序中会自己追加跑批日期 */
+    private static String RES_FILE_PATH;
+    /** 当前位置*/
     private static int currIndex = 85;
-    // 头部长度
-    private static int HEAD_SIZE = 85;
-    //
+    /** 结果文件后缀*/
     private static String RES_FILE_SUFFIX = ".dat";
-    // 分割符
-    private static String DELIMITER = "|";
-    // 报表日期
+    /** OK文件后缀 */
+    private static String OK_FILE_SUFFIX = ".ok";
+    /** 报表日期*/
     private static String date;
-    // TU文件名称
+    /** TU文件名称*/
     private static String fileName;
-    // 计数器（行号）
+    /** 计数器（行号）*/
     private static AtomicInteger countNum = new AtomicInteger(0);
-    // 模块名称: 一共5个模块，对应5个不同文件名称
+    /** 模块名称: 一共5个模块，对应5个不同文件名称*/
     private static Map<String, String> MODULE_SEQ = new HashMap<>();
-    // Segments：每1个文件格式一样，由7个组成。segments数组
+    /** Segments：每1个文件格式一样，由7个组成。segments数组*/
     private static String[] SEGS = {"NA", "AL", "AD", "PH", "AC", "LM", "RI"};
-    // 约定，每1个Segments对应一个编号
+    /** 约定，每1个Segments对应一个编号*/
     private static Map<String, String> SEGMENT_SEQ = new HashMap<>();
-    // 每一个Segments对应的字段(TU已经规定好格式，不能悠 )
+
+    /** 每一个Segments对应的字段(TU已经规定好格式，不能改 ) */
     private static Map<String, String[]> SEGMENT_FIELD = new HashMap<>();
     private static String[] NA_LIST = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"};
     private static String[] AL_LIST = {"03", "05", "06", "07", "08", "09", "10"};
@@ -43,8 +45,8 @@ public class TuFileParse {
     private static String[] AC_LIST = {"01", "02", "04", "05", "07", "08", "09", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "30", "32", "33", "34", "35"};
     private static String[] LM_LIST = {"01", "02"};
     private static String[] RI_LIST = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21"};
-    //结果
-    private static Map<String, List<String>> result = new HashMap<>();
+    /**结果*/
+    private static Map<String, List<String>> RESULT_MAP = new HashMap<>();
 
     static {
         MODULE_SEQ.put("cif088d.dat", "02");
@@ -69,88 +71,100 @@ public class TuFileParse {
         SEGMENT_FIELD.put("LM", LM_LIST);
         SEGMENT_FIELD.put("RI", RI_LIST);
 
-        result.put("NA", new ArrayList<>());
-        result.put("AL", new ArrayList<>());
-        result.put("AD", new ArrayList<>());
-        result.put("PH", new ArrayList<>());
-        result.put("AC", new ArrayList<>());
-        result.put("LM", new ArrayList<>());
-        result.put("RI", new ArrayList<>());
+        RESULT_MAP.put("NA", new ArrayList<>());
+        RESULT_MAP.put("AL", new ArrayList<>());
+        RESULT_MAP.put("AD", new ArrayList<>());
+        RESULT_MAP.put("PH", new ArrayList<>());
+        RESULT_MAP.put("AC", new ArrayList<>());
+        RESULT_MAP.put("LM", new ArrayList<>());
+        RESULT_MAP.put("RI", new ArrayList<>());
     }
 
-    public static void main(String[] args) throws IOException {
-        fileName = args[0];
-        date = args[1];
-        TuFileParse fileDemo = new TuFileParse();
-//        fileDemo.parseFile("D:\\IdeaProjects_community\\java-core-material\\core\\src\\main\\java\\com\\roboslyq\\io\\io\\cif089rn.dat");
-        fileDemo.parseFile("D:\\IdeaProjects_community\\java-core-material\\core\\src\\main\\java\\com\\roboslyq\\io\\io\\cif088d.dat");
-    }
-
-    public void parseFile(String filePath) throws IOException {
-        BufferedReader fileReader = new BufferedReader(new FileReader(new File(filePath)));
-        String  completeStr = fileReader.readLine();
-        if(Objects.isNull(completeStr) || completeStr.length() <= HEAD_SIZE + 2){
-            System.out.println("文件长度小于85,请检查文件大小");
+    /**
+     * 解析文件入口
+     * @param filePath 包括文件路径和具体名称
+     * @throws IOException 文件解析异常
+     */
+    private void parseFile(String filePath) throws IOException {
+        File srcFile = new File(filePath);
+        if(!srcFile.exists()){
+            System.out.println("源文件:" + srcFile + "不在存!!!");
+            return;
         }
-        String srcdata = completeStr.substring(HEAD_SIZE);
-        // 按每一笔Loan拆分，得到每一笔Loan的详情，包含7个segments
-        String[] resArray = srcdata.split("ES02\\*\\*");
-        Arrays.stream(resArray).forEach(loan -> parseLoan(loan, 0, ""));
-        writeResult(this.result);
+        BufferedReader fileReader = new BufferedReader(new FileReader(srcFile));
+        String  completeStr = fileReader.readLine();
+        // 头部长度
+        int headSize = 85;
+        if(Objects.isNull(completeStr) || completeStr.length() <= headSize){
+            System.out.println("文件数据长度小于85,直接生成结果文件.");
+        }else{
+            String srcdata = completeStr.substring(headSize);
+            // 按每一笔Loan拆分，得到每一笔Loan的详情，包含7个segments
+            String[] resArray = srcdata.split("ES02\\*\\*");
+            Arrays.stream(resArray).forEach(loan -> parseLoan(loan, 0, ""));
+        }
+        writeResult(RESULT_MAP);
         System.out.println("finished");
     }
 
     /**
      * 解析每一笔Loan
      *
-     * @param loan
+     * @param loan 每一个贷款记录
      */
-    public void parseLoan(String loan, int curIndex, String na_lineno) {
+    private void parseLoan(String loan, int curIndex, String naLineno) {
         if (curIndex == loan.length()){
             return;
         }
-//      # the current segment name: NA,AL,AD,PH,AC,LM,RI
+        //  the current segment name: NA,AL,AD,PH,AC,LM,RI
         String segName = loan.substring(curIndex, curIndex + 2);
         int curCountNum = countNum.getAndIncrement();
         int segLength = Integer.parseInt(loan.substring(curIndex + 2, curIndex + 4));
         String segmentLine = loan.substring(curIndex + 4, curIndex + 4 + segLength);
-        String[] fileds = SEGMENT_FIELD.get(segName);
+        String[] fields = SEGMENT_FIELD.get(segName);
         StringBuilder sb = new StringBuilder();
-        sb.append(date).append(DELIMITER).append(curCountNum).append(DELIMITER);
+        //分割符
+        String delimiter = "|";
+        sb.append(date).append(delimiter).append(curCountNum).append(delimiter);
         if (segName.equals(SEGS[0])) {
-            na_lineno = segmentLine;
+            naLineno = segmentLine;
         } else {
-            sb.append(na_lineno).append(DELIMITER);
+            sb.append(naLineno).append(delimiter);
         }
-        sb.append(segmentLine).append(DELIMITER);
+        sb.append(segmentLine).append(delimiter);
 
         curIndex = curIndex + 4 + segLength;
         // 循环处理各种域
-        for (String field : fileds) {
+        for (String field : fields) {
             if (curIndex == loan.length()) {
                 break;
             }
             String fieldInLoan = loan.substring(curIndex, curIndex + 2);
             if (!fieldInLoan.equals(field)) {
-                sb.append(DELIMITER);
+                sb.append(delimiter);
             } else {
                 int fieldLen = Integer.parseInt(loan.substring(curIndex + 2, curIndex + 2 + 2));
                 if (fieldLen == 0) {
-                    sb.append(DELIMITER);
+                    sb.append(delimiter);
                     curIndex += 4;
                 } else {
                     String fieldValue = loan.substring(curIndex + 4, curIndex + 4 + fieldLen);
                     curIndex = curIndex + 4 + fieldLen;
-                    sb.append(fieldValue).append(DELIMITER);
+                    sb.append(fieldValue).append(delimiter);
                 }
             }
         }
-        result.get(segName).add(sb.toString());
-        //递归解析
-        parseLoan(loan, curIndex, na_lineno);
+        RESULT_MAP.get(segName).add(sb.toString());
+        // 递归解析
+        parseLoan(loan, curIndex, naLineno);
     }
 
-    public void writeResult(Map<String,List<String>> content) throws IOException {
+    /**
+     * 将结果写入文件
+     * @param content  结果内容
+     * @throws IOException 写异常
+     */
+    private void writeResult(Map<String,List<String>> content) throws IOException {
         for(String seg :SEGS){
             List<String> list =  content.get(seg);
             fileWriter(seg,list);
@@ -158,11 +172,38 @@ public class TuFileParse {
     }
 
     /**
+     * 初始化
+     */
+    private static void init(String[] args){
+        TuFileParse.fileName = args[0];
+        TuFileParse.date = args[1];
+        TuFileParse.SRC_FILE_PATH = args[2];
+        TuFileParse.RES_FILE_PATH = args[3];
+        TuFileParse.RES_FILE_PATH = RES_FILE_PATH + date + "\\";
+        TuFileParse.SRC_FILE_PATH = SRC_FILE_PATH + date + "\\";
+        // 循环清除上一次跑批的结果文件
+        for(String seg :SEGS){
+            String filePathAndName =RES_FILE_PATH + getResultFileName(seg,RES_FILE_SUFFIX);
+            String okFilePathAndName = RES_FILE_PATH + getResultFileName(seg,OK_FILE_SUFFIX);
+            System.out.println("要删除的文件名：" + filePathAndName);
+            File file = new File(filePathAndName);
+            File okFile = new File(okFilePathAndName);
+            if(file.exists()){
+                boolean fileDel = file.delete();
+                boolean okFileDel = okFile.delete();
+                System.out.println("结果文件删除： " + fileDel +", .ok文件删除：" + okFileDel);
+            }else {
+                System.out.println("文件 " + fileName +"不存在");
+            }
+
+        }
+
+    }
+    /**
      * 使用字符流
      */
-    public void fileWriter(String seg, List<String> content) throws IOException {
-        File file = new File(RES_FILE_PATH + getResultFileName(seg));
-        file.deleteOnExit();
+    private void fileWriter(String seg, List<String> content) throws IOException {
+        File file = new File(RES_FILE_PATH + getResultFileName(seg,RES_FILE_SUFFIX));
         boolean createNewFileResult = file.createNewFile();
         if (!createNewFileResult) {
             System.out.println("文件创建失败!!");
@@ -175,17 +216,41 @@ public class TuFileParse {
         for (String line : content) {
             out.write(line + "\n");
         }
-        // 必须刷新,否则部分数据无法写回文件。
-        // 注意,是部分数据,当达到缓冲区存储值,会自动 刷新缓冲区。
+        /* 必须刷新,否则部分数据无法写回文件。  注意,是部分数据,当达到缓冲区存储值,会自动 刷新缓冲区。*/
         out.flush();
+        File okFile = new File(RES_FILE_PATH + getResultFileName(seg,OK_FILE_SUFFIX));
+        boolean okFileRes = okFile.createNewFile();
+        if (!okFileRes) {
+            System.out.println(".ok 文件创建失败!!");
+        }
     }
 
     /**
      * 根据seg获取结果文件路径
-     * @param seg
-     * @return
+     * @param seg seg名称
+     * @return 文件名称
      */
-    public String getResultFileName(String seg){
-        return seg + "-" + MODULE_SEQ.get(fileName) + SEGMENT_SEQ.get(seg) + date + RES_FILE_SUFFIX;
+    private static String getResultFileName(String seg,String suffix){
+        return seg + "-" + MODULE_SEQ.get(fileName) + SEGMENT_SEQ.get(seg) + date + suffix;
     }
+
+
+    public static void main(String[] args) throws IOException {
+        int argsNum = 4;
+        if(args.length < argsNum){
+            System.out.println("请使用命令`java -jar xxx.jar filename report_date srcdir resdir`来启动。\n" +
+                    "java -jar cif089rp.dat 20200331  D:\\logs\\tu\\  D:\\logs\\tu\\res\\");
+        }
+
+        init(args);
+
+        TuFileParse fileDemo = new TuFileParse();
+
+        long startTime = System.currentTimeMillis();
+        System.out.println("start pasre(ms): " + startTime);
+        fileDemo.parseFile(SRC_FILE_PATH + fileName);
+        System.out.println("used millis time: " + (System.currentTimeMillis() - startTime) + "(ms)");
+
+    }
+
 }
