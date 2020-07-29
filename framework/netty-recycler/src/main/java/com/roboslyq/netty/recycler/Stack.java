@@ -307,6 +307,7 @@ public class Stack<T> {
                 return;
             }
             // Check if we already reached the maximum number of delayed queues and if we can allocate at all.
+            // 创建新的WeakOrderQueue,并且使用头插法，插入到Statck.head中
             if ((queue = WeakOrderQueue.allocate(this, thread)) == null) {
                 // drop object
                 return;

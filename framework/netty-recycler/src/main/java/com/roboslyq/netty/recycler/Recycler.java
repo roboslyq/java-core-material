@@ -273,9 +273,6 @@ public abstract class Recycler<T> {
      */
     protected abstract T newObject(Handle<T> handle);
 
-
-
-
     /**
      * 类属性，所有实例共享，从而实现不同线程间的对象回收。比如，A线程创建对象 POJO1,传递给B线程使用，B线程也可以对对象POJO1进行回收。
      * Recycler <--1:1-->Thread
