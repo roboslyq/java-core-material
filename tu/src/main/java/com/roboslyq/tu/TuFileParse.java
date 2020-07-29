@@ -106,7 +106,7 @@ public class TuFileParse {
             });
         }
         writeResult(RESULT_MAP);
-        System.out.println("finished");
+        System.out.println("parsed the file successfully!");
     }
 
     /**
@@ -182,8 +182,7 @@ public class TuFileParse {
         TuFileParse.date = args[1];
         TuFileParse.SRC_FILE_PATH = args[2];
         TuFileParse.RES_FILE_PATH = args[3];
-
-        // 循环清除上一次跑批的结果文件
+        // 循环清除上一次跑批的结果文件,如果是第1次运行,则不需要删除
         for(String seg :SEGS){
             String filePathAndName =RES_FILE_PATH + getResultFileName(seg,RES_FILE_SUFFIX);
             String okFilePathAndName = RES_FILE_PATH + getResultFileName(seg,OK_FILE_SUFFIX);
@@ -195,7 +194,7 @@ public class TuFileParse {
                 boolean okFileDel = okFile.delete();
                 System.out.println("结果文件删除： " + fileDel +", .ok文件删除：" + okFileDel);
             }else {
-                System.out.println("文件 " + fileName +"不存在");
+                System.out.println("结果文件" + filePathAndName +"不存在,不需要删除");
             }
 
         }
@@ -249,9 +248,11 @@ public class TuFileParse {
         TuFileParse fileDemo = new TuFileParse();
 
         long startTime = System.currentTimeMillis();
-        System.out.println("start pasre(ms): " + startTime);
+        System.out.println("start pasre timestamp (ms): " + startTime);
         fileDemo.parseFile(SRC_FILE_PATH + fileName);
-        System.out.println("used millis time: " + (System.currentTimeMillis() - startTime) + "(ms)");
+        long endTime = System.currentTimeMillis();
+        System.out.println("end parse  timestamp (ms): " + endTime);
+        System.out.println("used millis time: " + ( endTime - startTime) + "(ms)");
 
     }
 
