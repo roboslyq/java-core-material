@@ -1,5 +1,4 @@
-package com.roboslyq.io.io;
-
+package com.roboslyq.tu;
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -183,8 +182,7 @@ public class TuFileParse {
         TuFileParse.date = args[1];
         TuFileParse.SRC_FILE_PATH = args[2];
         TuFileParse.RES_FILE_PATH = args[3];
-        TuFileParse.RES_FILE_PATH = RES_FILE_PATH + date + "\\";
-        TuFileParse.SRC_FILE_PATH = SRC_FILE_PATH + date + "\\";
+
         // 循环清除上一次跑批的结果文件
         for(String seg :SEGS){
             String filePathAndName =RES_FILE_PATH + getResultFileName(seg,RES_FILE_SUFFIX);

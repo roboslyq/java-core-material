@@ -15,6 +15,7 @@
       <module fileurl="file://$PROJECT_DIR$/framework/mybatis/mybatis.iml" filepath="$PROJECT_DIR$/framework/mybatis/mybatis.iml" />
       <module fileurl="file://$PROJECT_DIR$/framework/netty-recycler/netty-recycler.iml" filepath="$PROJECT_DIR$/framework/netty-recycler/netty-recycler.iml" />
       <module fileurl="file://$PROJECT_DIR$/reactivestream/reactivestream.iml" filepath="$PROJECT_DIR$/reactivestream/reactivestream.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tu/tu.iml" filepath="$PROJECT_DIR$/tu/tu.iml" />
     </modules>
   </component>
 </project>
