@@ -240,7 +240,8 @@ public class TuFileParse {
         int argsNum = 4;
         if(args.length < argsNum){
             System.out.println("请使用命令`java -jar xxx.jar filename report_date srcdir resdir`来启动。\n" +
-                    "java -jar cif089rp.dat 20200331  D:\\logs\\tu\\  D:\\logs\\tu\\res\\");
+                    "例如 `java -jar cif089rp.dat 20200331  D:\\logs\\tu\\20200731\\  D:\\logs\\tu\\res\\20200731\\`");
+            System.exit(1);
         }
 
         init(args);
