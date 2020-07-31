@@ -97,6 +97,12 @@ public class TuFileParse {
         if(Objects.isNull(completeStr) || completeStr.length() <= headSize){
             System.out.println("文件数据长度小于85,直接生成结果文件.");
         }else{
+            // 文件中的日期格式为:DDMMYYYY
+            String dateInFile = completeStr.substring(71,75) + completeStr.substring(69,71) + completeStr.substring(67,69);
+            if(!dateInFile.equals(date)){
+                System.out.println("跑批日期：" + date + "与文件日期：" + dateInFile +"不匹配！！！");
+                return;
+            }
             String srcdata = completeStr.substring(headSize);
             // 按每一笔Loan拆分，得到每一笔Loan的详情，包含7个segments
             String[] resArray = srcdata.split("ES02\\*\\*");
