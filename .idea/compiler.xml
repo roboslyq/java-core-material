@@ -17,6 +17,7 @@
         <module name="mybatis" />
         <module name="netty-recycler" />
         <module name="reactivestream" />
+        <module name="tu" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="9">
@@ -32,6 +33,7 @@
       <module name="mybatis" target="1.7" />
       <module name="netty-recycler" target="8" />
       <module name="reactivestream" target="1.9" />
+      <module name="tu" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

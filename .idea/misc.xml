@@ -11,6 +11,7 @@
         <option value="$PROJECT_DIR$/framework/pom.xml" />
         <option value="$PROJECT_DIR$/framework/mybatis/pom.xml" />
         <option value="$PROJECT_DIR$/framework/dledger/pom.xml" />
+        <option value="$PROJECT_DIR$/tu/pom.xml" />
       </list>
     </option>
   </component>

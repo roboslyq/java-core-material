@@ -1,5 +1,4 @@
-package com.roboslyq.io.io;
-
+package com.roboslyq.tu;
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -98,13 +97,22 @@ public class TuFileParse {
         if(Objects.isNull(completeStr) || completeStr.length() <= headSize){
             System.out.println("文件数据长度小于85,直接生成结果文件.");
         }else{
+            // 文件中的日期格式为:DDMMYYYY
+            String dateInFile = completeStr.substring(71,75) + completeStr.substring(69,71) + completeStr.substring(67,69);
+            if(!dateInFile.equals(date)){
+                System.out.println("跑批日期：" + date + "与文件日期：" + dateInFile +"不匹配！！！");
+                return;
+            }
             String srcdata = completeStr.substring(headSize);
             // 按每一笔Loan拆分，得到每一笔Loan的详情，包含7个segments
             String[] resArray = srcdata.split("ES02\\*\\*");
-            Arrays.stream(resArray).forEach(loan -> parseLoan(loan, 0, ""));
+            Arrays.stream(resArray).forEach(loan -> {
+                int curCountNum = countNum.getAndIncrement();
+                parseLoan(loan, 0, "",curCountNum);
+            });
         }
         writeResult(RESULT_MAP);
-        System.out.println("finished");
+        System.out.println("parsed the file successfully!");
     }
 
     /**
@@ -112,13 +120,12 @@ public class TuFileParse {
      *
      * @param loan 每一个贷款记录
      */
-    private void parseLoan(String loan, int curIndex, String naLineno) {
+    private void parseLoan(String loan, int curIndex, String naLineno,int curCountNum) {
         if (curIndex == loan.length()){
             return;
         }
         //  the current segment name: NA,AL,AD,PH,AC,LM,RI
         String segName = loan.substring(curIndex, curIndex + 2);
-        int curCountNum = countNum.getAndIncrement();
         int segLength = Integer.parseInt(loan.substring(curIndex + 2, curIndex + 4));
         String segmentLine = loan.substring(curIndex + 4, curIndex + 4 + segLength);
         String[] fields = SEGMENT_FIELD.get(segName);
@@ -137,7 +144,9 @@ public class TuFileParse {
         // 循环处理各种域
         for (String field : fields) {
             if (curIndex == loan.length()) {
-                break;
+                //追加空的分割符
+                sb.append(delimiter);
+                continue;
             }
             String fieldInLoan = loan.substring(curIndex, curIndex + 2);
             if (!fieldInLoan.equals(field)) {
@@ -156,7 +165,7 @@ public class TuFileParse {
         }
         RESULT_MAP.get(segName).add(sb.toString());
         // 递归解析
-        parseLoan(loan, curIndex, naLineno);
+        parseLoan(loan, curIndex, naLineno,curCountNum);
     }
 
     /**
@@ -179,9 +188,7 @@ public class TuFileParse {
         TuFileParse.date = args[1];
         TuFileParse.SRC_FILE_PATH = args[2];
         TuFileParse.RES_FILE_PATH = args[3];
-        TuFileParse.RES_FILE_PATH = RES_FILE_PATH + date + "\\";
-        TuFileParse.SRC_FILE_PATH = SRC_FILE_PATH + date + "\\";
-        // 循环清除上一次跑批的结果文件
+        // 循环清除上一次跑批的结果文件,如果是第1次运行,则不需要删除
         for(String seg :SEGS){
             String filePathAndName =RES_FILE_PATH + getResultFileName(seg,RES_FILE_SUFFIX);
             String okFilePathAndName = RES_FILE_PATH + getResultFileName(seg,OK_FILE_SUFFIX);
@@ -193,7 +200,7 @@ public class TuFileParse {
                 boolean okFileDel = okFile.delete();
                 System.out.println("结果文件删除： " + fileDel +", .ok文件删除：" + okFileDel);
             }else {
-                System.out.println("文件 " + fileName +"不存在");
+                System.out.println("结果文件" + filePathAndName +"不存在,不需要删除");
             }
 
         }
@@ -231,7 +238,7 @@ public class TuFileParse {
      * @return 文件名称
      */
     private static String getResultFileName(String seg,String suffix){
-        return seg + "-" + MODULE_SEQ.get(fileName) + SEGMENT_SEQ.get(seg) + date + suffix;
+        return seg + "-" + MODULE_SEQ.get(fileName) + SEGMENT_SEQ.get(seg)  + "-" + date + suffix;
     }
 
 
@@ -239,7 +246,8 @@ public class TuFileParse {
         int argsNum = 4;
         if(args.length < argsNum){
             System.out.println("请使用命令`java -jar xxx.jar filename report_date srcdir resdir`来启动。\n" +
-                    "java -jar cif089rp.dat 20200331  D:\\logs\\tu\\  D:\\logs\\tu\\res\\");
+                    "例如 `java -jar cif089rp.dat 20200331  D:\\logs\\tu\\20200731\\  D:\\logs\\tu\\res\\20200731\\`");
+            System.exit(1);
         }
 
         init(args);
@@ -247,9 +255,11 @@ public class TuFileParse {
         TuFileParse fileDemo = new TuFileParse();
 
         long startTime = System.currentTimeMillis();
-        System.out.println("start pasre(ms): " + startTime);
+        System.out.println("start pasre timestamp (ms): " + startTime);
         fileDemo.parseFile(SRC_FILE_PATH + fileName);
-        System.out.println("used millis time: " + (System.currentTimeMillis() - startTime) + "(ms)");
+        long endTime = System.currentTimeMillis();
+        System.out.println("end parse  timestamp (ms): " + endTime);
+        System.out.println("used millis time: " + ( endTime - startTime) + "(ms)");
 
     }
 
