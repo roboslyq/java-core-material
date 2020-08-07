@@ -178,7 +178,8 @@ public class Stack<T> {
             return true;
         }
 
-        // reset our scavenge cursor
+        // reset our scavenge cursor(十分重要，重置我们的指针为head，以便进行新的遍列)
+        // 如果不重置，那么新“异线程”回收的WeakOrderQueue无法遍列。
         prev = null;
         cursor = head;
         return false;
@@ -194,6 +195,7 @@ public class Stack<T> {
                 return false;
             }
         } else {
+            // 如果cursor不为空，表明有异线程进行过对象回收，此时，因为是插头法入队，所以prev可能不为空。
             prev = this.prev;
         }
 
