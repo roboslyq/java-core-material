@@ -166,6 +166,7 @@ public class TuFileParse {
         String segmentLine = loan.substring(curIndex + 4, curIndex + 4 + segLength);
         String[] fields = SEGMENT_FIELD.get(segName);
         if (Objects.isNull(fields)) {
+            System.out.println("当前文件内容异常(错位),解析出的segName为" +segName +"不在标准的( NA,AL,AD,PH,AC,LM,RI)" );
             printException(loan, segName, curIndex, curCountNum);
             throw new Exception("文件解析异常");
         }
@@ -200,6 +201,7 @@ public class TuFileParse {
                     curIndex += 4;
                 } else {
                     if (loan.length() < curIndex + 4 + fieldLen) {
+                        System.out.println("当前文件长度异常，文件长度：" + loan.length() +"，需要长度：" +(curIndex + 4 + fieldLen));
                         printException(loan, segName, curIndex, curCountNum);
                         throw new Exception("文件解析异常");
                     } else {
