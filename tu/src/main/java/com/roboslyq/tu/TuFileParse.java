@@ -162,14 +162,19 @@ public class TuFileParse {
         }
         //  the current segment name: NA,AL,AD,PH,AC,LM,RI
         String segName = loan.substring(curIndex, curIndex + 2);
-        int segLength = Integer.parseInt(loan.substring(curIndex + 2, curIndex + 4));
-        String segmentLine = loan.substring(curIndex + 4, curIndex + 4 + segLength);
         String[] fields = SEGMENT_FIELD.get(segName);
         if (Objects.isNull(fields)) {
             System.out.println("当前文件内容异常(错位),解析出的segName为" +segName +"不在标准的( NA,AL,AD,PH,AC,LM,RI)" );
             printException(loan, segName, curIndex, curCountNum);
             throw new Exception("文件解析异常");
         }
+        int segLength = Integer.parseInt(loan.substring(curIndex + 2, curIndex + 4));
+        if(loan.length() < curIndex + 4 + segLength){
+            System.out.println("当前文件内容长度不够");
+            printException(loan, segName, curIndex, curCountNum);
+            throw new Exception("文件解析异常");
+        }
+        String segmentLine = loan.substring(curIndex + 4, curIndex + 4 + segLength);
         StringBuilder sb = new StringBuilder();
         //分割符
         String delimiter = "|";
@@ -317,6 +322,7 @@ public class TuFileParse {
         TuFileParse fileDemo = new TuFileParse();
 
         long startTime = System.currentTimeMillis();
+        System.out.println("start to parse file :" + args[0]);
         System.out.println("start pasre timestamp (ms): " + startTime);
         fileDemo.parseFile(SRC_FILE_PATH + fileName);
         long endTime = System.currentTimeMillis();
