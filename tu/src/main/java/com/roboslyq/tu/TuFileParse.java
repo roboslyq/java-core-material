@@ -30,9 +30,13 @@ public class TuFileParse {
      */
     private static String RES_FILE_PATH;
     /**
+     * 文件解析开始时间
+     */
+    private static Long START_TIMESTAMP = 0L;
+    /**
      * 结果文件后缀
      */
-    private static String RES_FILE_SUFFIX = ".dat";
+    private static String RES_ERR_FILE_SUFFIX = "_err.dat";
     /**
      * OK文件后缀
      */
@@ -50,7 +54,7 @@ public class TuFileParse {
      */
     private static AtomicInteger countNum = new AtomicInteger(0);
     /**
-     * 模块名称: 一共5个模块，对应5个不同文件名称
+     * 模块名称: 一共5个模块，对应5个不同文件名称，在拼接结果文件名称时使用
      */
     private static Map<String, String> MODULE_SEQ = new HashMap<>();
     /**
@@ -83,6 +87,8 @@ public class TuFileParse {
         MODULE_SEQ.put("cif089rn.dat", "04");
         MODULE_SEQ.put("cif089r1.dat", "05");
         MODULE_SEQ.put("cif089r2.dat", "06");
+        MODULE_SEQ.put("cif089r1_err.dat", "05");
+        MODULE_SEQ.put("cif089r2_err.dat", "06");
 
         SEGMENT_SEQ.put("NA", "01");
         SEGMENT_SEQ.put("AL", "02");
@@ -116,38 +122,62 @@ public class TuFileParse {
      * @throws IOException 文件解析异常
      */
     private void parseFile(String filePath) throws Exception {
-        File srcFile = new File(filePath);
-        if (!srcFile.exists()) {
-            System.out.println("源文件:" + srcFile + "不在存!!!");
-            return;
+        String[] loanArray =readDataFromFile(filePath);
+        for (String loan : loanArray) {
+            int curCountNum = countNum.getAndIncrement();
+            parseLoan(loan, 0, "", curCountNum);
         }
-        BufferedReader fileReader = new BufferedReader(new FileReader(srcFile));
-        String completeStr = fileReader.readLine();
-        // 头部长度
-        // 当前位置: 因为默认文件都包含84个头字符，所以当前位置是85
-        int headSize = 85;
-        if (Objects.isNull(completeStr) || completeStr.length() <= headSize) {
-            System.out.println("文件数据长度小于85,直接生成空结果文件.");
-        } else {
-            // 文件中的日期格式为:DDMMYYYY
-            String dateInFile = completeStr.substring(71, 75) + completeStr.substring(69, 71) + completeStr.substring(67, 69);
-            if (!dateInFile.equals(date)) {
-                System.out.println("跑批日期：" + date + "与文件日期：" + dateInFile + "不匹配！！！");
-                return;
-            }
-            String srcdata = completeStr.substring(headSize);
-            // 按每一笔Loan拆分，得到每一笔Loan的详情，包含7个segments
-            String[] resArray = srcdata.split("ES02\\*\\*");
-            for (String loan : resArray) {// 行号，每一笔Loan信息一行
-                int curCountNum = countNum.getAndIncrement();
-                parseLoan(loan, 0, "", curCountNum);
-            }
-        }
-        // 生成结果文件
         writeResult(RESULT_MAP);
         System.out.println("parsed the file successfully!");
     }
 
+    /**
+     * 读取文件具体内容，按ES02**进行分割
+     * 注意: cif089r1_err.dat和cif089r2_err.dat格式与其它文件格式不一致
+     * @param filePath 文件路径
+     * @return  解析的结果数据（每行一个账号数据）
+     * @throws IOException 文件不存在或者读取失败等
+     */
+    private String[] readDataFromFile(String filePath) throws IOException {
+        String[] resArray = {};
+        File srcFile = new File(filePath);
+        if (!srcFile.exists()) {
+            System.out.println("源文件:" + srcFile + "不在存!!!");
+            throw new IOException("源文件不存在");
+        }else{
+            BufferedReader fileReader = new BufferedReader(new FileReader(srcFile));
+            if(filePath.endsWith(RES_ERR_FILE_SUFFIX)){
+                String completeStr;
+                ArrayList<String> loanArrayList = new ArrayList<>();
+                //文件记录分割符
+                String splitStr = "ES02**";
+                while (!Objects.isNull(completeStr = fileReader.readLine())){
+                    loanArrayList.add(completeStr.substring(0,completeStr.length() - splitStr.length()));
+                }
+                resArray = loanArrayList.toArray(new String[0]);
+            }else {
+                String completeStr = fileReader.readLine();
+                // 头部长度
+                // 当前位置: 因为默认文件都包含84个头字符，所以当前位置是85
+                int headSize = 85;
+                if (Objects.isNull(completeStr) || completeStr.length() <= headSize) {
+                    System.out.println("文件数据长度小于85,直接生成空结果文件.");
+                } else {
+                    // 文件中的日期格式为:DDMMYYYY
+                    String dateInFile = completeStr.substring(71, 75) + completeStr.substring(69, 71) + completeStr.substring(67, 69);
+                    if (!dateInFile.equals(date)) {
+                        System.out.println("跑批日期：" + date + "与文件日期：" + dateInFile + "不匹配！！！");
+                    }else {
+                        String srcdata = completeStr.substring(headSize);
+                        // 按每一笔Loan拆分，得到每一笔Loan的详情，包含7个segments
+                        String splitStrSpel = "ES02\\*\\*";
+                        resArray = srcdata.split(splitStrSpel);
+                    }
+                }
+            }
+        }
+        return resArray;
+    }
     /**
      * 解析每一笔Loan
      *
@@ -217,6 +247,10 @@ public class TuFileParse {
                 }
             }
         }
+        // 如果是err文件，结果文件添加一个固定的错误标识字段，值为Y
+        if(getResFileSuffix(fileName).equals(RES_ERR_FILE_SUFFIX)){
+            sb.append(delimiter).append("Y");
+        }
         RESULT_MAP.get(segName).add(sb.toString());
         // 递归解析
         parseLoan(loan, curIndex, naLineno, curCountNum);
@@ -239,7 +273,6 @@ public class TuFileParse {
 
     /**
      * 将结果写入文件
-     *
      * @param content 结果内容
      * @throws IOException 写异常
      */
@@ -253,20 +286,37 @@ public class TuFileParse {
     /**
      * 初始化
      */
-    private static void init(String[] args) {
+    private static void init(String[] args) throws IOException {
+        // 参数校验
+        int argsNum = 4;
+        if (args.length < argsNum) {
+            System.out.println("请使用命令`java -jar xxx.jar filename report_date srcdir resdir`来启动。\n" +
+                    "例如 `java -jar cif089rp.dat 20200331  D:\\logs\\tu\\20200731\\  D:\\logs\\tu\\res\\20200731\\`");
+            System.exit(1);
+        }
+        // 日志打印
+        START_TIMESTAMP = System.currentTimeMillis();
+        System.out.println("start to parse file :" + args[0]);
+        System.out.println("start pasre timestamp (ms): " + START_TIMESTAMP);
+
+        // 参数赋值
         TuFileParse.fileName = args[0];
         TuFileParse.date = args[1];
         TuFileParse.SRC_FILE_PATH = args[2];
         TuFileParse.RES_FILE_PATH = args[3];
+
         // 循环清除上一次跑批的结果文件,如果是第1次运行,则不需要删除
         for (String seg : SEGS) {
-            String filePathAndName = RES_FILE_PATH + getResultFileName(seg, RES_FILE_SUFFIX);
+            String filePathAndName = RES_FILE_PATH + getResultFileName(seg, getResFileSuffix(TuFileParse.fileName));
             String okFilePathAndName = RES_FILE_PATH + getResultFileName(seg, OK_FILE_SUFFIX);
             File file = new File(filePathAndName);
             File okFile = new File(okFilePathAndName);
             if (file.exists()) {
-                file.delete();
-                okFile.delete();
+               boolean fileDeleteRes = file.delete();
+               boolean okFileDeleteRes = okFile.delete();
+               if(!fileDeleteRes || !okFileDeleteRes){
+                   throw new IOException("历史文件文件" + filePathAndName +"或" + okFileDeleteRes + "无法删除");
+                }
             }
         }
 
@@ -276,7 +326,7 @@ public class TuFileParse {
      * 使用字符流
      */
     private void fileWriter(String seg, List<String> content) throws IOException {
-        File file = new File(RES_FILE_PATH + getResultFileName(seg, RES_FILE_SUFFIX));
+        File file = new File(RES_FILE_PATH + getResultFileName(seg, getResFileSuffix(TuFileParse.fileName)));
         boolean createNewFileResult = file.createNewFile();
         if (!createNewFileResult) {
             System.out.println("文件创建失败!!");
@@ -289,7 +339,7 @@ public class TuFileParse {
         for (String line : content) {
             out.write(line + "\n");
         }
-        /* 必须刷新,否则部分数据无法写回文件。  注意,是部分数据,当达到缓冲区存储值,会自动 刷新缓冲区。*/
+        // 必须刷新,否则部分数据无法写回文件。  注意,是部分数据,当达到缓冲区存储值,会自动 刷新缓冲区。
         out.flush();
         File okFile = new File(RES_FILE_PATH + getResultFileName(seg, OK_FILE_SUFFIX));
         boolean okFileRes = okFile.createNewFile();
@@ -308,27 +358,33 @@ public class TuFileParse {
         return seg + "-" + MODULE_SEQ.get(fileName) + SEGMENT_SEQ.get(seg) + "-" + date + suffix;
     }
 
-
-    public static void main(String[] args) throws Exception {
-        int argsNum = 4;
-        if (args.length < argsNum) {
-            System.out.println("请使用命令`java -jar xxx.jar filename report_date srcdir resdir`来启动。\n" +
-                    "例如 `java -jar cif089rp.dat 20200331  D:\\logs\\tu\\20200731\\  D:\\logs\\tu\\res\\20200731\\`");
-            System.exit(1);
+    private static String getResFileSuffix(String fileName){
+        if(fileName.endsWith(RES_ERR_FILE_SUFFIX)){
+            return "_err.dat";
+        }else {
+            return ".dat";
         }
-
-        init(args);
-
-        TuFileParse fileDemo = new TuFileParse();
-
-        long startTime = System.currentTimeMillis();
-        System.out.println("start to parse file :" + args[0]);
-        System.out.println("start pasre timestamp (ms): " + startTime);
-        fileDemo.parseFile(SRC_FILE_PATH + fileName);
-        long endTime = System.currentTimeMillis();
-        System.out.println("end parse  timestamp (ms): " + endTime);
-        System.out.println("used millis time: " + (endTime - startTime) + "(ms)");
-
     }
 
+    private static void finishParse() {
+        long endTime = System.currentTimeMillis();
+        System.out.println("end parse  timestamp (ms): " + endTime);
+        System.out.println("used millis time: " + (endTime - START_TIMESTAMP) + "(ms)");
+    }
+
+    public static void main(String[] args) {
+        try {
+            init(args);
+
+            TuFileParse parse = new TuFileParse();
+
+            parse.parseFile(SRC_FILE_PATH + fileName);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            finishParse();
+        }
+
+    }
 }
