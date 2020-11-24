@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/cache/cache.iml" filepath="$PROJECT_DIR$/cache/cache.iml" />
       <module fileurl="file://$PROJECT_DIR$/framework/calcite/calcite.iml" filepath="$PROJECT_DIR$/framework/calcite/calcite.iml" />
+      <module fileurl="file://$PROJECT_DIR$/framework/cglib/cglib.iml" filepath="$PROJECT_DIR$/framework/cglib/cglib.iml" />
       <module fileurl="file://$PROJECT_DIR$/jdk/concurrent/concurrent.iml" filepath="$PROJECT_DIR$/jdk/concurrent/concurrent.iml" />
       <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
       <module fileurl="file://$PROJECT_DIR$/framework/dledger/dledger.iml" filepath="$PROJECT_DIR$/framework/dledger/dledger.iml" />
@@ -15,6 +16,7 @@
       <module fileurl="file://$PROJECT_DIR$/framework/mybatis/mybatis.iml" filepath="$PROJECT_DIR$/framework/mybatis/mybatis.iml" />
       <module fileurl="file://$PROJECT_DIR$/framework/netty-recycler/netty-recycler.iml" filepath="$PROJECT_DIR$/framework/netty-recycler/netty-recycler.iml" />
       <module fileurl="file://$PROJECT_DIR$/reactivestream/reactivestream.iml" filepath="$PROJECT_DIR$/reactivestream/reactivestream.iml" />
+      <module fileurl="file://$PROJECT_DIR$/framework/springframework/springframework.iml" filepath="$PROJECT_DIR$/framework/springframework/springframework.iml" />
       <module fileurl="file://$PROJECT_DIR$/tu/tu.iml" filepath="$PROJECT_DIR$/tu/tu.iml" />
     </modules>
   </component>

@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="cache" />
         <module name="calcite" />
+        <module name="cglib" />
         <module name="concurrent" />
         <module name="core" />
         <module name="dledger" />
@@ -17,12 +18,14 @@
         <module name="mybatis" />
         <module name="netty-recycler" />
         <module name="reactivestream" />
+        <module name="springframework" />
         <module name="tu" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="9">
       <module name="cache" target="1.5" />
       <module name="calcite" target="1.7" />
+      <module name="cglib" target="1.5" />
       <module name="concurrent" target="9" />
       <module name="core" target="9" />
       <module name="dledger" target="1.7" />
@@ -33,7 +36,8 @@
       <module name="mybatis" target="1.7" />
       <module name="netty-recycler" target="8" />
       <module name="reactivestream" target="1.9" />
-      <module name="tu" target="8" />
+      <module name="springframework" target="1.7" />
+      <module name="tu" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
