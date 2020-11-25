@@ -13,6 +13,9 @@
         <module>dledger</module>
         <module>netty-recycler</module>
         <module>calcite</module>
+        <module>disruptor</module>
+        <module>spring-framework</module>
+        <module>cglib</module>
     </modules>
 
 
