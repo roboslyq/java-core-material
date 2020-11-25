@@ -108,7 +108,12 @@ public class TuFileParse {
             String[] resArray = srcdata.split("ES02\\*\\*");
             Arrays.stream(resArray).forEach(loan -> {
                 int curCountNum = countNum.getAndIncrement();
-                parseLoan(loan, 0, "",curCountNum);
+                try{
+                    parseLoan(loan, 0, "",curCountNum);
+                }catch (Exception e){
+                    System.out.println("当前异常记录：" + loan);
+                    throw e;
+                }
             });
         }
         writeResult(RESULT_MAP);
@@ -142,6 +147,9 @@ public class TuFileParse {
 
         curIndex = curIndex + 4 + segLength;
         // 循环处理各种域
+        if(fields == null){
+            System.out.println("fields is null");
+        }
         for (String field : fields) {
             if (curIndex == loan.length()) {
                 //追加空的分割符
