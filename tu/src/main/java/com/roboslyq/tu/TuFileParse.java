@@ -36,11 +36,11 @@ public class TuFileParse {
     /**
      * 结果文件后缀
      */
-    private static String RES_ERR_FILE_SUFFIX = "_err.dat";
+    private static final String RES_ERR_FILE_SUFFIX = "_err.dat";
     /**
      * OK文件后缀
      */
-    private static String OK_FILE_SUFFIX = ".ok";
+    private static final String OK_FILE_SUFFIX = ".ok";
     /**
      * 报表日期
      */
@@ -52,34 +52,34 @@ public class TuFileParse {
     /**
      * 计数器（行号）
      */
-    private static AtomicInteger countNum = new AtomicInteger(0);
+    private static final AtomicInteger COUNT_NUM = new AtomicInteger(0);
     /**
      * 模块名称: 一共5个模块，对应5个不同文件名称，在拼接结果文件名称时使用
      */
-    private static Map<String, String> MODULE_SEQ = new HashMap<>();
+    private static final Map<String, String> MODULE_SEQ = new HashMap<>();
     /**
      * Segments：每1个文件格式一样，由7个组成。segments数组
      */
-    private static String[] SEGS = {"NA", "AL", "AD", "PH", "AC", "LM", "RI"};
+    private static final String[] SEGS = {"NA", "AL", "AD", "PH", "AC", "LM", "RI"};
     /**
      * 约定，每1个Segments对应一个编号
      */
-    private static Map<String, String> SEGMENT_SEQ = new HashMap<>();
+    private static final Map<String, String> SEGMENT_SEQ = new HashMap<>();
     /**
      * 每一个Segments对应的字段(TU已经规定好格式，不能改 )
      */
-    private static Map<String, String[]> SEGMENT_FIELD = new HashMap<>();
-    private static String[] NA_LIST = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"};
-    private static String[] AL_LIST = {"03", "05", "06", "07", "08", "09", "10"};
-    private static String[] AD_LIST = {"01", "02", "03", "04"};
-    private static String[] PH_LIST = {"01", "02", "03", "04", "05"};
-    private static String[] AC_LIST = {"01", "02", "04", "05", "07", "08", "09", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "30", "32", "33", "34", "35"};
-    private static String[] LM_LIST = {"01", "02"};
-    private static String[] RI_LIST = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21"};
+    private static final Map<String, String[]> SEGMENT_FIELD = new HashMap<>();
+    private static final String[] NA_LIST = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"};
+    private static final String[] AL_LIST = {"03", "05", "06", "07", "08", "09", "10"};
+    private static final String[] AD_LIST = {"01", "02", "03", "04"};
+    private static final String[] PH_LIST = {"01", "02", "03", "04", "05"};
+    private static final String[] AC_LIST = {"01", "02", "04", "05", "07", "08", "09", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "30", "32", "33", "34", "35"};
+    private static final String[] LM_LIST = {"01", "02"};
+    private static final String[] RI_LIST = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21"};
     /**
      * 结果
      */
-    private static Map<String, List<String>> RESULT_MAP = new HashMap<>();
+    private static final Map<String, List<String>> RESULT_MAP = new HashMap<>();
 
     static {
         MODULE_SEQ.put("cif088d.dat", "02");
@@ -124,7 +124,7 @@ public class TuFileParse {
     private void parseFile(String filePath) throws Exception {
         String[] loanArray =readDataFromFile(filePath);
         for (String loan : loanArray) {
-            int curCountNum = countNum.getAndIncrement();
+            int curCountNum = COUNT_NUM.getAndIncrement();
             parseLoan(loan, 0, "", curCountNum);
         }
         writeResult(RESULT_MAP);
