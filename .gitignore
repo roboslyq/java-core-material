@@ -32,3 +32,18 @@ gen### Java template
 hs_err_pid*
 
 /.idea/
+/framework/cglib/target/classes/META-INF/cglib.kotlin_module
+/core/src/main/java/com/roboslyq/io/io/cif088d.dat
+/core/src/main/java/com/roboslyq/io/io/cif089rn.dat
+/core/src/main/java/com/roboslyq/io/io/cif089rp.dat
+/framework/dledger/target/classes/application.properties
+/framework/dledger/target/classes/application-n0.properties
+/framework/dledger/target/classes/application-n1.properties
+/framework/dledger/target/classes/application-n2.properties
+/framework/mybatis/target/classes/mapper/BlogMapper.xml
+/framework/mybatis/target/classes/mybatis-config.xml
+/framework/rocketmq/target/classes/META-INF/rocketmq.kotlin_module
+/framework/rocketmq/target/classes/application.yaml
+/framework/springframework/src/main/java/framework/App.java
+/framework/springframework/src/test/java/framework/AppTest.java
+/tu/target/classes/META-INF/MANIFEST.MF

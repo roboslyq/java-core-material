@@ -89,6 +89,8 @@ public class TuFileParse {
         MODULE_SEQ.put("cif089r2.dat", "06");
         MODULE_SEQ.put("cif089r1_err.dat", "05");
         MODULE_SEQ.put("cif089r2_err.dat", "06");
+        MODULE_SEQ.put("cif089rp_err.dat", "03");
+        MODULE_SEQ.put("cif089rn_err.dat", "04");
 
         SEGMENT_SEQ.put("NA", "01");
         SEGMENT_SEQ.put("AL", "02");
