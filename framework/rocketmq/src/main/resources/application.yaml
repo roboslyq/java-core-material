@@ -1,0 +1,30 @@
+server:
+    port: 8081
+
+spring:
+    application:
+        name: rocketmq-demo
+rocketmq:
+  name-server: http://47.93.201.88:9876 #rocketmq服务地址
+  producer:
+    group: rocketmq_test #自定义的组名称
+    send-message-timeout: 3000  #消息发送超时时长
+
+
+#    rocketmq.name-server=localhost:9876
+#    rocketmq.producer.group=my-group1
+#    rocketmq.producer.sendMessageTimeout=300000
+#
+#    # properties used in the application
+#    demo.rocketmq.topic=string-topic
+#    demo.rocketmq.orderTopic=order-paid-topic
+#    demo.rocketmq.msgExtTopic=message-ext-topic
+#    demo.rocketmq.transTopic=spring-transaction-topic
+#    demo.rocketmq.topic.user=user-topic
+#
+#    demo.rocketmq.bytesRequestTopic=bytesRequestTopic:tagA
+#    demo.rocketmq.stringRequestTopic=stringRequestTopic:tagA
+#    demo.rocketmq.objectRequestTopic=objectRequestTopic:tagA
+#    demo.rocketmq.genericRequestTopic=genericRequestTopic:tagA
+#
+#    demo.rocketmq.extNameServer=127.0.0.1:9876

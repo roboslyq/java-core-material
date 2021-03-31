@@ -19,8 +19,9 @@
         <module>netty-recycler</module>
         <module>calcite</module>
         <module>disruptor</module>
-        <module>spring-framework</module>
+        <module>springframework</module>
         <module>cglib</module>
+        <module>rocketMq</module>
     </modules>
 
 
