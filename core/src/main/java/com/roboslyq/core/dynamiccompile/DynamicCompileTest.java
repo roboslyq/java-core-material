@@ -61,7 +61,7 @@ public class DynamicCompileTest {
         }
         Method method = cls.getDeclaredMethod("main",String[].class);
         String[] s = {};
-        method.invoke(object,s);
+        method.invoke(null,(Object)s);
 
     }
 
