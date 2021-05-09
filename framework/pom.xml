@@ -17,6 +17,7 @@
         <module>springframework</module>
         <module>cglib</module>
         <module>rocketMq</module>
+        <module>shiro</module>
     </modules>
 
 
