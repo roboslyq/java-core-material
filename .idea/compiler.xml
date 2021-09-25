@@ -8,8 +8,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="tu" />
-        <module name="cache" />
         <module name="cglib" />
+        <module name="cache" />
         <module name="rocketmq" />
         <module name="io" />
         <module name="mybatis" />
@@ -17,6 +17,7 @@
         <module name="calcite" />
         <module name="core" />
         <module name="netty-recycler" />
+        <module name="shiro" />
         <module name="dledger" />
         <module name="lang" />
         <module name="springframework" />
@@ -35,11 +36,11 @@
       <module name="jdk" target="9" />
       <module name="lang" target="9" />
       <module name="mybatis" target="1.7" />
-      <module name="netty-recycler" target="1.5" />
+      <module name="netty-recycler" target="8" />
       <module name="reactivestream" target="1.9" />
       <module name="rocketmq" target="1.8" />
+      <module name="shiro" target="1.5" />
       <module name="springframework" target="1.7" />
-      <module name="test" target="9" />
       <module name="tu" target="8" />
     </bytecodeTargetLevel>
   </component>
