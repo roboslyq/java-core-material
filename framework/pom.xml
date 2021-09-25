@@ -23,6 +23,7 @@
         <module>cglib</module>
         <module>rocketMq</module>
         <module>shiro</module>
+        <module>velocity</module>
     </modules>
 
 

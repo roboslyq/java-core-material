@@ -1,0 +1,24 @@
+## 两个##号为注释
+## parse为导入vm并且为解析其中的代码语法
+## include仅导入，不会解析其中的语法
+#parse("/templates/macro/jscode.vm")
+## 赋值变量greet = 'hello'
+#set($greet = 'hello')
+## 将变量转出到结果中
+$greet $name
+## 循环语句
+#foreach($i in $list)
+$i
+## 判断语句
+#if($i == "2")
+"你好2"
+#else
+"非2"
+#end
+#end
+## 调用java中的方法
+$dateUtils.getDate()
+## 直接输出java对象，默认调用toString()方法
+$dateUtils
+## 调用vm定义的宏(macro,即函数)
+#jscode("roboslyq")

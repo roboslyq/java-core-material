@@ -15,6 +15,7 @@
         <module name="mybatis" />
         <module name="concurrent" />
         <module name="calcite" />
+        <module name="velocity" />
         <module name="core" />
         <module name="netty-recycler" />
         <module name="shiro" />
@@ -42,6 +43,7 @@
       <module name="shiro" target="1.5" />
       <module name="springframework" target="1.7" />
       <module name="tu" target="8" />
+      <module name="velocity" target="9" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

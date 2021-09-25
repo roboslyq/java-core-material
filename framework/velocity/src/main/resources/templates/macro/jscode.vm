@@ -1,0 +1,3 @@
+#macro(jscode $name)
+   hello $name
+#end

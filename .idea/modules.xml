@@ -20,6 +20,7 @@
       <module fileurl="file://$PROJECT_DIR$/framework/shiro/shiro.iml" filepath="$PROJECT_DIR$/framework/shiro/shiro.iml" />
       <module fileurl="file://$PROJECT_DIR$/framework/springframework/springframework.iml" filepath="$PROJECT_DIR$/framework/springframework/springframework.iml" />
       <module fileurl="file://$PROJECT_DIR$/tu/tu.iml" filepath="$PROJECT_DIR$/tu/tu.iml" />
+      <module fileurl="file://$PROJECT_DIR$/framework/velocity/velocity.iml" filepath="$PROJECT_DIR$/framework/velocity/velocity.iml" />
     </modules>
   </component>
 </project>
