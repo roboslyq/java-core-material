@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/jdk/concurrent/concurrent.iml" filepath="$PROJECT_DIR$/jdk/concurrent/concurrent.iml" />
       <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
       <module fileurl="file://$PROJECT_DIR$/framework/dledger/dledger.iml" filepath="$PROJECT_DIR$/framework/dledger/dledger.iml" />
+      <module fileurl="file://$PROJECT_DIR$/framework/excel/excel.iml" filepath="$PROJECT_DIR$/framework/excel/excel.iml" />
       <module fileurl="file://$PROJECT_DIR$/framework/framework.iml" filepath="$PROJECT_DIR$/framework/framework.iml" />
       <module fileurl="file://$PROJECT_DIR$/jdk/io/io.iml" filepath="$PROJECT_DIR$/jdk/io/io.iml" />
       <module fileurl="file://$PROJECT_DIR$/java-core-material.iml" filepath="$PROJECT_DIR$/java-core-material.iml" />
@@ -16,7 +17,7 @@
       <module fileurl="file://$PROJECT_DIR$/framework/mybatis/mybatis.iml" filepath="$PROJECT_DIR$/framework/mybatis/mybatis.iml" />
       <module fileurl="file://$PROJECT_DIR$/framework/netty-recycler/netty-recycler.iml" filepath="$PROJECT_DIR$/framework/netty-recycler/netty-recycler.iml" />
       <module fileurl="file://$PROJECT_DIR$/reactivestream/reactivestream.iml" filepath="$PROJECT_DIR$/reactivestream/reactivestream.iml" />
-      <module fileurl="file://$PROJECT_DIR$/framework/rocketmq/rocketmq.iml" filepath="$PROJECT_DIR$/framework/rocketmq/rocketmq.iml" />
+      <module fileurl="file://$PROJECT_DIR$/framework/rocketmq/rocketMq.iml" filepath="$PROJECT_DIR$/framework/rocketmq/rocketMq.iml" />
       <module fileurl="file://$PROJECT_DIR$/framework/shiro/shiro.iml" filepath="$PROJECT_DIR$/framework/shiro/shiro.iml" />
       <module fileurl="file://$PROJECT_DIR$/framework/springframework/springframework.iml" filepath="$PROJECT_DIR$/framework/springframework/springframework.iml" />
       <module fileurl="file://$PROJECT_DIR$/tu/tu.iml" filepath="$PROJECT_DIR$/tu/tu.iml" />

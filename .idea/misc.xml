@@ -12,6 +12,8 @@
         <option value="$PROJECT_DIR$/framework/mybatis/pom.xml" />
         <option value="$PROJECT_DIR$/framework/dledger/pom.xml" />
         <option value="$PROJECT_DIR$/tu/pom.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/framework/excel/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
@@ -46,7 +48,7 @@
       </profile-state>
     </entry>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_9" default="false" project-jdk-name="9" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

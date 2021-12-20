@@ -23,7 +23,8 @@ public class LyqClassloader extends ClassLoader {
         File file = new File(CLASS_PATH_PREFIX + getFilePath(name));
         System.out.println(file.getAbsolutePath());
         FileInputStream fileInputStream = new FileInputStream(file);
-        return fileInputStream.readAllBytes();
+//        return fileInputStream.readAllBytes();
+        return null;
     }
 
     public String getFilePath(String classPath){

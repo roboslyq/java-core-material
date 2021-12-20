@@ -25,9 +25,9 @@ public class PrintClass {
         //Class文件保存路径(根据实际情况自己选定)
         File file = new File("core\\target\\classes\\com\\roboslyq\\core\\common\\HelloWorldBean.class");
         try( FileInputStream isr = new FileInputStream(file);){
-            byte[] fileContext = isr.readAllBytes();
+//            byte[] fileContext = isr.readAllBytes();
             //此处输入为Class文件原内容(十六进制展示)
-            System.out.println(str2HexStr(fileContext));
+//            System.out.println(str2HexStr(fileContext));
             //测试将十六进制转换为普通字符串（翻译），即可以根据需要将读出Class内容进行翻译
             System.out.println(str2HexStr("sayHello2".getBytes()));
         }
