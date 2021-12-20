@@ -19,6 +19,5 @@
     <module>reactivestream</module>
     <module>tu</module>
     <module>tools</module>
-    <module>excel</module>
   </modules>
 </project>
