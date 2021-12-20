@@ -24,6 +24,7 @@
         <module>rocketMq</module>
         <module>shiro</module>
         <module>velocity</module>
+        <module>excel</module>
     </modules>
 
     <build>

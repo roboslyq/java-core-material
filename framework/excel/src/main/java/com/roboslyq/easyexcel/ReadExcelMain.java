@@ -1,5 +1,7 @@
 package com.roboslyq.easyexcel;
 
+import com.alibaba.excel.EasyExcel;
+
 import java.io.File;
 
 /**
@@ -9,7 +11,7 @@ import java.io.File;
  */
 public class ReadExcelMain {
     public static void main(String[] args) {
-        String fileName = TestFileUtil.getPath() + "demo" + File.separator + "demo.xlsx";
+        String fileName =  "D:\\IdeaProjects_community\\java-core-material\\framework\\excel\\src\\main\\resources\\demo.xlsx";
         // 这里 需要指定读用哪个class去读，然后读取第一个sheet 文件流会自动关闭
         EasyExcel.read(fileName, DemoData.class, new DemoDataListener()).sheet().doRead();
     }
