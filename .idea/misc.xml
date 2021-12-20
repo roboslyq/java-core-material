@@ -13,6 +13,7 @@
         <option value="$PROJECT_DIR$/framework/dledger/pom.xml" />
         <option value="$PROJECT_DIR$/tu/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/framework/excel/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
