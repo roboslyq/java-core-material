@@ -26,24 +26,24 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="11">
-      <module name="cache" target="1.5" />
-      <module name="calcite" target="1.7" />
-      <module name="cglib" target="1.5" />
+      <module name="cache" target="11" />
+      <module name="calcite" target="11" />
+      <module name="cglib" target="11" />
       <module name="concurrent" target="11" />
       <module name="core" target="11" />
-      <module name="dledger" target="1.7" />
-      <module name="excel" target="1.7" />
-      <module name="framework" target="1.5" />
+      <module name="dledger" target="11" />
+      <module name="excel" target="11" />
+      <module name="framework" target="11" />
       <module name="io" target="11" />
-      <module name="java-core-material" target="1.5" />
+      <module name="java-core-material" target="11" />
       <module name="jdk" target="11" />
       <module name="lang" target="11" />
-      <module name="mybatis" target="1.7" />
+      <module name="mybatis" target="11" />
       <module name="netty-recycler" target="11" />
       <module name="reactivestream" target="11" />
-      <module name="rocketMq" target="1.8" />
-      <module name="shiro" target="1.5" />
-      <module name="springframework" target="1.7" />
+      <module name="rocketMq" target="11" />
+      <module name="shiro" target="11" />
+      <module name="springframework" target="11" />
       <module name="tu" target="11" />
     </bytecodeTargetLevel>
   </component>
