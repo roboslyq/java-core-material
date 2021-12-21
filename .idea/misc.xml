@@ -19,6 +19,7 @@
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/framework/disruptor/pom.xml" />
+        <option value="$PROJECT_DIR$/framework/rocketmq/pom.xml" />
         <option value="$PROJECT_DIR$/temp/pom.xml" />
         <option value="$PROJECT_DIR$/tools/pom.xml" />
       </set>

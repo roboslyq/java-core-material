@@ -18,6 +18,10 @@ import org.apache.poi.util.IOUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.List;
 
 /**
@@ -29,11 +33,12 @@ import java.util.List;
  */
 @Slf4j
 public class EasypoiMain {
-    public static void main(String[] args) {
-        File file = new File("D:\\IdeaProjects_community\\java-core-material\\framework\\excel\\src\\main\\resources\\demo.xlsx");
+    public static void main(String[] args) throws IOException, URISyntaxException {
+//        File file = new File("D:\\IdeaProjects_community\\java-core-material\\framework\\excel\\src\\main\\resources\\demo.xlsx");
         ImportParams importParams =  new ImportParams();
+        URL url= EasypoiMain.class.getClassLoader().getResource("demo.xlsx");
         importParams.setHeadRows(1);
-        List<DemoData> demoDatas = importExcel(file,DemoData.class,importParams);
+        List<DemoData> demoDatas = importExcel(new File(url.toURI()),DemoData.class,importParams);
         demoDatas.forEach(System.out::println);
     }
     /**
