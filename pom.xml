@@ -19,6 +19,7 @@
     <module>reactivestream</module>
     <module>tu</module>
     <module>tools</module>
+      <module>springboot-arthas</module>
   </modules>
   <dependencies>
     <dependency>
