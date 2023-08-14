@@ -10,12 +10,12 @@
         <module name="tu" />
         <module name="cache" />
         <module name="cglib" />
-        <module name="springboot-arthas" />
         <module name="io" />
         <module name="mybatis" />
         <module name="concurrent" />
         <module name="calcite" />
         <module name="velocity" />
+        <module name="demo" />
         <module name="excel" />
         <module name="core" />
         <module name="shiro" />
@@ -27,26 +27,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="19">
-      <module name="cache" target="19" />
-      <module name="calcite" target="19" />
-      <module name="cglib" target="19" />
-      <module name="concurrent" target="19" />
-      <module name="core" target="19" />
-      <module name="dledger" target="19" />
-      <module name="excel" target="19" />
-      <module name="framework" target="19" />
-      <module name="io" target="19" />
       <module name="java-core-material" target="19" />
-      <module name="jdk" target="19" />
-      <module name="lang" target="19" />
-      <module name="mybatis" target="19" />
-      <module name="netty-recycler" target="19" />
-      <module name="reactivestream" target="19" />
-      <module name="shiro" target="19" />
       <module name="springboot-arthas" target="19" />
-      <module name="springframework" target="19" />
-      <module name="tu" target="19" />
-      <module name="velocity" target="19" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -24,6 +24,7 @@ import java.util.stream.Stream;
 public class Test1 {
 
     public static void main(String[] args) throws UnsupportedEncodingException {
+        System.out.println(fn(5));
         String str = "roboslyq中国人";
         print(str.getBytes());
         print(str.getBytes("ISO-8859-1"));
@@ -62,5 +63,13 @@ public class Test1 {
        }else {
            return false;
        }
+    }
+
+   public static int fn(int n){
+        if(n <2){
+            return n;
+        }else{
+            return fn(n-1) + fn(n-2);
+        }
     }
 }
