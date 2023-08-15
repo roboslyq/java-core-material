@@ -11,7 +11,7 @@ import java.util.Properties;
 @SuppressWarnings("all")
 public class PropertiesUtil {
     private final static String PATH=System.getProperty("user.dir");
-    public  static final Map<String, String> PARAMETERS_MAP=PropertiesUtil.getMap("./config/config.properties");
+    public  static final Map<String, String> PARAMETERS_MAP=PropertiesUtil.getMap("/config/config.properties");
 
     static{
         Map<String, String> map = PARAMETERS_MAP;
