@@ -11,10 +11,8 @@
 package com.roboslyq.algorithm.leetcode.lc0101to0200.lc0148_sortlist;
 
 import com.roboslyq.algorithm.leetcode.ListNode;
-import lombok.val;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 
 /**
