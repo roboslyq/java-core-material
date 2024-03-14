@@ -56,7 +56,7 @@ public class TuFileParse {
     /**
      * 模块名称: 一共5个模块，对应5个不同文件名称，在拼接结果文件名称时使用
      */
-    private static final Map<String, String> MODULE_SEQ = new HashMap<>();
+    private static  Map<String, String> MODULE_SEQ = new HashMap<>();
     /**
      * Segments：每1个文件格式一样，由7个组成。segments数组
      */
@@ -82,15 +82,17 @@ public class TuFileParse {
     private static final Map<String, List<String>> RESULT_MAP = new HashMap<>();
 
     static {
-        MODULE_SEQ.put("cif088d.dat", "02");
-        MODULE_SEQ.put("cif089rp.dat", "03");
-        MODULE_SEQ.put("cif089rn.dat", "04");
-        MODULE_SEQ.put("cif089r1.dat", "05");
-        MODULE_SEQ.put("cif089r2.dat", "06");
-        MODULE_SEQ.put("cif089r1_err.dat", "05");
-        MODULE_SEQ.put("cif089r2_err.dat", "06");
-        MODULE_SEQ.put("cif089rp_err.dat", "03");
-        MODULE_SEQ.put("cif089rn_err.dat", "04");
+//        MODULE_SEQ.put("cif088d.dat", "02");
+//        MODULE_SEQ.put("cif089rp.dat", "03");
+//        MODULE_SEQ.put("cif089rn.dat", "04");
+//        MODULE_SEQ.put("cif089r1.dat", "05");
+//        MODULE_SEQ.put("cif089r2.dat", "06");
+//        MODULE_SEQ.put("cif089r1_err.dat", "05");
+//        MODULE_SEQ.put("cif089r2_err.dat", "06");
+//        MODULE_SEQ.put("cif089rp_err.dat", "03");
+//        MODULE_SEQ.put("cif089rn_err.dat", "04");
+
+        MODULE_SEQ =  PropertiesUtil.PARAMETERS_MAP;
 
         SEGMENT_SEQ.put("NA", "01");
         SEGMENT_SEQ.put("AL", "02");
@@ -376,6 +378,10 @@ public class TuFileParse {
 
     public static void main(String[] args) {
         try {
+            PropertiesUtil.PARAMETERS_MAP.entrySet().forEach(obj->{
+                System.out.printf("打印配置文件日志："+obj.getKey() + obj.getValue());
+            });
+
             init(args);
 
             TuFileParse parse = new TuFileParse();
